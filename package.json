@@ -46,7 +46,7 @@
     "minimist": "^1.2.8",
     "moment-timezone": "^0.5.43",
     "multiformats": "^12.1.2",
-    "next": "13.1.1",
+    "next": "^14.0.1",
     "p-ratelimit": "^1.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
