@@ -18,7 +18,7 @@ export default function Home() {
         <Flex justify="space-between" align="center">
           <Text fontSize="2xl" fontWeight="bold" color="white">Workout and Research</Text>
           <Button colorScheme="teal" variant="outline" color="white" onClick={onOpen}>
-            Get Started
+            Connect Wallet
           </Button>
         </Flex>
 
