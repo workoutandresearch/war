@@ -14,7 +14,6 @@ export default function Home() {
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
- 
       {/* Navbar */}
       <Box as="header" bg="#ff3a00" py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
@@ -54,7 +53,7 @@ export default function Home() {
         <VStack spacing={6} align="start">
           <Text fontSize="4xl" fontWeight="bold">Empower Your Wellness Journey</Text>
           <Text fontSize="xl">
-            Step into our inclusive Discord community, where every fitness journey is celebrated. Our innovative workout tracker is designed for everyone, regardless of fitness level or background. Here, you'll find personalized support, expert nutritional advice, and the latest wellness research. It's a place where knowledge meets action, and where every member is empowered to achieve their best health.
+            Step into our inclusive Discord community, where every fitness journey is celebrated. Our innovative workout tracker is designed for everyone, regardless of fitness level or background. Here, you&apos;ll find personalized support, expert nutritional advice, and the latest wellness research. It&apos;s a place where knowledge meets action, and where every member is empowered to achieve their best health.
           </Text>
           <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme="teal" target="_blank">
             Join Our Community
