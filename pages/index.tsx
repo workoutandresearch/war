@@ -104,7 +104,6 @@ export default function Home() {
         <Flex direction="column" align="center" justify="center">
           <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
           <Flex mt={2}>
-            {/* Social Icons */}
           </Flex>
         </Flex>
       </Box>
