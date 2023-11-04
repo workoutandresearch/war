@@ -24,6 +24,7 @@ import {
 } from '@chakra-ui/react';
 import Connect from 'components/Connect'; // Make sure to import the Connect component
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
+import styles from './glow.module.css'; // Adjust the path as needed
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,6 +32,8 @@ export default function Home() {
   const textColor = useColorModeValue('#', 'inherit'); // 'inherit' will keep the original color in dark mode
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
+  const gradientText = useColorModeValue(styles.textAnimatedGlowL, styles.textAnimatedGlowD);
+
   
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
