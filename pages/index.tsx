@@ -23,7 +23,7 @@ export default function Home() {
           </Button>
           <Text fontSize="2xl" fontWeight="bold" color="white">Workout and Research</Text>
           <Button colorScheme="orange" variant="solid" onClick={onOpen}>
-            Connect Wallet
+            Connect
           </Button>
         </Flex>
 
