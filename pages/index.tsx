@@ -84,7 +84,7 @@ export default function Home() {
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-          <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">[INSERT TITLE HERE]</Text>
+        <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">[INSERT TITLE HERE]</Text>
           <Text fontSize="xl" color="white" mt={4} textAlign="center">[INSERT TEXT HERE]</Text>
         </Container>
       </Box>
