@@ -6,14 +6,14 @@ import { MdNotInterested } from "react-icons/md"
 import { Fragment } from 'react'
 import { classNames } from 'utils'
 import styles2 from '../../styles/glow.module.css'
-import styles from '../../styles/glow.module.css';
+import styles from '../../styles/glow.module.css'; // Adjust the path as needed
 
 
 export default function Connect() {
   const { providers, activeAccount } = useWallet()
   const { colorMode } = useColorMode();
-  const gradientText = useColorModeValue(styles2.textAnimatedGlowL, styles2.textAnimatedGlowD)
-  const boxGlow = useColorModeValue(styles2.boxGlowL, styles2.boxGlowD)
+  const gradientText = useColorModeValue(styles.textAnimatedGlowL, styles.textAnimatedGlowD)
+  const boxGlow = useColorModeValue(styles.boxGlowL, styles.boxGlowD)
   const text100 = useColorModeValue('orange.100', 'cyan.100')
   const text400 = useColorModeValue('orange.400', 'cyan.400')
 
