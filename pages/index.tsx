@@ -28,7 +28,7 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const textColor = useColorModeValue('#ff3a00', 'inherit'); // 'inherit' will keep the original color in dark mode
+  const textColor = useColorModeValue('#', 'inherit'); // 'inherit' will keep the original color in dark mode
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
   
