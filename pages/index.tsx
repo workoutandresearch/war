@@ -22,7 +22,7 @@ import {
   IconButton, // Import IconButton
   Center
 } from '@chakra-ui/react';
-import Connect from 'components/MainTools/Connect'; // Make sure to import the Connect component
+import Connect from 'components/Connect'; // Make sure to import the Connect component
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 
 export default function Home() {
