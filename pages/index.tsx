@@ -83,19 +83,17 @@ export default function Home() {
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-          <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">Empower Your Journey</Text>
-          <Text fontSize="xl" color="white" mt={4} textAlign="center">Join our virtual fitness community and explore cutting-edge research</Text>
+          <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">[INSERT TITLE HERE]</Text>
+          <Text fontSize="xl" color="white" mt={4} textAlign="center">[INSERT TEXT HERE]</Text>
         </Container>
       </Box>
   
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center">Unleash Your Potential</Text>
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center">[INSERT TEXT HERE]</Text>
           <Box maxW="container.lg" mx="auto">
-            <Text fontSize="xl" textAlign="center">
-              Step into our inclusive Discord community, where every fitness journey is celebrated. Our innovative workout tracker is designed for everyone, regardless of fitness level or background. Here, you&apos;ll find personalized support, expert nutritional advice, and the latest wellness research. It&apos;s a place where knowledge meets action, and where every member is empowered to achieve their best health.
-            </Text>
+            <Text fontSize="xl" textAlign="center">[INSERT TEXT HERE]</Text>
           </Box>
           <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank">
             Join Our Community
@@ -106,14 +104,14 @@ export default function Home() {
       {/* Features Section */}
       <Box as="section" py={10} bgGradient={featuresBgGradient}>
         <Container maxW="container.lg">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color="black">Bot Features</Text>
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color="black">[INSERT TITLE HERE]</Text>
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
             {/* Cardio Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/cardio-tracking.jpg" alt="Cardio" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Cardio</Text>
-                <Text fontSize="md" color="black">Track your cardio sessions and monitor your progress over time directly within Discord.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
 
@@ -121,8 +119,8 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/calisthenics-tracking.jpg" alt="Calisthenics" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Calisthenics</Text>
-                <Text fontSize="md" color="black">Log your calisthenics workouts and view your strength progression over time.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
 
@@ -130,16 +128,16 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/weight-lifting-tracking.jpg" alt="Weight Lifting" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Weight Lifting</Text>
-                <Text fontSize="md" color="black">Keep a detailed log of your weight lifting sessions and analyze your performance.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
             {/* Nutrition Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/nutrition-tracking.jpg" alt="Nutrition" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Nutrition</Text>
-                <Text fontSize="md" color="black">Monitor your dietary habits and nutritional intake to align with your fitness goals.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
 
@@ -147,8 +145,8 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/sleep-analysis.jpg" alt="Sleep" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Sleep Analysis</Text>
-                <Text fontSize="md" color="black">Track and analyze your sleep patterns to improve recovery and performance.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
 
@@ -156,8 +154,8 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderRadius="lg" bg="white" _hover={{ shadow: "lg" }}>
                 <Image src="/hydration-reminder.jpg" alt="Hydration" borderRadius="lg" mb={4} />
-                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">Hydration Reminder</Text>
-                <Text fontSize="md" color="black">Set reminders to stay hydrated throughout the day for optimal health and performance.</Text>
+                <Text fontSize="xl" fontWeight="bold" color="black" textAlign="center">[INSERT TITLE HERE]</Text>
+                <Text fontSize="md" color="black">[INSERT TEXT HERE]</Text>
               </Box>
             </ScaleFade>
           </SimpleGrid>
