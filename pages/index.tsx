@@ -84,17 +84,17 @@ export default function Home() {
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-        <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">&lsqb;INSERT TEXT HERE&rsqb;</Text>
-          <Text fontSize="xl" color="white" mt={4} textAlign="center">&lsqb;INSERT TEXT HERE&rsqb;</Text>
+          <Text fontSize="5xl" fontWeight="bold" color="white" textAlign="center">INSERT TITLE HERE</Text>
+          <Text fontSize="xl" color="white" mt={4} textAlign="center">INSERT TEXT HERE</Text>
         </Container>
       </Box>
   
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-        <Text fontSize="xl" color="white" mt={4} textAlign="center">&lsqb;INSERT TEXT HERE&rsqb;</Text>
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center">INSERT TEXT HERE</Text>
           <Box maxW="container.lg" mx="auto">
-            <Text fontSize="xl" textAlign="center">&lsqb;INSERT TEXT HERE&rsqb;</Text>
+            <Text fontSize="xl" textAlign="center">INSERT TEXT HERE</Text>
           </Box>
           <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank">
             Join Our Community
