@@ -120,7 +120,7 @@ export default function Home() {
             {/* Calisthenics Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt-in to $WAR, a coin that offers unique features and benefits.</Text>
+                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt-in to WAR, a coin that offers unique features and benefits.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Opt-In</Button>
                 </Center>
