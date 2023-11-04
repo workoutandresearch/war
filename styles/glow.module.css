@@ -149,8 +149,8 @@
   background: linear-gradient(45deg , #00bbff, #9978e5, #00bbff);
   background-size: 350%;
   color: #000;
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 12s linear infinite;
   
@@ -161,8 +161,8 @@
   background: linear-gradient(45deg , #ffb300, #ff7235, #ffb300);
   background-size: 350%;
   color: #000;
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shine 12s linear infinite;
   
