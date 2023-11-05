@@ -20,17 +20,18 @@ import {
   ScaleFade,
   useColorModeValue,
   IconButton,
-  Center, // Import IconButton
+  Center,
 } from '@chakra-ui/react';
-import Connect from 'components/Connect'; // Make sure to import the Connect component
+import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const textColor = useColorModeValue('#000000', '#ffffff'); // 'inherit' will keep the original color in dark mode
+  const textColor = useColorModeValue('#000000', 'inherit');
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
+  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
@@ -97,7 +98,7 @@ export default function Home() {
             <Text fontSize="xl" textAlign="center">INSERT TEXT HERE</Text>
           </Box>
           <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank">
-            Join Our Community
+            Join The Community
           </Button>
         </VStack>
       </Box>
@@ -111,7 +112,7 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
                 <Center>
-                  <Button mt={4} colorScheme={buttonColorScheme}>Roadmap</Button>
+                  <Button mt={4} colorScheme={buttonColorScheme} color={buttonTextColor}>Roadmap</Button>
                 </Center>
                 <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
               </Box>
@@ -121,7 +122,7 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
                 <Center>
-                  <Button mt={4} colorScheme={buttonColorScheme}>Opt-In</Button>
+                  <Button mt={4} colorScheme={buttonColorScheme} color={buttonTextColor}>Opt-In</Button>
                 </Center>
                 <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
               </Box>
@@ -131,7 +132,7 @@ export default function Home() {
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
                 <Center>
-                  <Button mt={4} colorScheme={buttonColorScheme}>Whitepaper</Button>
+                  <Button mt={4} colorScheme={buttonColorScheme} color={buttonTextColor}>Whitepaper</Button>
                 </Center>
                 <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
               </Box>
