@@ -160,7 +160,7 @@ export default function Roadmap() {
             <Text fontSize="xl" textAlign="center" color={textColor}>
               Fitness is a crucial aspect of our daily lives that often gets overlooked. It is not just 
               about looking good, but feeling good as well. In today's fast-paced world, it can be 
-              challenging to find the time and motivation to stay fit and healthy. That's why we are 
+              challenging to find the time and motivation to stay fit and healthy. That is why we are 
               excited to announce the launch of our new project, $WAR, which combines the power of 
               blockchain technology with the world of fitness.
             </Text>
@@ -180,7 +180,7 @@ export default function Roadmap() {
                 Easy Accessibility
                 </Text>
                 <Text fontSize="md" textAlign="center" color={textColor}>
-                $WAR is built on the Algorand blockchain, which is known for its high performance, security, and scalability. This means that it is easy to use and accessible to everyone, regardless of their technical expertise. The token can be easily stored in a wallet and used to purchase fitness merchandise with just a few clicks.
+                $WAR is built on the Algorand blockchain, which is known for thier high performance, security, and scalability. This means that it is easy to use and accessible to everyone, regardless of their technical expertise. The token can be easily stored in a wallet and used to purchase fitness merchandise with just a few clicks.
                 </Text>
             </VStack>
             {/* Feature 2 */}
