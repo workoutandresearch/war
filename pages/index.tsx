@@ -117,9 +117,9 @@ export default function Home() {
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
-            Connect and Engage with Our Community
-          </Text>
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+          Connect and Engage with Our Community
+        </Text>
 
           <Box maxW="container.lg" mx="auto">
             <Text fontSize="xl" textAlign="center" color={textColor}>
