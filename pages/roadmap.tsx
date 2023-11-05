@@ -92,7 +92,7 @@ export default function Roadmap() {
             />
           </Flex>
           
-          <Text fontSize="2xl" fontWeight="bold" color="white" textAlign="center">Workout and Research</Text>
+          <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
@@ -107,6 +107,8 @@ export default function Roadmap() {
               <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
