@@ -95,7 +95,7 @@ export default function Whitepaper() {
             />
           </Flex>
           
-          <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center">Workout and Research</Text>
+          <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
