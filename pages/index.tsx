@@ -110,7 +110,7 @@ export default function Home() {
             {/* Cardio Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">The steps we're taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
+                <Text fontSize="md" color={textColor} textAlign="center">The steps wen are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Roadmap</Button>
                 </Center>
@@ -120,7 +120,7 @@ export default function Home() {
             {/* Calisthenics Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt-in to WAR, a coin that offers unique features and benefits.</Text>
+                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Opt-In</Button>
                 </Center>
