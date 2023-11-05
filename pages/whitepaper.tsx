@@ -47,8 +47,11 @@ export default function Whitepaper() {
   const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
   const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
-  const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
+
+  const footerBgColorLight = 'linear(to-b, #ffca80, #ffd7b5)'; // New gradient for light mode
+    const footerBgColorDark = 'transparent'; // Keep dark mode as it was
+    const footerBgColor = useColorModeValue(footerBgColorLight, footerBgColorDark);
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -215,7 +218,7 @@ export default function Whitepaper() {
         </Box>
 
         {/* Conclusion Section (You can modify this section for your Whitepaper) */}
-        <Box as="section" py={10} bgGradient={aboutBgGradient}>
+        <Box as="section" py={10} bgGradient={footerBgColor}>
             <VStack spacing={6} align="center">
             <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
             Conclusion
