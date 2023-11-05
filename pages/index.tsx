@@ -28,7 +28,7 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
-  const textColor = useColorModeValue('#', 'inherit'); // 'inherit' will keep the original color in dark mode
+  const textColor = useColorModeValue('#000000', '#ffffff'); // 'inherit' will keep the original color in dark mode
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
 
@@ -105,41 +105,42 @@ export default function Home() {
       {/* Features Section */}
       <Box as="section" py={10} bgGradient={featuresBgGradient}>
         <Container maxW="container.lg">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>Connect and Participate</Text>
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>Community Participation</Text>
           <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
             {/* Cardio Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Roadmap</Button>
                 </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
               </Box>
             </ScaleFade>
 
             {/* Calisthenics Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Opt-In</Button>
                 </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
               </Box>
             </ScaleFade>
 
             {/* Weight Lifting Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Whitepaper</Button>
-                </Center>            
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
               </Box>
             </ScaleFade>
             {/* More feature sections can follow the same pattern */}
           </SimpleGrid>
         </Container>
       </Box>
+
       
       {/* Footer */}
       <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
