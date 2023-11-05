@@ -6,7 +6,7 @@ import { MdNotInterested } from "react-icons/md"
 import { Fragment } from 'react'
 import { classNames } from 'utils'
 import styles2 from '../../styles/glow.module.css'
-import styles from 'glow.module.css'; // Adjust the path as needed
+import styles from './glow.module.css'; // Adjust the path as needed
 
 
 export default function Connect() {
