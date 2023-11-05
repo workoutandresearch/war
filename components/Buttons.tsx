@@ -8,7 +8,7 @@ import {
     Icon,
   } from '@chakra-ui/react'
   import * as React from 'react'
-  import styles from '../../styles/glow.module.css'; // Adjust the path as needed
+  import styles from 'glow.module.css'; // Adjust the path as needed
   
   interface textProp {
       fontsize? : any,

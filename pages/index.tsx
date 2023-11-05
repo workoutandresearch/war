@@ -24,7 +24,7 @@ import {
 } from '@chakra-ui/react';
 import Connect from 'components/Connect'; // Make sure to import the Connect component
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
-import styles from '../../styles/glow.module.css'; // Adjust the path as needed
+import styles from 'glow.module.css'; // Adjust the path as needed
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
