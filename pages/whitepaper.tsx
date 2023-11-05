@@ -92,7 +92,7 @@ export default function Roadmap() {
             />
           </Flex>
           
-          <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
+          <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
@@ -109,6 +109,7 @@ export default function Roadmap() {
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
@@ -131,11 +132,19 @@ export default function Roadmap() {
       {/* Hero Section (You can modify this section for your Whitepaper) */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-          <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
-            Whitepaper
+        <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout And Research
           </Text>
           <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
-            Your Whitepaper content goes here.
+            $WAR Token created on 01.19.2023
+          </Text>
+          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
+            Token ASA 1015673913
+          </Text>
+          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
+            <a href="https://workoutandresearch.algo.xyz" target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>
+              workoutandresearch.algo.xyz
+            </a>
           </Text>
         </Container>
       </Box>
@@ -143,17 +152,82 @@ export default function Roadmap() {
       {/* About Section (You can modify this section for your Whitepaper) */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
-          Whitepaper Section
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+            Introduction
           </Text>
 
           <Box maxW="container.lg" mx="auto">
             <Text fontSize="xl" textAlign="center" color={textColor}>
-              Your Whitepaper details and items go here.
+              Fitness is a crucial aspect of our daily lives that often gets overlooked. It is not just 
+              about looking good, but feeling good as well. In today's fast-paced world, it can be 
+              challenging to find the time and motivation to stay fit and healthy. That's why we are 
+              excited to announce the launch of our new project, $WAR, which combines the power of 
+              blockchain technology with the world of fitness.
             </Text>
           </Box>
         </VStack>
       </Box>
+      {/* Features Section */}
+        <Box as="section" py={10} bgGradient={featuresBgGradient}>
+        <VStack spacing={6} align="center">
+            <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+            Why $WAR is the Future of Fitness
+            </Text>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={10}>
+            {/* Feature 1 */}
+            <VStack spacing={4} align="center" border="1px solid black" p={5}>
+                <Text fontSize="xl" fontWeight="bold" textAlign="center" color={textColor}>
+                Easy Accessibility
+                </Text>
+                <Text fontSize="md" textAlign="center" color={textColor}>
+                $WAR is built on the Algorand blockchain, which is known for its high performance, security, and scalability. This means that it is easy to use and accessible to everyone, regardless of their technical expertise. The token can be easily stored in a wallet and used to purchase fitness merchandise with just a few clicks.
+                </Text>
+            </VStack>
+            {/* Feature 2 */}
+            <VStack spacing={4} align="center" border="1px solid black" p={5}>
+                <Text fontSize="xl" fontWeight="bold" textAlign="center" color={textColor}>
+                Deals and Discounts
+                </Text>
+                <Text fontSize="md" textAlign="center" color={textColor}>
+                As a holder of $WAR, you will have access to exclusive deals and discounts on the best fitness products available. This means that you will be able to get the best deals on the latest workout clothes and other products we may have to offer. This is a huge advantage as it will allow you to save money and stay on top of the latest trends in fitness.
+                </Text>
+            </VStack>
+            {/* Feature 3 */}
+            <VStack spacing={4} align="center" border="1px solid black" p={5}>
+                <Text fontSize="xl" fontWeight="bold" textAlign="center" color={textColor}>
+                Community Support
+                </Text>
+                <Text fontSize="md" textAlign="center" color={textColor}>
+                $WAR is more than just a token, it is a community. By holding $WAR, you will be supporting fitness communities and promoting a healthy lifestyle. You will be able to connect with other fitness enthusiasts and share tips, advice, and inspiration. This will help to create a positive and supportive environment for everyone who is interested in fitness.
+                </Text>
+            </VStack>
+            {/* Feature 4 */}
+            <VStack spacing={4} align="center" border="1px solid black" p={5}>
+                <Text fontSize="xl" fontWeight="bold" textAlign="center" color={textColor}>
+                Innovative Technology
+                </Text>
+                <Text fontSize="md" textAlign="center" color={textColor}>
+                Blockchain technology is the backbone of $WAR. It provides transparency and security, ensuring that all transactions are recorded and traceable. This means that you can trust that your purchases are secure and that your data is protected.
+                </Text>
+            </VStack>
+            </SimpleGrid>
+        </VStack>
+        </Box>
+
+        {/* Conclusion Section (You can modify this section for your Whitepaper) */}
+        <Box as="section" py={10} bgGradient={aboutBgGradient}>
+            <VStack spacing={6} align="center">
+            <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+            Conclusion
+            </Text>
+
+            <Box maxW="container.lg" mx="auto">
+                <Text fontSize="xl" textAlign="center" color={textColor}>
+                $WAR is a revolutionary new token that combines the power of blockchain technology with the world of fitness. It provides access to exclusive deals and discounts on the best fitness products available from Workout and Research, making it easy and accessible for everyone. With $WAR, you will be supporting fitness communities and promoting a healthy lifestyle. We invite you to join our community and become a part of the future of fitness.
+                </Text>
+            </Box>
+            </VStack>
+        </Box>
     </Box>
   );
 }
