@@ -14,6 +14,7 @@ export default function Roadmap() {
   const { colorMode, toggleColorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
+  const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -45,7 +46,9 @@ export default function Roadmap() {
 
       {/* Main Content */}
       <Container maxW="container.lg" py={10}>
-        <Text fontSize="4xl" fontWeight="bold" color={textColor} textAlign="center">Our Roadmap</Text>
+      <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+        Our Roadmap
+        </Text>
         <Text fontSize="xl" mt={4} color={textColor} textAlign="center">
           Explore the strategic steps we're taking to achieve our goals and milestones.
         </Text>
@@ -53,7 +56,14 @@ export default function Roadmap() {
       </Container>
 
       {/* Footer */}
-      {/* Add footer similar to the Home page */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Flex mt={2}>
+            {/* Additional footer content can go here */}
+          </Flex>
+        </Flex>
+      </Box>
     </Box>
   );
 }
