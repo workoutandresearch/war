@@ -15,12 +15,12 @@ import {
     useColorMode,
   } from '@chakra-ui/react';
   import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon, InfoIcon, UpDownIcon } from '@chakra-ui/icons'
-  import styles2 from './glow.module.css'; // Adjust the path as needed
+  import styles from './glow.module.css'; // Adjust the path as needed
   import Connect from './Connect'
 
   export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
-  const navBG = useColorModeValue(styles2.navglowL, styles2.navglowD)
+  const navBG = useColorModeValue(styles.navglowL, styles.navglowD)
 
     return (
       <>
