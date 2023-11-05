@@ -93,15 +93,21 @@ export default function Home() {
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center">INSERT TEXT HERE</Text>
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center">
+          Connect and Engage with Our Community
+        </Text>
+
           <Box maxW="container.lg" mx="auto">
-            <Text fontSize="xl" textAlign="center">INSERT TEXT HERE</Text>
+            <Text fontSize="xl" textAlign="center">
+              Connect with fellow enthusiasts, stay updated on the latest news, and engage in discussions about our project. Empower your journey with the latest tools added to the server!
+            </Text>
           </Box>
-          <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank">
+          <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank" color={buttonTextColor}>
             Join The Community
           </Button>
         </VStack>
       </Box>
+
 
       {/* Features Section */}
       <Box as="section" py={10} bgGradient={featuresBgGradient}>
