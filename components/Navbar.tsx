@@ -1,55 +1,71 @@
-import Link from 'next/link'
-import * as React from 'react'
+import Link from 'next/link';
+import * as React from 'react';
 import {
-    Flex,
-    HStack,
-    Button,
-    Center,
-    Menu,
-    MenuItem,
-    MenuButton,
-    Image,
-    MenuList,
-    MenuDivider,
-    useColorModeValue,
-    useColorMode,
-  } from '@chakra-ui/react';
-  import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon, InfoIcon, UpDownIcon } from '@chakra-ui/icons'
-  import styles from './glow.module.css'; // Adjust the path as needed
-  import Connect from './Connect'
+  Flex,
+  HStack,
+  Button,
+  Center,
+  Menu,
+  MenuItem,
+  MenuButton,
+  Image,
+  MenuList,
+  MenuDivider,
+  useColorModeValue,
+  useColorMode,
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon, InfoIcon, UpDownIcon } from '@chakra-ui/icons';
+import Connect from './Connect';
 
-  export default function Navbar() {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const navBG = useColorModeValue(styles.navglowL, styles.navglowD)
+export default function Navbar() {
+  const { colorMode, toggleColorMode } = useColorMode();
 
-    return (
-      <>
-    <Flex className={navBG} w="100%" h="64px" alignItems="center" justifyContent="space-between">
-        <Button ml={2} _hover={{textColor:'white'}} _active={{bgColor:'transparent'}} textColor='black' fontSize='14px' fontFamily="Orbitron" size='md' bgColor='transparent' onClick={toggleColorMode}>
-                  {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            </Button>
-        <Link href='/'>
-        <Image
-          src="/logo.svg"
-          alt="Fallen Order"
-          w="60px"
-        />
+  return (
+    <>
+      <Flex
+        bg={useColorModeValue('orange.400', 'cyan.400')}
+        w="100%"
+        h="64px"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Button
+          ml={2}
+          bg="transparent"
+          _hover={{ color: 'white' }}
+          _active={{ bg: 'transparent' }}
+          color="black"
+          fontSize="14px"
+          fontFamily="Orbitron"
+          size="md"
+          onClick={toggleColorMode}
+        >
+          {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        </Button>
+        <Link href="/">
+          <Image src="/logo.svg" alt="Fallen Order" w="60px" />
         </Link>
         <Menu>
           <MenuButton
-            _hover={{textColor:'white'}} _active={{bgColor:'transparent'}} textColor='black' fontSize='14px' fontFamily="Orbitron" size='md' bgColor='transparent' 
+            bg="transparent"
+            _hover={{ color: 'white' }}
+            _active={{ bg: 'transparent' }}
+            color="black"
+            fontSize="14px"
+            fontFamily="Orbitron"
+            size="md"
             as={Button}
-            cursor={'pointer'}
+            cursor="pointer"
             minW={0}
             mr={2}
-            >
+          >
             <HamburgerIcon />
           </MenuButton>
-          <MenuList p={0} m={3} borderRadius='20px'>
+          <MenuList p={0} m={3} borderRadius="20px">
             <Connect />
           </MenuList>
         </Menu>
-    </Flex>
-      </>
-    )
+      </Flex>
+    </>
+  );
 }

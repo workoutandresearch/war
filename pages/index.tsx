@@ -19,12 +19,11 @@ import {
   SimpleGrid,
   ScaleFade,
   useColorModeValue,
-  IconButton, // Import IconButton
-  Center
+  IconButton,
+  Center, // Import IconButton
 } from '@chakra-ui/react';
 import Connect from 'components/Connect'; // Make sure to import the Connect component
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
-import styles from './glow.module.css'; // Adjust the path as needed
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,9 +31,7 @@ export default function Home() {
   const textColor = useColorModeValue('#', 'inherit'); // 'inherit' will keep the original color in dark mode
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
-  const gradientText = useColorModeValue(styles.textAnimatedGlowL, styles.textAnimatedGlowD);
 
-  
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
   const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
@@ -42,8 +39,8 @@ export default function Home() {
   const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
-  
-  // Function to handle color mode toggle and provide appropriate icon
+
+  // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
     <IconButton
       icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -53,9 +50,9 @@ export default function Home() {
       color="white"
     />
   );
-  
+
   return (
-    <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}> {/* Apply the gradient conditionally */}
+    <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
         <title>Workout and Research - Home</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
@@ -70,7 +67,7 @@ export default function Home() {
             Connect
           </Button>
         </Flex>
-  
+
         {/* Modal */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -83,7 +80,7 @@ export default function Home() {
           </ModalContent>
         </Modal>
       </Box>
-  
+
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
@@ -91,7 +88,7 @@ export default function Home() {
           <Text fontSize="xl" color="white" mt={4} textAlign="center">INSERT TEXT HERE</Text>
         </Container>
       </Box>
-  
+
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
@@ -104,7 +101,7 @@ export default function Home() {
           </Button>
         </VStack>
       </Box>
-  
+
       {/* Features Section */}
       <Box as="section" py={10} bgGradient={featuresBgGradient}>
         <Container maxW="container.lg">
@@ -113,7 +110,7 @@ export default function Home() {
             {/* Cardio Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-              <Text fontSize="md" color={textColor} textAlign="center">The steps we&apos;re taking to bring our project to fruition and gives you an understanding of what to expect from us. </Text>
+                <Text fontSize="md" color={textColor} textAlign="center">The steps we're taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Roadmap</Button>
                 </Center>
@@ -133,7 +130,7 @@ export default function Home() {
             {/* Weight Lifting Tracking */}
             <ScaleFade initialScale={0.9} in={true}>
               <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions. </Text>
+                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
                 <Center>
                   <Button mt={4} colorScheme={buttonColorScheme}>Whitepaper</Button>
                 </Center>            
@@ -143,8 +140,7 @@ export default function Home() {
           </SimpleGrid>
         </Container>
       </Box>
-
-  
+      
       {/* Footer */}
       <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
         <Flex direction="column" align="center" justify="center">

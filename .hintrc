@@ -8,9 +8,12 @@
       {
         "ignore": [
           "width: fit-content",
-          "height: fit-content"
+          "height: fit-content",
+          "-ms-box-orient"
         ]
       }
-    ]
+    ],
+    "detect-css-reflows/composite": "off",
+    "detect-css-reflows/paint": "off"
   }
 }
