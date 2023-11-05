@@ -159,7 +159,7 @@ export default function Whitepaper() {
           <Box maxW="container.lg" mx="auto">
             <Text fontSize="xl" textAlign="center" color={textColor}>
               Fitness is a crucial aspect of our daily lives that often gets overlooked. It is not just 
-              about looking good, but feeling good as well. In today's fast-paced world, it can be 
+              about looking good, but feeling good as well. In todays fast paced world, it can be 
               challenging to find the time and motivation to stay fit and healthy. That is why we are 
               excited to announce the launch of our new project, WAR, which combines the power of 
               blockchain technology with the world of fitness.
