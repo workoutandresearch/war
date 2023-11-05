@@ -21,6 +21,11 @@ import {
   useColorModeValue,
   IconButton,
   Center,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
 } from '@chakra-ui/react';
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
@@ -36,7 +41,6 @@ export default function Home() {
   const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
@@ -67,23 +71,25 @@ export default function Home() {
       {/* Navbar */}
       <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
-          <ToggleColorModeButton />
-          
-          {/* Hamburger Menu Icon */}
-          <IconButton
-            display={{ base: 'block', md: 'none' }}
-            icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-            onClick={toggleMenu}
-            aria-label="Open Menu"
-            variant="ghost"
-            color="white"
-          />
+          {/* Hamburger Menu and Color Mode Toggle */}
+          <Flex align="center">
+            {/* Hamburger Menu Icon */}
+            <IconButton
+              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              variant="ghost"
+              color="white"
+            />
 
-          {/* Navigation Links */}
-          <Flex display={{ base: 'none', md: 'flex' }} align="center">
-            <Button as={Link} href="/" variant="ghost" color={textColor}>Home</Button>
-            <Button as={Link} href="/roadmap" variant="ghost" color={textColor}>Roadmap</Button>
-            {/* ... other navigation links ... */}
+            {/* Color Mode Toggle */}
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              variant="ghost"
+              color="white"
+            />
           </Flex>
           
           <Text fontSize="2xl" fontWeight="bold" color="white" textAlign="center">Workout and Research</Text>
@@ -92,7 +98,20 @@ export default function Home() {
             Connect
           </Button>
         </Flex>
-
+        {/* Drawer for Hamburger Menu */}
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu}>
+          <DrawerOverlay />
+          <DrawerContent>
+            <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+            <DrawerBody>
+              <VStack spacing={4}>
+                <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                {/* ... Additional menu links ... */}
+              </VStack>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
 
         {/* Modal */}
         <Modal isOpen={isOpen} onClose={onClose}>
