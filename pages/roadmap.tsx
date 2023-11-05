@@ -92,7 +92,7 @@ export default function Roadmap() {
             />
           </Flex>
           
-          <Text fontSize="2xl" fontWeight="bold" color="black" textAlign="center">Workout and Research</Text>
+          <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
@@ -135,25 +135,93 @@ export default function Roadmap() {
             Roadmap
           </Text>
           <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
-            Your roadmap content goes here.
+          This roadmap outlines a plan from early 2023 to early 2025. Initially, it focuses on launching a token, creating a website, and designing clothes. Then, it aims to build partnerships, launch the clothing line, and add new features. The plan also includes expanding internationally, improving customer experience, and building a community.
           </Text>
         </Container>
       </Box>
 
       {/* About Section (You can modify this section for your roadmap) */}
-      <Box as="section" py={10} bgGradient={aboutBgGradient}>
+        <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+            <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
             Roadmap Section
-          </Text>
-
-          <Box maxW="container.lg" mx="auto">
-            <Text fontSize="xl" textAlign="center" color={textColor}>
-              Your roadmap details and items go here.
             </Text>
-          </Box>
+
+            <SimpleGrid columns={2} spacing={4} maxW="container.lg" mx="auto">
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q1-Q2 2023
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Launching the token on Algorand and creating initial liquidity for the token. Developing a user-friendly website.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q2-Q3 2023
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Developing and designing the clothing line. Creating a brand identity, designing the clothes, and sourcing materials.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q3-Q4 2023
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Building partnerships with retailers and online marketplaces to sell the clothing. This includes developing relationships with brick-and-mortar stores and online marketplaces.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q4-Q1 2023-2024
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Launching the clothing line. This includes announcing the launch, releasing the clothes for sale, and promoting the clothing and the use of the token through marketing and advertising campaigns.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q1-Q2 2024
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Adding new features to the token and clothing line. This includes adding new designs and styles of clothing, as well as adding new features to the token.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor }textAlign="center">
+                Q2-Q3 2024
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Researching and entering new international markets, translating the website and other materials, and adapting the business to comply with regulations.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q3-Q4 2024
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Continuously improving the customer experience. This includes gathering feedback, implementing changes, and providing exceptional customer service to maintain customer loyalty.
+                </Text>
+            </Box>
+
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Text fontSize="xl" fontWeight="bold" color={textColor} textAlign="center">
+                Q4 2024-Q1 2025
+                </Text>
+                <Text fontSize="lg" color={textColor} textAlign="center">
+                Focus on developing the community. This includes creating a community portal, hosting events and meetups, and encouraging token holders to engage with each other and with the business.
+                </Text>
+            </Box>
+            </SimpleGrid>
         </VStack>
-      </Box>
+        </Box>
     </Box>
   );
 }
