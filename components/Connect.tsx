@@ -5,8 +5,7 @@ import { Listbox,Transition } from '@headlessui/react'
 import { MdNotInterested } from "react-icons/md"
 import { Fragment } from 'react'
 import { classNames } from 'utils'
-import styles from './glow.module.css';
-
+import styles2 from './glow.module.css';
 
 export default function Connect() {
   const { providers, activeAccount } = useWallet()
