@@ -46,9 +46,7 @@ export default function Roadmap() {
 
       {/* Main Content */}
       <Container maxW="container.lg" py={10}>
-      <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
-        Our Roadmap
-        </Text>
+      <Text fontSize="4xl" fontWeight="bold" color={textColor} textAlign="center">Our Roadmap</Text>
         <Text fontSize="xl" mt={4} color={textColor} textAlign="center">
           Explore the strategic steps we're taking to achieve our goals and milestones.
         </Text>
