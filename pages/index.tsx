@@ -36,6 +36,7 @@ export default function Home() {
   const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
   const [isMenuOpen, setIsMenuOpen] = useState(false); 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
