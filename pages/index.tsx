@@ -62,7 +62,7 @@ export default function Home() {
       <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
           <ToggleColorModeButton />
-          <Text fontSize="2xl" fontWeight="bold" color="white">Workout and Research</Text>
+          <Text fontSize="2xl" fontWeight="bold" color="white" textAlign="center">Workout and Research</Text>
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen}>
             Connect
           </Button>
