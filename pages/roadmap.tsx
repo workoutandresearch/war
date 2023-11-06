@@ -49,6 +49,7 @@ export default function Roadmap() {
   const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
+  const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -79,7 +80,7 @@ export default function Roadmap() {
               onClick={toggleMenu}
               aria-label="Open Menu"
               variant="ghost"
-              color="white"
+              color={boxColorScheme}
             />
 
             {/* Color Mode Toggle */}
@@ -88,7 +89,7 @@ export default function Roadmap() {
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color="white"
+              color={boxColorScheme}
             />
           </Flex>
           
@@ -101,15 +102,20 @@ export default function Roadmap() {
         {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
-          <DrawerContent bg={boxColorScheme}> {/* Set the background color here */}
+          <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
-              <VStack spacing={4}>
+            <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>
-                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
+                <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
+                <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
                 <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
+                <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
+                <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
