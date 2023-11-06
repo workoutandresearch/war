@@ -163,7 +163,7 @@ export default function Privacypolicy() {
             Our Commitment to Privacy
             </Text>
             <Text fontSize="md" color={textColor} textAlign="center">
-            We take your privacy very seriously and will comply with applicable law by ensuring our customers' information is protected. We are committed to achieving the highest level of customer satisfaction through the best-in-class management of personal information.
+            We take your privacy very seriously and will comply with applicable law by ensuring our customers information is protected. We are committed to achieving the highest level of customer satisfaction through the best-in-class management of personal information.
             </Text>
         </Box>
         </Flex>
