@@ -43,9 +43,13 @@ export default function Disclaimer() {
     // Corrected gradient and color variables for light mode
     const headerBgGradient = useColorModeValue('none', 'transparent'); // No gradient for light mode
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
-    const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
     const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
 
+    const pageBgGradient = useColorModeValue(
+        'linear(to-b, #ff3a00, #ff7e00)', // Updated gradient colors for light mode
+        'linear(to-b, #0000FF, #000000)' // Gradient colors for dark mode
+      );
+      
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
     <IconButton
