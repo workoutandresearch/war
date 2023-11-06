@@ -133,28 +133,37 @@ export default function Roadmap() {
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
           <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
-          opt in
+          OPT-IN TO $WAR
           </Text>
           <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
-            Your opt in content goes here.
+          ASA ID - 1015673913
           </Text>
         </Container>
       </Box>
 
-      {/* About Section (You can modify this section for your opt in) */}
-      <Box as="section" py={10} bgGradient={aboutBgGradient}>
-        <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
-          opt in Section
-          </Text>
-
-          <Box maxW="container.lg" mx="auto">
-            <Text fontSize="xl" textAlign="center" color={textColor}>
-              Your opt in details and items go here.
-            </Text>
-          </Box>
+      {/* About Section (You can modify this section for your opt-in) */}
+        <Box as="section" py={10} bgGradient={aboutBgGradient}>
+        <VStack spacing={4} align="center">
+            {/* Add 5 buttons with different links */}
+            <VStack spacing={4}>
+            <Button as="a" href="https://explorer.perawallet.app/assets/1015673913/" colorScheme={buttonColorScheme} color={textColor}>
+                PERA WALLET
+            </Button>
+            <Button as="a" href="https://app.humble.sh/swap?poolId=1015678698&asset_in=0&asset_out=1015673913" colorScheme={buttonColorScheme} color={textColor}>
+                HUMBLE SWAP
+            </Button>
+            <Button as="a" href="https://app.tinyman.org/#/swap?asset_in=0&asset_out=1015673913" colorScheme={buttonColorScheme} color={textColor}>
+                TINYMAN V2
+            </Button>
+            <Button as="a" href="https://algoexplorer.io/asset/1015673913" colorScheme={buttonColorScheme} color={textColor}>
+                ALGOEXPLORER
+            </Button>
+            <Button as="a" href="https://vestige.fi/asset/1015673913" colorScheme={buttonColorScheme} color={textColor}>
+                VESTIGE FI
+            </Button>
+            </VStack>
         </VStack>
-      </Box>
+        </Box>
     </Box>
   );
 }
