@@ -34,7 +34,7 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-export default function shippingpolicy() {
+export default function Shippingpolicy() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');

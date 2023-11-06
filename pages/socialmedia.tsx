@@ -32,7 +32,7 @@ import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 
-export default function socialmedia() {
+export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');
