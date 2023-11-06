@@ -102,10 +102,10 @@ export default function Whitepaper() {
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}
-        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu}>
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerContent bg={boxColorScheme}> {/* Set the background color here */}
+            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
               <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>

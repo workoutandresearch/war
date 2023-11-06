@@ -79,7 +79,7 @@ export default function Roadmap() {
               onClick={toggleMenu}
               aria-label="Open Menu"
               variant="ghost"
-              color="white"
+              color={boxColorScheme}
             />
 
             {/* Color Mode Toggle */}
@@ -88,7 +88,7 @@ export default function Roadmap() {
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color="white"
+              color={boxColorScheme}
             />
           </Flex>
           
@@ -99,16 +99,17 @@ export default function Roadmap() {
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}
-        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu}>
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
-          <DrawerContent>
-            <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
+          <DrawerContent bg={boxColorScheme}> {/* Set the background color here */}
+            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
               <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
