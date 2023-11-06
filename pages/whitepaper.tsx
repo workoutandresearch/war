@@ -112,7 +112,7 @@ export default function Whitepaper() {
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
-
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>

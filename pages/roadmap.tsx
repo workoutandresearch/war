@@ -105,10 +105,11 @@ export default function Roadmap() {
             <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
             <DrawerBody>
               <VStack spacing={4}>
-                <Link href="/" onClick={toggleMenu}>Home</Link>
+              <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
