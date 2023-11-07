@@ -212,7 +212,7 @@ export default function Optin() {
           {/* Add a button with an onClick handler */}
           <VStack spacing={4}>
           <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
-            By clicking "Opt In," you acknowledge and agree to the terms and conditions associated with this opt-in process.
+            By clicking Opt In, you acknowledge and agree to the terms and conditions associated with this opt-in process.
           </Text>
           <Spacer h={4} />
           <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
