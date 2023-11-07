@@ -60,10 +60,13 @@ export default function Optin() {
 
 
   const sendOptIn = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       if (!activeAddress) {
-        throw new Error('Wallet Not Connected!')
+        // Wallet Not Connected, open the modal
+        onOpen();
+        setLoading(false);
+        return;
       }
   
       const suggestedParams = await algodClient.getTransactionParams().do()
@@ -98,10 +101,10 @@ export default function Optin() {
       })
       setLoading(false)
     } catch (error) {
-      console.error(error)
-      toast.error('Oops! Opt In Failed!', { id: 'txn' })
+      console.error(error);
+      toast.error('Oops! Opt In Failed!', { id: 'txn' });
     }
-  }
+  };
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -144,13 +147,16 @@ export default function Optin() {
               color={boxColorScheme}
             />
           </Flex>
-          
-          <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
-          
+
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>
         </Flex>
+
         {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
@@ -174,10 +180,10 @@ export default function Optin() {
           </DrawerContent>
         </Drawer>
 
-        {/* Modal */}
+        {/* Modal for Connecting Wallet */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg={drawerBgColor}>
             <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -187,19 +193,19 @@ export default function Optin() {
         </Modal>
       </Box>
 
-      {/* Hero Section (You can modify this section for your opt in) */}
+      {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
           <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
-          OPT-IN TO $WAR
+            OPT-IN TO $WAR
           </Text>
           <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
-          ASA ID - 1015673913
+            ASA ID - 1015673913
           </Text>
         </Container>
       </Box>
 
-      {/* About Section (You can modify this section for your opt-in) */}
+      {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={4} align="center">
           {/* Add a button with an onClick handler */}

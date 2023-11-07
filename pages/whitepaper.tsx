@@ -128,7 +128,7 @@ export default function Whitepaper() {
         {/* Modal */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg={drawerBgColor}>
             <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
@@ -149,11 +149,6 @@ export default function Whitepaper() {
           </Text>
           <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
             Token ASA 1015673913
-          </Text>
-          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
-            <a href="https://workoutandresearch.algo.xyz" target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>
-              workoutandresearch.algo.xyz
-            </a>
           </Text>
         </Container>
       </Box>

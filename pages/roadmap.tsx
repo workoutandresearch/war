@@ -125,7 +125,7 @@ export default function Roadmap() {
         {/* Modal */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent bg={drawerBgColor}>
             <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
