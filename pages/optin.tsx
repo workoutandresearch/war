@@ -215,15 +215,6 @@ export default function Optin() {
           </VStack>
         </VStack>
       </Box>
-      {/* Footer */}
-      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
-        <Flex direction="column" align="center" justify="center" color={textColor}>
-          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
-          <Flex mt={2}>
-            {/* Additional footer content can go here */}
-          </Flex>
-        </Flex>
-      </Box>
     </Box>
   );
 }
