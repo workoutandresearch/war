@@ -10,7 +10,7 @@ import type { AppProps } from 'next/app'
 import { ChakraProvider, extendTheme } from "@chakra-ui/react"
 
 import 'styles/globals.css'
-import "@fontsource/orbitron"
+import '@fontsource/share-tech-mono';
 
 const queryClient = new QueryClient()
 

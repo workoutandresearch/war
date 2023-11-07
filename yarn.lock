@@ -1109,6 +1109,11 @@
   resolved "https://registry.npmjs.org/@fontsource/orbitron/-/orbitron-5.0.12.tgz"
   integrity sha512-r+uR4TTwhGYe3Rtvs3LDxtofH2gDFazJqnyFExy5Od1RWnsWPGky2/rn2Tjnvo9WC0L7ki5riGzaJmGvEjsJew==
 
+"@fontsource/share-tech-mono@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/share-tech-mono/-/share-tech-mono-5.0.8.tgz#b671b45fc59ac561d55544013ba591c0a79eba88"
+  integrity sha512-TswltQj0p+pprBRgSHW6W0JOL7kPGBSuwensgpKjGY1+5HYTXg0xihN1uFPt4HsieeJbw7ldoHimogmjyrIemw==
+
 "@headlessui/react@^1.7.17":
   version "1.7.17"
   resolved "https://registry.npmjs.org/@headlessui/react/-/react-1.7.17.tgz"
