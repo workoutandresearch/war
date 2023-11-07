@@ -31,6 +31,10 @@ import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import algosdk from 'algosdk';
+import { algodClient } from 'lib/algodClient';
+import toast from 'react-hot-toast';
+import { useWallet } from '@txnlab/use-wallet';
 
 export default function Optin() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,7 +54,54 @@ export default function Optin() {
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+  const { activeAddress, signTransactions } = useWallet()
+  const [loading, setLoading] = useState<boolean>(false)
 
+
+
+  const sendOptIn = async () => {
+    setLoading(true)
+    try {
+      if (!activeAddress) {
+        throw new Error('Wallet Not Connected!')
+      }
+  
+      const suggestedParams = await algodClient.getTransactionParams().do()
+      suggestedParams.fee = 1000
+      suggestedParams.flatFee = true
+      const note = Uint8Array.from('Successfully Opted In To Workout and Research!'.split("").map(x => x.charCodeAt(0)))
+  
+      const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+                  from: activeAddress,
+                  to: activeAddress,
+                  amount: 0,
+                  assetIndex: 1015673913,
+                  suggestedParams,
+                  note,
+                })
+
+      const encodedTransaction = algosdk.encodeUnsignedTransaction(txn)
+
+      toast.loading('Awaiting Signature...', { id: 'txn', duration: Infinity })
+
+      const signedTransaction = await signTransactions([encodedTransaction])
+
+      toast.loading('Sending transaction...', { id: 'txn', duration: Infinity })
+
+      algodClient.sendRawTransaction(signedTransaction).do()
+
+      console.log(`Successfully Opted In!`)
+
+      toast.success(`Transaction Successful!`, {
+        id: 'txn',
+        duration: 5000
+      })
+      setLoading(false)
+    } catch (error) {
+      console.error(error)
+      toast.error('Oops! Opt In Failed!', { id: 'txn' })
+    }
+  }
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -149,28 +200,32 @@ export default function Optin() {
       </Box>
 
       {/* About Section (You can modify this section for your opt-in) */}
-        <Box as="section" py={10} bgGradient={aboutBgGradient}>
+      <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={4} align="center">
-            {/* Add 5 buttons with different links */}
-            <VStack spacing={4}>
-            <Button as="a" href="https://explorer.perawallet.app/assets/1015673913/" colorScheme={buttonColorScheme} color={textColor}>
-                PERA WALLET
+          {/* Add a button with an onClick handler */}
+          <VStack spacing={4}>
+            <Button
+              as="a"
+              colorScheme={buttonColorScheme}
+              color={textColor}
+              onClick={sendOptIn} // Add onClick handler here
+            >
+              Opt In
             </Button>
-            <Button as="a" href="https://app.humble.sh/swap?poolId=1015678698&asset_in=0&asset_out=1015673913" colorScheme={buttonColorScheme} color={textColor}>
-                HUMBLE SWAP
-            </Button>
-            <Button as="a" href="https://app.tinyman.org/#/swap?asset_in=0&asset_out=1015673913" colorScheme={buttonColorScheme} color={textColor}>
-                TINYMAN V2
-            </Button>
-            <Button as="a" href="https://algoexplorer.io/asset/1015673913" colorScheme={buttonColorScheme} color={textColor}>
-                ALGOEXPLORER
-            </Button>
-            <Button as="a" href="https://vestige.fi/asset/1015673913" colorScheme={buttonColorScheme} color={textColor}>
-                VESTIGE FI
-            </Button>
-            </VStack>
+          </VStack>
         </VStack>
-        </Box>
+      </Box>
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Flex mt={2}>
+            {/* Additional footer content can go here */}
+          </Flex>
+        </Flex>
+      </Box>
     </Box>
   );
 }
+
+
