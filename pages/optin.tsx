@@ -194,56 +194,42 @@ export default function Optin() {
         </Modal>
       </Box>
 
+      {/* Hero Section */}
+      <Box as="section" bgGradient={heroBgGradient} h="60vh">
+        <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
+          <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
+            OPT-IN TO $WAR
+          </Text>
+          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">
+            ASA ID - 1015673913
+          </Text>
+        </Container>
+      </Box>
+
       {/* About Section */}
-      <Box as="section" py={10} bgGradient={heroBgGradient}>
+      <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={4} align="center">
           {/* Add a button with an onClick handler */}
           <VStack spacing={4}>
-          <Box
-            maxW="container.sm" // Set the maximum width you desire
-            p={5}
-            shadow="md"
-            borderWidth="1px"
-            borderColor="black"
-            borderRadius="lg"
-            bg={boxColorScheme}
-            _hover={{ shadow: "lg" }}
-            w={500} // Set the fixed width you want (3x3)
-            h={400} // Set the fixed height you want (3x3)
-            overflow="hidden"
-        >
-            <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>
-            OPT-IN TO $WAR
-            </Text>
-            <Text fontSize="lg" fontWeight="bold" color={textColor} textAlign="center">
-            ASA ID - 1015673913
-            </Text>
-            <Spacer h={4} />
-            <Text fontSize="md" color={textColor} textAlign="center">
-            By clicking Opt In, you acknowledge and agree to the terms and conditions associated with this opt-in process.
-            </Text>
-            <Spacer h={4} />
-            <Text fontSize="md" color={textColor} textAlign="center">
+          <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
+            By clicking "Opt In," you acknowledge and agree to the terms and conditions associated with this opt-in process.
+          </Text>
+          <Spacer h={4} />
+          <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
             Please review our <Link href="/termscond">Terms and Conditions</Link> and <Link href="/privacypolicy">Privacy Policy</Link> before proceeding.
-            </Text>
-            <Spacer h={4} />
-            <Center>
-              <Button
-                as="a"
-                colorScheme={buttonColorScheme}
-                color={textColor}
-                onClick={sendOptIn} // Add onClick handler here
-              >
-                Opt In
-              </Button>
-            </Center>
-            <Spacer h={4} />
-        </Box>
+          </Text>
+          <Spacer h={4} />
+            <Button
+              as="a"
+              colorScheme={buttonColorScheme}
+              color={textColor}
+              onClick={sendOptIn} // Add onClick handler here
+            >
+              Opt In
+            </Button>
           </VStack>
         </VStack>
       </Box>
-        <Box as="section" py={100} bgGradient={aboutBgGradient}>
-        </Box>
     </Box>
   );
 }
