@@ -220,7 +220,7 @@ export default function Optin() {
             </Text>
             <Spacer h={4} />
             <Text fontSize="md" color={textColor} textAlign="center">
-            By clicking "Opt In," you acknowledge and agree to the terms and conditions associated with this opt-in process.
+            By clicking Opt In, you acknowledge and agree to the terms and conditions associated with this opt-in process.
             </Text>
             <Spacer h={4} />
             <Text fontSize="md" color={textColor} textAlign="center">
