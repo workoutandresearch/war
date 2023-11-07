@@ -152,8 +152,8 @@ export default function Privacypolicy() {
             borderRadius="lg"
             bg={boxColorScheme}
             _hover={{ shadow: "lg" }}
-            w={400} // Set the fixed width you want (3x3)
-            h={250} // Set the fixed height you want (3x3)
+            w={500} // Set the fixed width you want (3x3)
+            h={400} // Set the fixed height you want (3x3)
             overflow="hidden"
         >
             <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>
