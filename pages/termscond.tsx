@@ -104,44 +104,23 @@ export default function Termscond() {
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}
-        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu}>
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
-          <DrawerContent bg={drawerBgColor}>
-            <DrawerHeader borderBottomWidth="1px" textAlign="center">
-              Menu
-            </DrawerHeader>
+          <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
+            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
-              <VStack spacing={4}>
-                <Link href="/" onClick={toggleMenu}>
-                  Home
-                </Link>
-                <Link href="/whitepaper" onClick={toggleMenu}>
-                  Whitepaper
-                </Link>
-                <Link href="/roadmap" onClick={toggleMenu}>
-                  Roadmap
-                </Link>
-                <Link href="/optin" onClick={toggleMenu}>
-                  Opt In
-                </Link>
-                <Link href="/socialmedia" onClick={toggleMenu}>
-                  Social Media
-                </Link>
-                <Link href="/termscond" onClick={toggleMenu}>
-                  Terms and Conditions
-                </Link>
-                <Link href="/privacypolicy" onClick={toggleMenu}>
-                  Privacy Policy
-                </Link>
-                <Link href="/disclaimer" onClick={toggleMenu}>
-                  Disclaimer
-                </Link>
-                <Link href="/returnpolicy" onClick={toggleMenu}>
-                  Return Policy
-                </Link>
-                <Link href="/shippingpolicy" onClick={toggleMenu}>
-                  Shipping Policy
-                </Link>
+            <VStack spacing={4}>
+                <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/merch" onClick={toggleMenu}>Merch</Link>
+                <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
+                <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
+                <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
+                <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
+                <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
