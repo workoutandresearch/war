@@ -31,7 +31,7 @@ import {
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
@@ -57,6 +57,27 @@ export default function Merch() {
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
   const { activeAddress, signTransactions } = useWallet()
   const [loading, setLoading] = useState<boolean>(false)
+  const [warTokenBalance, setWarTokenBalance] = useState(null);
+
+  // Fetch WAR token balance
+  const fetchWarTokenBalance = async (address: string) => {
+    try {
+      const accountInfo = await algodClient.accountInformation(address).do();
+      const assets = accountInfo['assets'];
+      const warAsset = assets.find((asset: { [x: string]: any; }) => asset['asset-id'] === 1015673913); // Replace WAR_TOKEN_ID with actual ID
+      setWarTokenBalance(warAsset ? warAsset.amount : 0);
+    } catch (error) {
+      console.error('Error fetching WAR token balance:', error);
+      setWarTokenBalance(null);
+    }
+  };
+
+  // Effect to fetch the WAR token balance when the active address changes
+  useEffect(() => {
+    if (activeAddress) {
+      fetchWarTokenBalance(activeAddress);
+    }
+  }, [activeAddress]);
 
   const sendOptIn = async () => {
     setLoading(true);
@@ -119,7 +140,7 @@ export default function Merch() {
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
-        <title>Workout and Research - Opt In</title>
+        <title>Workout and Research - Merch</title>
         <meta name="description" content="Your opt in description goes here." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -150,7 +171,12 @@ export default function Merch() {
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>

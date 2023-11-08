@@ -30,7 +30,12 @@ import {
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import algosdk from 'algosdk';
+import { algodClient } from 'lib/algodClient';
+import toast from 'react-hot-toast';
+import { useWallet } from '@txnlab/use-wallet';
+
 
 export default function Disclaimer() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,10 +46,80 @@ export default function Disclaimer() {
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   
     // Corrected gradient and color variables for light mode
-    const headerBgGradient = useColorModeValue('none', 'transparent'); // No gradient for light mode
+    const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
     const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
     const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+    const { activeAddress, signTransactions } = useWallet()
+    const [loading, setLoading] = useState<boolean>(false)
+    const [warTokenBalance, setWarTokenBalance] = useState(null);
+  
+    // Fetch WAR token balance
+    const fetchWarTokenBalance = async (address: string) => {
+      try {
+        const accountInfo = await algodClient.accountInformation(address).do();
+        const assets = accountInfo['assets'];
+        const warAsset = assets.find((asset: { [x: string]: any; }) => asset['asset-id'] === 1015673913); // Replace WAR_TOKEN_ID with actual ID
+        setWarTokenBalance(warAsset ? warAsset.amount : 0);
+      } catch (error) {
+        console.error('Error fetching WAR token balance:', error);
+        setWarTokenBalance(null);
+      }
+    };
+  
+    // Effect to fetch the WAR token balance when the active address changes
+    useEffect(() => {
+      if (activeAddress) {
+        fetchWarTokenBalance(activeAddress);
+      }
+    }, [activeAddress]);
+  
+    const sendOptIn = async () => {
+      setLoading(true);
+      try {
+        if (!activeAddress) {
+          // Wallet Not Connected, open the modal
+          onOpen();
+          setLoading(false);
+          return;
+        }
+    
+        const suggestedParams = await algodClient.getTransactionParams().do()
+        suggestedParams.fee = 1000
+        suggestedParams.flatFee = true
+        const note = Uint8Array.from('Successfully Opted In To Workout and Research!'.split("").map(x => x.charCodeAt(0)))
+    
+        const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+                    from: activeAddress,
+                    to: activeAddress,
+                    amount: 0,
+                    assetIndex: 1015673913,
+                    suggestedParams,
+                    note,
+                  })
+  
+        const encodedTransaction = algosdk.encodeUnsignedTransaction(txn)
+  
+        toast.loading('Awaiting Signature...', { id: 'txn', duration: Infinity })
+  
+        const signedTransaction = await signTransactions([encodedTransaction])
+  
+        toast.loading('Sending transaction...', { id: 'txn', duration: Infinity })
+  
+        algodClient.sendRawTransaction(signedTransaction).do()
+  
+        console.log(`Successfully Opted In!`)
+  
+        toast.success(`Transaction Successful!`, {
+          id: 'txn',
+          duration: 5000
+        })
+        setLoading(false)
+      } catch (error) {
+        console.error(error);
+        toast.error('Oops! Opt In Failed!', { id: 'txn' });
+      }
+    };
 
     const pageBgGradient = useColorModeValue(
         'linear(to-b, #ff3a00, #ff7e00)', // Updated gradient colors for light mode
@@ -65,12 +140,12 @@ export default function Disclaimer() {
   return (
     <Box bgGradient={pageBgGradient}>
       <Head>
-        <title>Workout and Research - Home</title>
+        <title>Workout and Research - Disclaimer</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Navbar */}
-      <Box as="header" bg={headerBgGradient} py={4} px={8} boxShadow="sm">
+      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
           {/* Hamburger Menu and Color Mode Toggle */}
           <Flex align="center">
@@ -92,13 +167,21 @@ export default function Disclaimer() {
               color={boxColorScheme}
             />
           </Flex>
-          
-          <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
-          
+
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>
         </Flex>
+        
         {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
