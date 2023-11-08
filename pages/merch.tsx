@@ -204,7 +204,7 @@ export default function Merch() {
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={8}>
           <Button
               as="a"
-              href="/merch/outerwear" // Replace with the actual URL for your t-shirts
+              //href="/merch/outerwear" // Replace with the actual URL for your t-shirts
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
@@ -214,7 +214,7 @@ export default function Merch() {
             </Button>
             <Button
               as="a"
-              href="/merch/t-shirts" // Replace with the actual URL for your t-shirts
+              //href="/merch/t-shirts" // Replace with the actual URL for your t-shirts
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
@@ -224,7 +224,7 @@ export default function Merch() {
             </Button>
             <Button
               as="a"
-              href="/merch/hats" // Replace with the actual URL for your hats
+              //href="/merch/hats" // Replace with the actual URL for your hats
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
@@ -234,7 +234,7 @@ export default function Merch() {
             </Button>
             <Button
               as="a"
-              href="/merch/accessories" // Replace with the actual URL for your accessories
+              //href="/merch/accessories" // Replace with the actual URL for your accessories
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"

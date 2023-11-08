@@ -60,6 +60,12 @@ export default function Merch() {
   const [usdToAlgoRate, setUsdToAlgoRate] = useState(null);
   const [cart, setCart] = useState([]);
   const [algoToWarRate, setAlgoToWarRate] = useState(null);
+  interface CartItem {
+    name: string;
+    price: number;
+    quantity?: number; // Optional since we'll add it during the reduce
+  }
+  
 
   const fetchAlgoToWarRate = async () => {
     try {
