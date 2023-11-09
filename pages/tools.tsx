@@ -9,7 +9,6 @@ import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
 import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
-import ExerciseDatabase from '../components/ExerciseDatabase';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -105,7 +104,6 @@ export default function Tools() {
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
       { name: 'Workout History', id: 'workoutHistory' },
-      { name: 'Exercise Database', id: 'exerciseDatabase' }, // Add Exercise Database
       // Add more tools as needed
     ];
 
@@ -137,16 +135,6 @@ export default function Tools() {
   const [countdown, setCountdown] = useState(30);
   const [isCountingDown, setIsCountingDown] = useState(false);
 
-  useEffect(() => {
-    setFilteredExercises(calisthenicsExercises);
-  }, [calisthenicsExercises]);
-
-  useEffect(() => {
-    if (calisthenicsExercises.length === 0) {
-      // Handle the case when there are no exercises.
-    }
-  }, [calisthenicsExercises.length]);
-  
   // Custom hook to handle interval
   useInterval(() => {
     if (countdown > 0) {
@@ -339,29 +327,12 @@ export default function Tools() {
       </Box>
     )}
 
-    {selectedTool === 'exerciseDatabase' && (
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={featuresBgGradient}
-      >
-        <ExerciseDatabase exercises={calisthenicsExercises} />
-      </Box>
-    )}
-
+    {/* Add ExerciseDatabase component below */}
+    <ExerciseDatabase />
+    
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
       </Box>
     </Box>
   );
-}
-
-function setFilteredExercises(calisthenicsExercises: { name: string; description: string; time: string; instructions: string; }[]) {
-  throw new Error('Function not implemented.');
 }
