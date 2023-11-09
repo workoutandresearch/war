@@ -140,6 +140,7 @@ export default function Home() {
             <DrawerBody>
             <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
