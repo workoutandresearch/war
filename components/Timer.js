@@ -42,7 +42,7 @@ const Timer = () => {
       <Text fontSize="9xl" color={textColor}>
         Timer
       </Text>
-      <Text fontSize="4xl" color={textColor}>
+      <Text fontSize="7xl" color={textColor}>
         {formatTime(seconds)}
       </Text>
       <div className="timer-buttons">

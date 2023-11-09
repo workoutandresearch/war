@@ -98,7 +98,14 @@ export default function Tools() {
     }
     ];
 
-    
+    const tools = [
+      { name: 'Calisthenics', id: 'calisthenics' },
+      { name: 'Cal. Calculator', id: 'calculator' },
+      { name: 'Cal. Counter', id: 'counter' },
+      { name: 'Timer', id: 'timer' },
+      { name: 'Workout History', id: 'workoutHistory' },
+      // Add more tools as needed
+    ];
 
   // Fetch WAR token balance
   const fetchWarTokenBalance = async (address: string) => {
@@ -229,41 +236,18 @@ export default function Tools() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex justify="center" align="center" my={4} bgGradient={heroBgGradient}>
-        <Button
-          onClick={() => handleToolChange('calisthenics')}
-          colorScheme={selectedTool === 'calisthenics' ? buttonColorScheme : 'transparent'}
-          color={textColor}
-        >
-          Calisthenics
-        </Button>
-        <Button
-          onClick={() => handleToolChange('calculator')}
-          colorScheme={selectedTool === 'calculator' ? buttonColorScheme : 'transparent'}
-          color={textColor}
-        >
-          Cal. Calculator
-        </Button>
-        <Button
-          onClick={() => handleToolChange('counter')}
-          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'transparent'}
-          color={textColor}
-        >
-          Cal. Counter
-        </Button>
-        <Button
-          onClick={() => handleToolChange('timer')}
-          colorScheme={selectedTool === 'timer' ? buttonColorScheme : 'transparent'}
-          color={textColor}
-        >
-          Timer
-        </Button>
-        <Button
-          onClick={() => handleToolChange('workoutHistory')}
-          colorScheme={selectedTool === 'workoutHistory' ? buttonColorScheme : 'transparent'}
-          color={textColor}
-        >
-          Workout History
-        </Button>
+        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+          {tools.map((tool) => (
+            <Button
+              key={tool.id}
+              onClick={() => handleToolChange(tool.id)}
+              colorScheme={selectedTool === tool.id ? buttonColorScheme : 'transparent'}
+              color={textColor}
+            >
+              {tool.name}
+            </Button>
+          ))}
+        </Grid>
       </Flex>
 
       {selectedTool === 'calisthenics' && (
