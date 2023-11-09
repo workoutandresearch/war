@@ -7,6 +7,8 @@ import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
+import Timer from 'components/Timer'; // Import the Timer component
+import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -248,7 +250,22 @@ export default function Tools() {
         >
           Cal. Counter
         </Button>
+        <Button
+          onClick={() => handleToolChange('timer')}
+          colorScheme={selectedTool === 'timer' ? buttonColorScheme : 'transparent'}
+          color={textColor}
+        >
+          Timer
+        </Button>
+        <Button
+          onClick={() => handleToolChange('workoutHistory')}
+          colorScheme={selectedTool === 'workoutHistory' ? buttonColorScheme : 'transparent'}
+          color={textColor}
+        >
+          Workout History
+        </Button>
       </Flex>
+
       {selectedTool === 'calisthenics' && (
         <Box
           borderWidth="1px"
@@ -294,6 +311,37 @@ export default function Tools() {
           <CalorieCounter />
         </Box>
       )}
+      {selectedTool === 'timer' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={featuresBgGradient}
+      >
+        <Timer />
+      </Box>
+    )}
+
+    {selectedTool === 'workoutHistory' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={featuresBgGradient}
+        >
+        <WorkoutHistory />
+      </Box>
+    )}
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
       </Box>
