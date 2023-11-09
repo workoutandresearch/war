@@ -10,6 +10,7 @@ const CalorieCalculator = () => {
   const [calories, setCalories] = useState<string | null>(null);
   const textColor = useColorModeValue('#000000', 'inherit');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
+  const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
 
   const calculateCalories = (event: { preventDefault: () => void; }) => {
     event.preventDefault(); // Prevent form submission and page reload
@@ -49,9 +50,8 @@ const CalorieCalculator = () => {
   // Define a style for the label elements
   const labelStyle = {
     color: textColor,
-    boxColorScheme,
-
   };
+
   return (
     <div>
       <h2>Calorie Calculator</h2>
@@ -62,8 +62,8 @@ const CalorieCalculator = () => {
             type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            colorScheme={boxColorScheme}
-          />
+            bgGradient={heroBgGradient}
+            />
         </div>
         <div>
           <label style={labelStyle}>Height (in centimeters):</label>
@@ -71,8 +71,8 @@ const CalorieCalculator = () => {
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            colorScheme={boxColorScheme}
-          />
+            bgGradient={heroBgGradient}
+            />
         </div>
         <div>
           <label style={labelStyle}>Age:</label>
@@ -80,16 +80,16 @@ const CalorieCalculator = () => {
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            colorScheme={boxColorScheme}
-          />
+            bgGradient={heroBgGradient}
+            />
         </div>
         <div>
           <label style={labelStyle}>Gender:</label>
           <Select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            colorScheme={boxColorScheme}
-          >
+            bgGradient={heroBgGradient}
+            >
             <option value="male">Male</option>
             <option value="female">Female</option>
           </Select>
@@ -99,8 +99,8 @@ const CalorieCalculator = () => {
           <Select
             value={activityLevel}
             onChange={(e) => setActivityLevel(e.target.value)}
-            colorScheme={boxColorScheme}
-          >
+            bgGradient={heroBgGradient}
+            >
             <option value="sedentary">Sedentary (little or no exercise)</option>
             <option value="lightlyActive">Lightly Active (light exercise or sports 1-3 days a week)</option>
             <option value="moderatelyActive">Moderately Active (moderate exercise or sports 3-5 days a week)</option>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
@@ -10,6 +10,8 @@ import { algodClient } from 'lib/algodClient';
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
+import CalorieCounter from 'components/CalorieCounter';
+
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -200,8 +202,14 @@ export default function Tools() {
         </Drawer>
       </Box>
 
-    {/* Calisthenics Session Box */}
-    <Box as="section" py={10} bgGradient={heroBgGradient} className="bold">
+    {/* Grid Layout for Tools */}
+    <Grid
+      templateColumns="repeat(3, 1fr)" // 3 columns
+      gap={6} // Gap between columns and rows
+      p={4} // Padding for the grid
+      bgGradient={heroBgGradient}
+    >
+      {/* First Tool Box - Calisthenics Session */}
       <Box
         borderWidth="1px"
         borderRadius="lg"
@@ -210,36 +218,54 @@ export default function Tools() {
         p={4}
         m={4}
         color={textColor}
-        textAlign="center" // Use textAlign to center the content horizontally
+        textAlign="center"
+        bgGradient={heroBgGradient}
       >
-        <CalisthenicsSession /> {/* This will be inside the box */}
+        <CalisthenicsSession />
       </Box>
-    </Box>
-    <Box>
-      {/* Calorie Calculator Box */}
-      <Box as="section" py={10} bgGradient={aboutBgGradient} color={textColor}>
-        <Box
-          borderWidth="1px"
-          borderRadius="lg"
-          border="black"
-          overflow="hidden"
-          p={4}
-          m={4}
-          color={textColor}
-          textAlign="center"
-        >
-          <CalorieCalculator />
-        </Box>
-      </Box>
-     
 
-      {/* Footer */}
-      <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
-        <Flex direction="column" align="center" justify="center" color={textColor}>
-          <Text textAlign="center" color={textColor}>&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
-        </Flex>
+      {/* Second Tool Box - Calorie Calculator */}
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={heroBgGradient}
+      >
+        <CalorieCalculator />
       </Box>
+
+      {/* Third Tool Box - Calorie Counter */}
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={heroBgGradient}
+      >
+        <CalorieCounter />
+      </Box>
+
+      {/* Additional Tool Boxes */}
+      {/* Add more tool boxes here */}
+    </Grid>
+
+    {/* Footer */}
+    <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
+      <Flex direction="column" align="center" justify="center" color={textColor}>
+        <Text textAlign="center" color={textColor}>
+          &copy; {new Date().getFullYear()} Workout and Research. All rights reserved.
+        </Text>
+      </Flex>
     </Box>
-    </Box>
-  );
+  </Box>
+);
 }
