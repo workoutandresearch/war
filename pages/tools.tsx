@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
@@ -173,28 +173,53 @@ export default function Tools() {
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-          {activeAddress && warTokenBalance !== null && (
-            <Text color={textColor} pr={4}>
-              WAR Balance: {warTokenBalance}
-            </Text>
-          )}
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>
         </Flex>
+        {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
-          <DrawerContent bg={drawerBgColor}>
+          <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
-              <VStack spacing={4}>
+            <VStack spacing={4}>
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
+                <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/merch" onClick={toggleMenu}>Merch</Link>
+                <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
+                <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
+                <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
+                <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
+                <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
                 {/* ... Additional menu links ... */}
               </VStack>
             </DrawerBody>
           </DrawerContent>
         </Drawer>
+
+        {/* Modal */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg={drawerBgColor}>
+            <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Connect />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+        
       </Box>
       <Head>
         <title>Workout and Research - Tools</title>
