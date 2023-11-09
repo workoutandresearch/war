@@ -137,6 +137,16 @@ export default function Tools() {
   const [countdown, setCountdown] = useState(30);
   const [isCountingDown, setIsCountingDown] = useState(false);
 
+  useEffect(() => {
+    setFilteredExercises(calisthenicsExercises);
+  }, [calisthenicsExercises]);
+
+  useEffect(() => {
+    if (calisthenicsExercises.length === 0) {
+      // Handle the case when there are no exercises.
+    }
+  }, [calisthenicsExercises.length]);
+  
   // Custom hook to handle interval
   useInterval(() => {
     if (countdown > 0) {
@@ -341,7 +351,7 @@ export default function Tools() {
         textAlign="center"
         bgGradient={featuresBgGradient}
       >
-        <ExerciseDatabase />
+        <ExerciseDatabase exercises={calisthenicsExercises} />
       </Box>
     )}
 
@@ -350,4 +360,8 @@ export default function Tools() {
       </Box>
     </Box>
   );
+}
+
+function setFilteredExercises(calisthenicsExercises: { name: string; description: string; time: string; instructions: string; }[]) {
+  throw new Error('Function not implemented.');
 }
