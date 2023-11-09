@@ -20,55 +20,55 @@ const CalisthenicsSession = () => {
     {
       name: 'Neck Rolls Clockwise',
       description: 'Perform gentle neck rolls in a clockwise motion to release neck tension and improve flexibility.',
-      time: '3 seconds',
+      time: '30 seconds',
       instructions: 'Stand with your feet shoulder-width apart and relax your shoulders. Slowly roll your head in a circular motion, starting from one side and moving to the other.'
     },
     {
       name: 'Neck Rolls Counter-Clockwise',
       description: 'Perform gentle neck rolls in a counter-clockwise motion to promote neck mobility and alleviate stiffness.',
-      time: '3 seconds',
+      time: '30 seconds',
       instructions: 'Stand with your feet shoulder-width apart and relax your shoulders. Slowly roll your head in a circular motion, starting from one side and moving to the other.'
     },
     {
       name: 'Big Arm Circles Clockwise',
       description: 'Engage in big arm circles in a clockwise motion - perform large circles for 3 seconds to warm up your shoulder muscles and enhance circulation.',
-      time: '3 seconds each direction',
+      time: '15 seconds each direction',
       instructions: 'Extend your arms out to the sides. Make large clockwise circular motions with your arms, moving them forward for 3 seconds.'
     },
     {
       name: 'Big Arm Circles Counter-Clockwise',
       description: 'Engage in big arm circles in a counter-clockwise motion - perform large circles for 3 seconds to boost shoulder mobility and blood flow.',
-      time: '3 seconds each direction',
+      time: '15 seconds each direction',
       instructions: 'Extend your arms out to the sides. Make large circular motions with your arms, moving them forward for 3 seconds.'
     },
     {
       name: 'Small Arm Circles Clockwise',
       description: 'Perform small arm circles in a clockwise motion - make small circles for 3 seconds to activate shoulder muscles and enhance joint stability.',
-      time: '3 seconds each direction',
+      time: '15 seconds each direction',
       instructions: 'Extend your arms out to the sides. Make small clockwise circular motions with your arms, moving them forward for 3 seconds.'
     },
     {
       name: 'Small Arm Circles Counter-Clockwise',
       description: 'Perform small arm circles in a counter-clockwise motion - make small circles for 3 seconds to improve shoulder flexibility and reduce tension.',
-      time: '3 seconds each direction',
+      time: '15 seconds each direction',
       instructions: 'Extend your arms out to the sides. Make small circular counter-clockwise motions with your arms, moving them forward for 3 seconds.'
     },
     {
       name: 'Touch Your Toes',
       description: 'Gently bend forward and reach for your toes for 3 seconds to stretch your lower back and hamstrings effectively.',
-      time: '3 seconds',
+      time: '30 seconds',
       instructions: 'Stand with your feet shoulder-width apart and slightly bend your knees. Slowly bend forward from your hips, maintaining a straight back. Reach down towards your toes as far as you can comfortably go. Hold the stretch for 3 seconds.'
     },
     {
       name: 'Left Leg Stretch',
       description: 'Stretch your left leg by shifting your weight to your right leg and bending towards the left for 3 seconds. This exercise enhances lateral flexibility and balance.',
-      time: '3 seconds',
+      time: '30 seconds',
       instructions: 'Stand with your legs wider than shoulder-width apart. Shift your weight to your right leg. Slowly bend your body to the left, reaching your left arm towards your left leg. Feel the stretch along the right side of your body. Hold the stretch for 3 seconds.'
     },
     {
       name: 'Right Leg Stretch',
       description: 'Stretch your right leg by shifting your weight to your left leg and bending towards the right for 3 seconds. This exercise enhances lateral flexibility and balance.',
-      time: '3 seconds',
+      time: '30 seconds',
       instructions: 'Stand with your legs wider than shoulder-width apart. Shift your weight to your left leg. Slowly bend your body to the right, reaching your right arm towards your right leg. Feel the stretch along the left side of your body. Hold the stretch for 3 seconds.'
     }
     ];
