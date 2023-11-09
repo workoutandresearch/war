@@ -145,31 +145,22 @@ export default function Privacypolicy() {
         h="100vh" // Set the height to cover the full viewport height
         bgGradient={heroBgGradient}
         >
-        <Box
-            maxW="container.sm" // Set the maximum width you desire
-            p={5}
-            shadow="md"
-            borderWidth="1px"
-            borderColor="black"
-            borderRadius="lg"
-            bg={boxColorScheme}
-            _hover={{ shadow: "lg" }}
-            w={300} // Set the fixed width you want (3x3)
-            h={400} // Set the fixed height you want (3x3)
-            overflow="hidden"
+        <Flex
+          flexDirection="column"
+          maxW="container.sm" // Set the maximum width you desire
+          p={5}
         >
-            <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>
             Privacy Policy
-            </Text>
-            <Text fontSize="lg" fontWeight="bold" color={textColor} textAlign="center">
+          </Text>
+          <Text fontSize="lg" fontWeight="bold" color={textColor} textAlign="center">
             Our Commitment to Privacy
-            </Text>
-            <Text fontSize="md" color={textColor} textAlign="center">
-            We take your privacy very seriously and will comply with applicable law by ensuring our customers information is protected. We are committed to achieving the highest level of customer satisfaction through the best-in-class management of personal information.
-            </Text>
-        </Box>
+          </Text>
+          <Text fontSize="md" color={textColor} textAlign="center">
+            We take your privacy very seriously and will comply with applicable law by ensuring our customers' information is protected. We are committed to achieving the highest level of customer satisfaction through the best-in-class management of personal information.
+          </Text>
         </Flex>
-
+        </Flex>
     </Box>
   );
 }
