@@ -2,27 +2,23 @@ import { Input, Select, useColorMode, useColorModeValue } from '@chakra-ui/react
 import React, { useState } from 'react';
 
 const CalorieCalculator = () => {
-  const [weight, setWeight] = useState<number | string>('');
-  const [height, setHeight] = useState<number | string>('');
-  const [age, setAge] = useState<number | string>('');
-  const [gender, setGender] = useState<string>('male');
-  const [activityLevel, setActivityLevel] = useState<string>('sedentary');
-  const [calories, setCalories] = useState<string | null>(null);
-  const { colorMode } = useColorMode(); // Get the current color mode
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('male');
+  const [activityLevel, setActivityLevel] = useState('sedentary');
+  const [calories, setCalories] = useState(null);
+  const { colorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');
-  const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
-  const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none'); // Define the background gradient
+  const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
 
-  const calculateCalories = (event: { preventDefault: () => void; }) => {
-    event.preventDefault(); // Prevent form submission and page reload
+  const calculateCalories = (event) => {
+    event.preventDefault();
 
-    // Constants for Mifflin-St Jeor equation
     const genderFactor = gender === 'male' ? 5 : -161;
 
-    // Calculate BMR (Basal Metabolic Rate)
-    const bmr = (10 * Number(weight)) + (6.25 * Number(height)) - (5 * Number(age)) + genderFactor;
+    const bmr = 10 * Number(weight) + 6.25 * Number(height) - 5 * Number(age) + genderFactor;
 
-    // Calculate TDEE (Total Daily Energy Expenditure) based on activity level
     let tdee = 0;
     switch (activityLevel) {
       case 'sedentary':
@@ -44,18 +40,28 @@ const CalorieCalculator = () => {
         break;
     }
 
-    // Update the 'calories' state with the calculated TDEE
-    setCalories(tdee.toFixed(2)); // Round to two decimal places and store in 'calories' state
+    setCalories(tdee.toFixed(2));
   };
 
-  // Define a style for the label elements
+  const divStyle = {
+    backgroundColor: aboutBgGradient, // Set the background color for the container div
+    padding: '10px',
+    borderRadius: '8px',
+  };
+
+  const inputStyle = {
+    background: 'transparent', // Set a transparent background for the input boxes
+    width: '100%', // Ensure input boxes take up the full width
+    padding: '8px',
+    marginBottom: '10px',
+  };
+
   const labelStyle = {
     color: textColor,
-    bgGradient: { aboutBgGradient }
   };
 
   return (
-    <div>
+    <div style={divStyle}>
       <h2>Calorie Calculator</h2>
       <form onSubmit={calculateCalories}>
         <div>
@@ -64,7 +70,7 @@ const CalorieCalculator = () => {
             type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            bg={aboutBgGradient} // Set the background color based on color mode
+            style={inputStyle} // Apply the inputStyle for the input field
           />
         </div>
         <div>
@@ -73,7 +79,7 @@ const CalorieCalculator = () => {
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            bg={aboutBgGradient} // Set the background color based on color mode
+            style={inputStyle} // Apply the inputStyle for the input field
           />
         </div>
         <div>
@@ -82,7 +88,7 @@ const CalorieCalculator = () => {
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            bg={aboutBgGradient} // Set the background color based on color mode
+            style={inputStyle} // Apply the inputStyle for the input field
           />
         </div>
         <div>
@@ -90,7 +96,7 @@ const CalorieCalculator = () => {
           <Select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            bg={aboutBgGradient} // Set the background color based on color mode
+            style={inputStyle} // Apply the inputStyle for the select field
           >
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -101,7 +107,7 @@ const CalorieCalculator = () => {
           <Select
             value={activityLevel}
             onChange={(e) => setActivityLevel(e.target.value)}
-            bg={aboutBgGradient} // Set the background color based on color mode
+            style={inputStyle} // Apply the inputStyle for the select field
           >
             <option value="sedentary">Sedentary (little or no exercise)</option>
             <option value="lightlyActive">Lightly Active (light exercise or sports 1-3 days a week)</option>

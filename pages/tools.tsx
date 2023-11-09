@@ -2,34 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import {
-  Box,
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
-  Grid,
-  IconButton,
-  Link,
-  Text,
-  VStack,
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-  useInterval,
-} from '@chakra-ui/react';
+import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
+import Connect from 'components/Connect';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
-import SocialSharing from 'components/SocialSharing'; // Import your SocialSharing component
+
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,17 +20,9 @@ export default function Tools() {
   const textColor = useColorModeValue('#000000', 'inherit');
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
-  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit';
-
+  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
-
-  const [exercise, setExercise] = useState('');
-  const [sets, setSets] = useState(0);
-  const [reps, setReps] = useState(0);
-
-  const [workoutProgress, setWorkoutProgress] = useState<{ exercise: string; sets: number; reps: number; }[]>([]);
-
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
@@ -55,9 +30,10 @@ export default function Tools() {
   const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
   const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
-  const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
+  const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const lightDarkColor = useColorModeValue('black', 'white');
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+  const headerBgGradient = useColorModeValue('#ff3a00', 'transparent');
 
   const { activeAddress, signTransactions } = useWallet();
   const [loading, setLoading] = useState<boolean>(false);
@@ -120,6 +96,8 @@ export default function Tools() {
     }
     ];
 
+    
+
   // Fetch WAR token balance
   const fetchWarTokenBalance = async (address: string) => {
     try {
@@ -157,168 +135,162 @@ export default function Tools() {
     }
   }, isCountingDown ? 1000 : null); // Interval runs every second if counting down
 
-  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    // Create an object with the workout progress data
-    const progressData = {
-      exercise,
-      sets,
-      reps,
-    };
-
-    // Add the progress data to the workoutProgress array
-    setWorkoutProgress([...workoutProgress, progressData]);
-
-    // Clear the form fields
-    setExercise('');
-    setSets(0);
-    setReps(0);
-  };    
-
-
+  // Function to start the countdown
+  const startCountdown = () => {
+    setCountdown(30); // Reset countdown to 30 seconds
+    setIsCountingDown(true);
+  };
+  const [selectedTool, setSelectedTool] = useState('calisthenics');
+  const handleToolChange = (tool: React.SetStateAction<string>) => {
+    setSelectedTool(tool);
+  };
+  
   return (
-    <Box bgGradient={useColorMode === 'dark' ? pageBgGradient : 'none'}>
+      <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
+        <Head>
+          <title>Workout and Research - Tools</title>
+          <meta name="description" content="Your ultimate virtual workout and research platform" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        {/* Navbar */}
+        <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
+          <Flex justify="space-between" align="center">
+            {/* Hamburger Menu and Color Mode Toggle */}
+            <Flex align="center">
+              {/* Hamburger Menu Icon */}
+              <IconButton
+                icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+                onClick={toggleMenu}
+                aria-label="Open Menu"
+                variant="ghost"
+                color={buttonTextColor}
+              />
+
+              {/* Color Mode Toggle */}
+              <IconButton
+                icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                onClick={toggleColorMode}
+                aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+                variant="ghost"
+                color={buttonTextColor}
+              />
+            </Flex>
+
+            <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
+          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+            Connect
+          </Button>
+          </Flex>
+          {/* Drawer for Hamburger Menu */}
+          <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+            <DrawerOverlay />
+            <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
+              <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
+              <DrawerBody>
+              <VStack spacing={4}>
+                  <Link href="/" onClick={toggleMenu}>Home</Link>
+                  <Link href="/tools" onClick={toggleMenu}>Tools</Link>
+                  <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                  <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                  <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                  <Link href="/merch" onClick={toggleMenu}>Merch</Link>
+                  <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
+                  <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
+                  <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
+                  <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
+                  <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
+                  <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
+                  {/* ... Additional menu links ... */}
+                </VStack>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+      </Box>
       <Head>
         <title>Workout and Research - Tools</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* Navbar */}
-      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
-        <Flex justify="space-between" align="center">
-          {/* Hamburger Menu and Color Mode Toggle */}
-          <Flex align="center">
-            {/* Hamburger Menu Icon */}
-            <IconButton
-              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-              onClick={toggleMenu}
-              aria-label="Open Menu"
-              variant="ghost"
-              color={buttonTextColor}
-            />
-
-            {/* Color Mode Toggle */}
-            <IconButton
-              icon={useColorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              onClick={toggleColorMode}
-              aria-label={`Toggle ${useColorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-              variant="ghost"
-              color={buttonTextColor}
-            />
-          </Flex>
-
-          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
-            Workout and Research
-          </Text>
-          
-          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
-          </Button>
-        </Flex>
-        {/* Drawer for Hamburger Menu */}
-        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
-          <DrawerOverlay />
-          <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
-            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
-            <DrawerBody>
-            <VStack spacing={4}>
-                <Link href="/" onClick={toggleMenu}>Home</Link>
-                <Link href="/tools" onClick={toggleMenu}>Tools</Link>
-                <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
-                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
-                <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
-                <Link href="/merch" onClick={toggleMenu}>Merch</Link>
-                <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
-                <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
-                <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
-                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
-                <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
-                <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
-                {/* ... Additional menu links ... */}
-              </VStack>
-            </DrawerBody>
-          </DrawerContent>
-        </Drawer>
-      </Box>
-
-    {/* Grid Layout for Tools */}
-    <Grid
-      templateColumns="repeat(1, 1fr)" // 3 columns
-      gap={6} // Gap between columns and rows
-      p={4} // Padding for the grid
-      bgGradient={pageBgGradient}
-    >
-      {/* First Tool Box - Calisthenics Session */}
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={heroBgGradient}
-      >
-        <CalisthenicsSession />
-      </Box>
-
-      {/* Second Tool Box - Calorie Calculator */}
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={aboutBgGradient}
-      >
-        <CalorieCalculator />
-      </Box>
-
-      {/* Third Tool Box - Calorie Counter */}
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={featuresBgGradient}
-      >
-        <CalorieCounter />
-      </Box>
-
-      {/* Social Sharing Component */}
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={footerBgColor} // Use a gradient that matches your design
-      >
-        <SocialSharing workoutProgress={workoutProgress} />
-      </Box>
-      {/* Add more tool boxes here */}
-    </Grid>
-
-    {/* Footer */}
-    <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
-      <Flex direction="column" align="center" justify="center" color={textColor}>
-        <Text textAlign="center" color={textColor}>
-          &copy; {new Date().getFullYear()} Workout and Research. All rights reserved.
-        </Text>
+      {/* Buttons to switch between tools */}
+      <Flex justify="center" align="center" my={4} bgGradient={heroBgGradient}>
+        <Button
+          onClick={() => handleToolChange('calisthenics')}
+          colorScheme={selectedTool === 'calisthenics' ? 'blue' : 'gray'}
+        >
+          Calisthenics
+        </Button>
+        <Button
+          onClick={() => handleToolChange('calculator')}
+          colorScheme={selectedTool === 'calculator' ? 'blue' : 'gray'}
+        >
+          Cal. Calculator
+        </Button>
+        <Button
+          onClick={() => handleToolChange('counter')}
+          colorScheme={selectedTool === 'counter' ? 'blue' : 'gray'}
+        >
+          Cal. Counter
+        </Button>
       </Flex>
+      {/* Render the selected tool */}
+      {selectedTool === 'calisthenics' && (
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          border="black"
+          overflow="hidden"
+          p={4}
+          m={4}
+          color={textColor}
+          textAlign="center"
+          bgGradient={heroBgGradient}
+        >
+          <CalisthenicsSession />
+        </Box>
+      )}
+      {selectedTool === 'calculator' && (
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          border="black"
+          overflow="hidden"
+          p={4}
+          m={4}
+          color={textColor}
+          textAlign="center"
+          bgGradient={aboutBgGradient}
+        >
+          <CalorieCalculator />
+        </Box>
+      )}
+      {selectedTool === 'counter' && (
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          border="black"
+          overflow="hidden"
+          p={4}
+          m={4}
+          color={textColor}
+          textAlign="center"
+          bgGradient={featuresBgGradient}
+        >
+          <CalorieCounter />
+        </Box>
+      )}
+
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
+        {/* ... (previous code) */}
+      </Box>
     </Box>
-  </Box>
-);
+  );
 }

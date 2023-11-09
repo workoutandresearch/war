@@ -115,9 +115,9 @@ const CalisthenicsSession = () => {
       const currentExercise = calisthenicsExercises[currentExerciseIndex] || {};
     
       return (
-      <Box as="section" py={10}>
+      <Box as="section" py={10} justify="center">
           {!sessionStarted && (
-            <Button colorScheme={buttonColorScheme} onClick={startSession} color={textColor} className="bold">
+            <Button colorScheme={buttonColorScheme} onClick={startSession} justify="center" color={textColor} align="center" className="bold">
               Start Calisthenics Session
             </Button>
           )}
