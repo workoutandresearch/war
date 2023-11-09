@@ -67,7 +67,7 @@ export default function Termscond() {
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
-        <title>Workout and Research - Shipping Policy</title>
+        <title>Workout and Research - Terms and Conditions</title>
         <meta name="description" content="Your return policy description goes here." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
