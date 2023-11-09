@@ -1,6 +1,6 @@
 {
     "standard": "arc69",
-    "external_url": "https://www.workoutandresearch.com",
+    "external_url": "https://mainnet-algorand.api.purestake.io/ps2",
     "properties": {
       "Wallet": "{wallet}"
     }
