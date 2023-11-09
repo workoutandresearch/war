@@ -223,20 +223,20 @@ export default function Tools() {
       <Flex justify="center" align="center" my={4} bgGradient={heroBgGradient}>
         <Button
           onClick={() => handleToolChange('calisthenics')}
-          colorScheme={selectedTool === 'calisthenics' ? 'blue' : 'gray'}
-        >
+          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
+          >
           Calisthenics
         </Button>
         <Button
           onClick={() => handleToolChange('calculator')}
-          colorScheme={selectedTool === 'calculator' ? 'blue' : 'gray'}
-        >
+          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
+          >
           Cal. Calculator
         </Button>
         <Button
           onClick={() => handleToolChange('counter')}
-          colorScheme={selectedTool === 'counter' ? 'blue' : 'gray'}
-        >
+          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
+          >
           Cal. Counter
         </Button>
       </Flex>
