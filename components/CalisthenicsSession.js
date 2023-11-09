@@ -13,6 +13,7 @@ const CalisthenicsSession = () => {
     const [sessionStarted, setSessionStarted] = useState(false);
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
     const textColor = useColorModeValue('#000000', 'inherit');
+    const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
       const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
 
@@ -112,12 +113,12 @@ const CalisthenicsSession = () => {
       const currentExercise = calisthenicsExercises[currentExerciseIndex] || {};
     
       return (
-      <Box as="section" py={10} bgGradient={featuresBgGradient}>
+      <Box as="section" py={10} bgGradient={heroBgGradient}>
           <Heading as="h2" fontSize="xl" mb={4} color={textColor}>
             Calisthenics Session
           </Heading>
           {!sessionStarted && (
-            <Button colorScheme="teal" onClick={startSession} color={textColor}>
+            <Button colorScheme={buttonColorScheme} onClick={startSession} color={textColor}>
               Start Session
             </Button>
           )}
@@ -136,7 +137,7 @@ const CalisthenicsSession = () => {
               <Progress
                 value={((exerciseDuration - remainingTime) / exerciseDuration) * 100}
                 size="sm"
-                colorScheme="teal"
+                colorScheme={buttonColorScheme}
               />
             </VStack>
           )}

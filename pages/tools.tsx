@@ -200,16 +200,24 @@ export default function Tools() {
       </Box>
 
     {/* Calisthenics Session Box */}
-    <Box
+    <Box as="section" py={10} bg={heroBgGradient}>
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
         p={4}
         m={4}
-        textAlign="center"
+        bg={heroBgGradient}
+        color={textColor}
+        textAlign="center" // Use textAlign to center the content horizontally
       >
-        <CalisthenicsSession />
+        <CalisthenicsSession /> {/* This will be inside the box */}
       </Box>
+    </Box>
 
       {/* Footer */}
-      <Box as="footer" py={4} px={8}>
+      <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         <Flex direction="column" align="center" justify="center" color={textColor}>
           <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
         </Flex>
