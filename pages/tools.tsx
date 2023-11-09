@@ -199,14 +199,17 @@ export default function Tools() {
         </Drawer>
       </Box>
 
-      {/* Calisthenics Session Box */}
-                {/* Add content for the Medium link */}
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} m={4} bg={heroBgGradient} color={textColor} align="center">
-      <CalisthenicsSession /> {/* This will be inside the box */}
-    </Box>
+    {/* Calisthenics Session Box */}
+    <Box
+        p={4}
+        m={4}
+        textAlign="center"
+      >
+        <CalisthenicsSession />
+      </Box>
 
       {/* Footer */}
-      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+      <Box as="footer" py={4} px={8}>
         <Flex direction="column" align="center" justify="center" color={textColor}>
           <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
         </Flex>

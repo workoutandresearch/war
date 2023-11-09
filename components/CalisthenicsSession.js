@@ -13,8 +13,8 @@ const CalisthenicsSession = () => {
     const [sessionStarted, setSessionStarted] = useState(false);
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
     const textColor = useColorModeValue('#000000', 'inherit');
-    const buttonColorScheme = useColorModeValue('orange', 'blue');
-    const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
+      const buttonColorScheme = useColorModeValue('orange', 'blue');
+  const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
 
   const calisthenicsExercises = [
     {
@@ -88,12 +88,22 @@ const CalisthenicsSession = () => {
     }, [sessionStarted, currentExerciseIndex]);
 
     useEffect(() => {
-        if (sessionStarted && calisthenicsExercises.length > 0) {
-          const duration = extractDuration(calisthenicsExercises[currentExerciseIndex].time);
-          setExerciseDuration(duration);
-          setRemainingTime(duration);
+        let timer;
+        if (sessionStarted && remainingTime > 0) {
+        timer = setInterval(() => {
+            setRemainingTime((prevTime) => prevTime - 1);
+        }, 1000);
+        } else if (remainingTime === 0) {
+        if (currentExerciseIndex < calisthenicsExercises.length - 1) {
+            setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
+        } else {
+            // Session complete, reset for next session
+            setSessionStarted(false);
+            setCurrentExerciseIndex(0);
         }
-      }, [sessionStarted, currentExerciseIndex, calisthenicsExercises.length]);
+        }
+        return () => clearInterval(timer);
+    }, [sessionStarted, remainingTime, currentExerciseIndex]);
 
     const startSession = () => {
         setSessionStarted(true);
@@ -107,7 +117,7 @@ const CalisthenicsSession = () => {
             Calisthenics Session
           </Heading>
           {!sessionStarted && (
-            <Button colorScheme={buttonColorScheme} onClick={startSession} color={textColor}>
+            <Button colorScheme="teal" onClick={startSession} color={textColor}>
               Start Session
             </Button>
           )}
