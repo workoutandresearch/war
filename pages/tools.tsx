@@ -204,10 +204,10 @@ export default function Tools() {
 
     {/* Grid Layout for Tools */}
     <Grid
-      templateColumns="repeat(3, 1fr)" // 3 columns
+      templateColumns="repeat(1, 1fr)" // 3 columns
       gap={6} // Gap between columns and rows
       p={4} // Padding for the grid
-      bgGradient={heroBgGradient}
+      bgGradient={pageBgGradient}
     >
       {/* First Tool Box - Calisthenics Session */}
       <Box
@@ -234,7 +234,7 @@ export default function Tools() {
         m={4}
         color={textColor}
         textAlign="center"
-        bgGradient={heroBgGradient}
+        bgGradient={aboutBgGradient}
       >
         <CalorieCalculator />
       </Box>
@@ -249,7 +249,7 @@ export default function Tools() {
         m={4}
         color={textColor}
         textAlign="center"
-        bgGradient={heroBgGradient}
+        bgGradient={featuresBgGradient}
       >
         <CalorieCounter />
       </Box>

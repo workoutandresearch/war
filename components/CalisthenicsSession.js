@@ -14,6 +14,8 @@ const CalisthenicsSession = () => {
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
     const textColor = useColorModeValue('#000000', 'inherit');
     const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
+    const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
+
       const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
 

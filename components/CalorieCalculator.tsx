@@ -1,4 +1,4 @@
-import { Input, Select, useColorModeValue } from '@chakra-ui/react';
+import { Input, Select, useColorMode, useColorModeValue } from '@chakra-ui/react';
 import React, { useState } from 'react';
 
 const CalorieCalculator = () => {
@@ -8,9 +8,10 @@ const CalorieCalculator = () => {
   const [gender, setGender] = useState<string>('male');
   const [activityLevel, setActivityLevel] = useState<string>('sedentary');
   const [calories, setCalories] = useState<string | null>(null);
+  const { colorMode } = useColorMode(); // Get the current color mode
   const textColor = useColorModeValue('#000000', 'inherit');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
-  const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
+  const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none'); // Define the background gradient
 
   const calculateCalories = (event: { preventDefault: () => void; }) => {
     event.preventDefault(); // Prevent form submission and page reload
@@ -50,6 +51,7 @@ const CalorieCalculator = () => {
   // Define a style for the label elements
   const labelStyle = {
     color: textColor,
+    bgGradient: { aboutBgGradient }
   };
 
   return (
@@ -62,8 +64,8 @@ const CalorieCalculator = () => {
             type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            bgGradient={heroBgGradient}
-            />
+            bg={aboutBgGradient} // Set the background color based on color mode
+          />
         </div>
         <div>
           <label style={labelStyle}>Height (in centimeters):</label>
@@ -71,8 +73,8 @@ const CalorieCalculator = () => {
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            bgGradient={heroBgGradient}
-            />
+            bg={aboutBgGradient} // Set the background color based on color mode
+          />
         </div>
         <div>
           <label style={labelStyle}>Age:</label>
@@ -80,16 +82,16 @@ const CalorieCalculator = () => {
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
-            bgGradient={heroBgGradient}
-            />
+            bg={aboutBgGradient} // Set the background color based on color mode
+          />
         </div>
         <div>
           <label style={labelStyle}>Gender:</label>
           <Select
             value={gender}
             onChange={(e) => setGender(e.target.value)}
-            bgGradient={heroBgGradient}
-            >
+            bg={aboutBgGradient} // Set the background color based on color mode
+          >
             <option value="male">Male</option>
             <option value="female">Female</option>
           </Select>
@@ -99,8 +101,8 @@ const CalorieCalculator = () => {
           <Select
             value={activityLevel}
             onChange={(e) => setActivityLevel(e.target.value)}
-            bgGradient={heroBgGradient}
-            >
+            bg={aboutBgGradient} // Set the background color based on color mode
+          >
             <option value="sedentary">Sedentary (little or no exercise)</option>
             <option value="lightlyActive">Lightly Active (light exercise or sports 1-3 days a week)</option>
             <option value="moderatelyActive">Moderately Active (moderate exercise or sports 3-5 days a week)</option>

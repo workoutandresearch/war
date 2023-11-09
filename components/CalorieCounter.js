@@ -16,6 +16,7 @@ function CalorieCounter() {
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const heroBgGradient = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
+  const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
 
   // Function to update the daily calorie intake
   const handleCaloriesIntakeChange = (event) => {
@@ -38,7 +39,7 @@ function CalorieCounter() {
       <div>
         <label htmlFor="caloriesIntake">Calories Intake:</label>
         <Input
-            bgGradient={heroBgGradient}
+            bgGradient={featuresBgGradient}
             type="number"
           id="caloriesIntake"
           value={caloriesIntake}
@@ -48,7 +49,7 @@ function CalorieCounter() {
       <div>
         <label htmlFor="caloriesGoal">Calories Goal:</label>
         <Input
-            bgGradient={heroBgGradient}
+            bgGradient={featuresBgGradient}
             type="number"
           id="caloriesGoal"
           value={caloriesGoal}
