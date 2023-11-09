@@ -11,7 +11,8 @@ import { algodClient } from 'lib/algodClient';
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
-
+import SocialSharing from '../components/SocialSharing';
+import workoutProgress from '../components/workoutProgress';
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -135,6 +136,24 @@ export default function Tools() {
   const startCountdown = () => {
     setCountdown(30); // Reset countdown to 30 seconds
     setIsCountingDown(true);
+
+    const workoutProgress = [
+      {
+        exercise: 'Push-ups',
+        sets: 3,
+        reps: 15,
+      },
+      {
+        exercise: 'Squats',
+        sets: 4,
+        reps: 12,
+      },
+      {
+        exercise: 'Plank',
+        duration: '1 minute',
+      },
+      // Add more exercises and progress data as needed
+    ];    
   };
 
   return (
@@ -254,7 +273,20 @@ export default function Tools() {
         <CalorieCounter />
       </Box>
 
-      {/* Additional Tool Boxes */}
+      {/* Social Sharing Component */}
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={footerBgColor} // Use a gradient that matches your design
+      >
+        <SocialSharing workoutProgress={workoutProgress} />
+      </Box>
       {/* Add more tool boxes here */}
     </Grid>
 
