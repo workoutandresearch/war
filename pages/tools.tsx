@@ -9,6 +9,7 @@ import { algodClient } from 'lib/algodClient';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
+import CalorieCalculator from 'components/CalorieCalculator';
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -200,7 +201,7 @@ export default function Tools() {
       </Box>
 
     {/* Calisthenics Session Box */}
-    <Box as="section" py={10} bg={heroBgGradient}>
+    <Box as="section" py={10} bgGradient={heroBgGradient} className="bold">
       <Box
         borderWidth="1px"
         borderRadius="lg"
@@ -208,20 +209,37 @@ export default function Tools() {
         overflow="hidden"
         p={4}
         m={4}
-        bg={heroBgGradient}
         color={textColor}
         textAlign="center" // Use textAlign to center the content horizontally
       >
         <CalisthenicsSession /> {/* This will be inside the box */}
       </Box>
     </Box>
+    <Box>
+      {/* Calorie Calculator Box */}
+      <Box as="section" py={10} bgGradient={aboutBgGradient} color={textColor}>
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          border="black"
+          overflow="hidden"
+          p={4}
+          m={4}
+          color={textColor}
+          textAlign="center"
+        >
+          <CalorieCalculator />
+        </Box>
+      </Box>
+     
 
       {/* Footer */}
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         <Flex direction="column" align="center" justify="center" color={textColor}>
-          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Text textAlign="center" color={textColor}>&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
         </Flex>
       </Box>
+    </Box>
     </Box>
   );
 }
