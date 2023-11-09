@@ -1,38 +1,14 @@
+// pages/tools.tsx
+
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import {
-  Box,
-  Button,
-  VStack,
-  Text,
-  Image,
-  Link,
-  Container,
-  Flex,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  useColorMode,
-  SimpleGrid,
-  ScaleFade,
-  useColorModeValue,
-  IconButton,
-  Center,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerHeader,
-  DrawerBody,
-} from '@chakra-ui/react';
-import Connect from 'components/Connect';
-import { SunIcon, MoonIcon } from '@chakra-ui/icons';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useEffect, useRef, useState } from 'react';
-import { algodClient } from 'lib/algodClient';
+import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
+import { algodClient } from 'lib/algodClient';
+
+// Import the CalisthenicsSession component
+import CalisthenicsSession from '../components/CalisthenicsSession';
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,8 +17,8 @@ export default function Tools() {
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
   const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [sessionStarted, setSessionStarted] = useState(false);
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
@@ -53,20 +29,11 @@ export default function Tools() {
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const lightDarkColor = useColorModeValue('black', 'white');
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
-  const { activeAddress, signTransactions } = useWallet()
-  const [loading, setLoading] = useState<boolean>(false)
+
+  const { activeAddress, signTransactions } = useWallet();
+  const [loading, setLoading] = useState<boolean>(false);
   const [warTokenBalance, setWarTokenBalance] = useState(null);
-  const [exerciseDuration, setExerciseDuration] = useState<number | null>(null);
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const ToolsTsx = () => {
-    // Reference to the calisthenics section
-    const calisthenicsRef = useRef<HTMLDivElement>(null);
-    
   
-    // Function to scroll to the calisthenics section
-    const scrollToCalisthenics = () => {
-        calisthenicsRef.current?.scrollIntoView({ behavior: 'smooth' });
-      };
   const calisthenicsExercises = [
     {
       name: 'Neck Rolls Clockwise',
@@ -122,160 +89,128 @@ export default function Tools() {
       time: '30 seconds',
       instructions: 'Stand with your legs wider than shoulder-width apart. Shift your weight to your left leg. Slowly bend your body to the right, reaching your right arm towards your right leg. Feel the stretch along the left side of your body. Hold the stretch for 30 seconds.'
     }
-  ]
+    ];
 
-  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [exerciseDuration, setExerciseDuration] = useState<number | null>(null);
-
-  // Function to start the calisthenics session
-  const startCalisthenicsSession = () => {
-    onOpen();
-    setCurrentExerciseIndex(0);
-    setExerciseDuration(extractDuration(calisthenicsExercises[0].time));
-  };
-
-  // Function to go to the next exercise or close the modal if the last exercise is reached
-  const nextExercise = () => {
-    if (currentExerciseIndex < calisthenicsExercises.length - 1) {
-      setCurrentExerciseIndex(currentExerciseIndex + 1);
-      setExerciseDuration(extractDuration(calisthenicsExercises[currentExerciseIndex + 1].time));
-    } else {
-      onClose();
+  // Fetch WAR token balance
+  const fetchWarTokenBalance = async (address: string) => {
+    try {
+      const accountInfo = await algodClient.accountInformation(address).do();
+      const assets = accountInfo['assets'];
+      const warAsset = assets.find((asset: { [x: string]: any }) => asset['asset-id'] === 1015673913); // Replace WAR_TOKEN_ID with actual ID
+      setWarTokenBalance(warAsset ? warAsset.amount : 0);
+    } catch (error) {
+      console.error('Error fetching WAR token balance:', error);
+      setWarTokenBalance(null);
     }
   };
 
-  // Use useEffect to update exercise index and remaining time
+  // Effect to fetch the WAR token balance when the active address changes
   useEffect(() => {
-    if (exerciseDuration !== null) {
-      const timer = setTimeout(() => {
-        nextExercise();
-      }, exerciseDuration * 1000);
-
-      return () => {
-        clearTimeout(timer);
-      };
+    if (activeAddress) {
+      fetchWarTokenBalance(activeAddress);
     }
-  }, [currentExerciseIndex, exerciseDuration]);
+  }, [activeAddress]);
 
-  // Display the current exercise and remaining time
-  const currentExercise = calisthenicsExercises[currentExerciseIndex];
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const startSession = () => {
+    setSessionStarted(true);
+  };
+  // State for the countdown timer
+  const [countdown, setCountdown] = useState(30);
+  const [isCountingDown, setIsCountingDown] = useState(false);
 
-  // Function to handle color mode toggle and provide an appropriate icon
-  const ToggleColorModeButton = () => (
-    <IconButton
-      icon={colorMode === 'light' ? <MoonIcon color={lightDarkColor} /> : <SunIcon color={lightDarkColor} />}
-      onClick={toggleColorMode}
-      aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-      variant="ghost"
-      color={lightDarkColor}
-    />
+  // Custom hook to handle interval
+  useInterval(() => {
+    if (countdown > 0) {
+      setCountdown(countdown - 1);
+    } else {
+      setIsCountingDown(false);
+    }
+  }, isCountingDown ? 1000 : null); // Interval runs every second if counting down
+
+  // Function to start the countdown
+  const startCountdown = () => {
+    setCountdown(30); // Reset countdown to 30 seconds
+    setIsCountingDown(true);
+  };
+
+  return (
+    <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
+      <Head>
+        <title>Workout and Research - Tools</title>
+        <meta name="description" content="Your ultimate virtual workout and research platform" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      {/* Navbar */}
+      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
+        <Flex justify="space-between" align="center">
+          {/* Hamburger Menu and Color Mode Toggle */}
+          <Flex align="center">
+            {/* Hamburger Menu Icon */}
+            <IconButton
+              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              variant="ghost"
+              color={buttonTextColor}
+            />
+
+            {/* Color Mode Toggle */}
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              variant="ghost"
+              color={buttonTextColor}
+            />
+          </Flex>
+
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+          
+          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+            Connect
+          </Button>
+        </Flex>
+        {/* Drawer for Hamburger Menu */}
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+          <DrawerOverlay />
+          <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
+            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
+            <DrawerBody>
+            <VStack spacing={4}>
+                <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/tools" onClick={toggleMenu}>Tools</Link>
+                <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
+                <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
+                <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
+                <Link href="/merch" onClick={toggleMenu}>Merch</Link>
+                <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
+                <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
+                <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
+                <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
+                <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
+                <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
+                {/* ... Additional menu links ... */}
+              </VStack>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
+      </Box>
+
+      {/* Calisthenics Session Box */}
+                {/* Add content for the Medium link */}
+    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p={4} m={4} bg={heroBgGradient} color={textColor} align="center">
+      <CalisthenicsSession /> {/* This will be inside the box */}
+    </Box>
+
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+        </Flex>
+      </Box>
+    </Box>
   );
-
-    // Implement the extractDuration function properly
-    function extractDuration(timeString: string) {
-        // This regex matches the first occurrence of one or more digits
-        const match = timeString.match(/\d+/);
-        // Check if there is a match and return the first group converted to a number
-        return match ? parseInt(match[0], 10) : 0;
-      }
-
-      return (
-        <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
-          <Head>
-            <title>Workout and Research - Tools</title>
-            <meta name="description" content="Your ultimate virtual workout and research platform" />
-            <link rel="icon" href="/favicon.ico" />
-          </Head>
-          {/* Navbar */}
-          <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
-            <Flex justify="space-between" align="center">
-              {/* Hamburger Menu and Color Mode Toggle */}
-              <Flex align="center">
-                {/* Hamburger Menu Icon */}
-                <IconButton
-                  icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-                  onClick={toggleMenu}
-                  aria-label="Open Menu"
-                  variant="ghost"
-                  color={boxColorScheme}
-                />
-    
-                {/* Color Mode Toggle */}
-                <IconButton
-                  icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                  onClick={toggleColorMode}
-                  aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-                  variant="ghost"
-                  color={boxColorScheme}
-                />
-              </Flex>
-    
-              <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
-                Workout and Research
-              </Text>
-                  {/* Conditional rendering based on whether a wallet is connected */}
-                  {activeAddress && warTokenBalance !== null && (
-                    <Text color={textColor} pr={4}>
-                      WAR Balance: {warTokenBalance}
-                    </Text>
-                  )}
-              <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-                Connect
-              </Button>
-            </Flex>
-            {/* Drawer for Hamburger Menu */}
-            <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
-              <DrawerOverlay />
-              <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
-                <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
-                <DrawerBody>
-                <VStack spacing={4}>
-                    <Link href="/" onClick={toggleMenu}>Home</Link>
-                    <Link href="/tools" onClick={toggleMenu}>Tools</Link>
-                    <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
-                    <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
-                    <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
-                    <Link href="/merch" onClick={toggleMenu}>Merch</Link>
-                    <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
-                    <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
-                    <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
-                    <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
-                    <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
-                    <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
-                    {/* ... Additional menu links ... */}
-                  </VStack>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-    
-            {/* Modal */}
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent bg={drawerBgColor}>
-                <ModalHeader>{currentExercise.name}</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <p>{currentExercise.description}</p>
-                    <p>Time: {currentExercise.time}</p>
-                    <p>Instructions: {currentExercise.instructions}</p>
-                    <p>Remaining Time: {exerciseDuration} seconds</p>
-                </ModalBody>
-                </ModalContent>
-            </Modal>
-          </Box>
-    
-          {/* Button to show Calisthenics Section */}
-          <Button onClick={startCalisthenicsSession} colorScheme="blue" size="lg" m={4}>
-                Start Calisthenics
-            </Button>
-
-            {/* Calisthenics Section */}
-            <Box as="section" bgGradient={heroBgGradient} h="60vh" ref={calisthenicsRef}>
-                <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-                <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">Empower Your Journey</Text>
-                <Text fontSize="xl" color={textColor} mt={4} textAlign="center">Workout and Research</Text>
-                </Container>
-            </Box>
-        </Box>
-  );
-}}
+}
