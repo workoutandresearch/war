@@ -88,22 +88,12 @@ const CalisthenicsSession = () => {
     }, [sessionStarted, currentExerciseIndex]);
 
     useEffect(() => {
-        let timer;
-        if (sessionStarted && remainingTime > 0) {
-        timer = setInterval(() => {
-            setRemainingTime((prevTime) => prevTime - 1);
-        }, 1000);
-        } else if (remainingTime === 0) {
-        if (currentExerciseIndex < calisthenicsExercises.length - 1) {
-            setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
-        } else {
-            // Session complete, reset for next session
-            setSessionStarted(false);
-            setCurrentExerciseIndex(0);
+        if (sessionStarted && calisthenicsExercises.length > 0) {
+          const duration = extractDuration(calisthenicsExercises[currentExerciseIndex].time);
+          setExerciseDuration(duration);
+          setRemainingTime(duration);
         }
-        }
-        return () => clearInterval(timer);
-    }, [sessionStarted, remainingTime, currentExerciseIndex]);
+      }, [sessionStarted, currentExerciseIndex, calisthenicsExercises.length]);
 
     const startSession = () => {
         setSessionStarted(true);
