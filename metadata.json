@@ -1,6 +1,6 @@
 {
     "standard": "arc69",
-    "external_url": "https://mainnet-idx.algonode.cloud/v2/accounts/%7Buser_data_wallet%7D",
+    "external_url": "https://mainnet-idx.algonode.cloud/v2/accounts/{user_data_wallet}",
     "properties": {
       "Wallet": "{wallet}"
     }
