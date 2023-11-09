@@ -2,7 +2,25 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
+  Grid,
+  IconButton,
+  Link,
+  Text,
+  VStack,
+  useColorMode,
+  useColorModeValue,
+  useDisclosure,
+  useInterval,
+} from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
@@ -11,8 +29,7 @@ import { algodClient } from 'lib/algodClient';
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
-import SocialSharing from '../components/SocialSharing';
-import workoutProgress from '../components/workoutProgress';
+import SocialSharing from 'components/SocialSharing'; // Import your SocialSharing component
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -20,9 +37,17 @@ export default function Tools() {
   const textColor = useColorModeValue('#000000', 'inherit');
   const buttonColorScheme = useColorModeValue('orange', 'blue');
   const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
-  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
+  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit';
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [sessionStarted, setSessionStarted] = useState(false);
+
+  const [exercise, setExercise] = useState('');
+  const [sets, setSets] = useState(0);
+  const [reps, setReps] = useState(0);
+
+  const [workoutProgress, setWorkoutProgress] = useState<{ exercise: string; sets: number; reps: number; }[]>([]);
+
 
   // Define the background gradients for light and dark modes
   const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
@@ -30,7 +55,7 @@ export default function Tools() {
   const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
   const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
-  const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
+  const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
   const lightDarkColor = useColorModeValue('black', 'white');
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
 
@@ -132,32 +157,28 @@ export default function Tools() {
     }
   }, isCountingDown ? 1000 : null); // Interval runs every second if counting down
 
-  // Function to start the countdown
-  const startCountdown = () => {
-    setCountdown(30); // Reset countdown to 30 seconds
-    setIsCountingDown(true);
+  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
 
-    const workoutProgress = [
-      {
-        exercise: 'Push-ups',
-        sets: 3,
-        reps: 15,
-      },
-      {
-        exercise: 'Squats',
-        sets: 4,
-        reps: 12,
-      },
-      {
-        exercise: 'Plank',
-        duration: '1 minute',
-      },
-      // Add more exercises and progress data as needed
-    ];    
-  };
+    // Create an object with the workout progress data
+    const progressData = {
+      exercise,
+      sets,
+      reps,
+    };
+
+    // Add the progress data to the workoutProgress array
+    setWorkoutProgress([...workoutProgress, progressData]);
+
+    // Clear the form fields
+    setExercise('');
+    setSets(0);
+    setReps(0);
+  };    
+
 
   return (
-    <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
+    <Box bgGradient={useColorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
         <title>Workout and Research - Tools</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
@@ -179,9 +200,9 @@ export default function Tools() {
 
             {/* Color Mode Toggle */}
             <IconButton
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              icon={useColorMode === 'light' ? <MoonIcon /> : <SunIcon />}
               onClick={toggleColorMode}
-              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              aria-label={`Toggle ${useColorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
               color={buttonTextColor}
             />
