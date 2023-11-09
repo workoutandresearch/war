@@ -103,7 +103,6 @@ export default function Tools() {
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
-      { name: 'Workout History', id: 'workoutHistory' },
       // Add more tools as needed
     ];
 
@@ -308,22 +307,6 @@ export default function Tools() {
         bgGradient={featuresBgGradient}
       >
         <Timer />
-      </Box>
-    )}
-
-    {selectedTool === 'workoutHistory' && (
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={featuresBgGradient}
-        >
-        <WorkoutHistory />
       </Box>
     )}
     
