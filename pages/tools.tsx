@@ -9,6 +9,7 @@ import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
 import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
+import ExerciseDatabase from '../components/ExerciseDatabase';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -104,6 +105,7 @@ export default function Tools() {
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
       { name: 'Workout History', id: 'workoutHistory' },
+      { name: 'Exercise Database', id: 'exerciseDatabase' }, // Add Exercise Database
       // Add more tools as needed
     ];
 
@@ -326,6 +328,23 @@ export default function Tools() {
         <WorkoutHistory />
       </Box>
     )}
+
+    {selectedTool === 'exerciseDatabase' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={featuresBgGradient}
+      >
+        <ExerciseDatabase />
+      </Box>
+    )}
+
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
       </Box>
