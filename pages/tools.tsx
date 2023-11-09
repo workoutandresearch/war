@@ -146,101 +146,84 @@ export default function Tools() {
   };
   
   return (
-      <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
-        <Head>
-          <title>Workout and Research - Tools</title>
-          <meta name="description" content="Your ultimate virtual workout and research platform" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        {/* Navbar */}
-        <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
-          <Flex justify="space-between" align="center">
-            {/* Hamburger Menu and Color Mode Toggle */}
-            <Flex align="center">
-              {/* Hamburger Menu Icon */}
-              <IconButton
-                icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-                onClick={toggleMenu}
-                aria-label="Open Menu"
-                variant="ghost"
-                color={buttonTextColor}
-              />
-
-              {/* Color Mode Toggle */}
-              <IconButton
-                icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                onClick={toggleColorMode}
-                aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-                variant="ghost"
-                color={buttonTextColor}
-              />
-            </Flex>
-
-            <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+    <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
+      <Head>
+        <title>Workout and Research - Tools</title>
+        <meta name="description" content="Your ultimate virtual workout and research platform" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
+        <Flex justify="space-between" align="center">
+          <Flex align="center">
+            <IconButton
+              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              variant="ghost"
+              color={buttonTextColor}
+            />
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              variant="ghost"
+              color={buttonTextColor}
+            />
+          </Flex>
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-              {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
-                <Text color={textColor} pr={4}>
-                  WAR Balance: {warTokenBalance}
-                </Text>
-              )}
+          {activeAddress && warTokenBalance !== null && (
+            <Text color={textColor} pr={4}>
+              WAR Balance: {warTokenBalance}
+            </Text>
+          )}
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>
-          </Flex>
-          {/* Drawer for Hamburger Menu */}
-          <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
-            <DrawerOverlay />
-            <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
-              <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
-              <DrawerBody>
+        </Flex>
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+          <DrawerOverlay />
+          <DrawerContent bg={drawerBgColor}>
+            <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
+            <DrawerBody>
               <VStack spacing={4}>
-                  <Link href="/" onClick={toggleMenu}>Home</Link>
-                  <Link href="/tools" onClick={toggleMenu}>Tools</Link>
-                  <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
-                  <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
-                  <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
-                  <Link href="/merch" onClick={toggleMenu}>Merch</Link>
-                  <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
-                  <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
-                  <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
-                  <Link href="/disclaimer" onClick={toggleMenu}>Disclaimer</Link>
-                  <Link href="/returnpolicy" onClick={toggleMenu}>Return Policy</Link>
-                  <Link href="/shippingpolicy" onClick={toggleMenu}>Shipping Policy</Link>
-                  {/* ... Additional menu links ... */}
-                </VStack>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
+                <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/tools" onClick={toggleMenu}>Tools</Link>
+                {/* ... Additional menu links ... */}
+              </VStack>
+            </DrawerBody>
+          </DrawerContent>
+        </Drawer>
       </Box>
       <Head>
         <title>Workout and Research - Tools</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* Buttons to switch between tools */}
       <Flex justify="center" align="center" my={4} bgGradient={heroBgGradient}>
         <Button
           onClick={() => handleToolChange('calisthenics')}
-          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
-          >
+          colorScheme={selectedTool === 'calisthenics' ? buttonColorScheme : 'transparent'}
+          color={textColor}
+        >
           Calisthenics
         </Button>
         <Button
           onClick={() => handleToolChange('calculator')}
-          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
-          >
+          colorScheme={selectedTool === 'calculator' ? buttonColorScheme : 'transparent'}
+          color={textColor}
+        >
           Cal. Calculator
         </Button>
         <Button
           onClick={() => handleToolChange('counter')}
-          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'gray'}
-          >
+          colorScheme={selectedTool === 'counter' ? buttonColorScheme : 'transparent'}
+          color={textColor}
+        >
           Cal. Counter
         </Button>
       </Flex>
-      {/* Render the selected tool */}
       {selectedTool === 'calisthenics' && (
         <Box
           borderWidth="1px"
@@ -286,8 +269,6 @@ export default function Tools() {
           <CalorieCounter />
         </Box>
       )}
-
-      {/* Footer */}
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
       </Box>
