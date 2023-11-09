@@ -326,9 +326,6 @@ export default function Tools() {
         <WorkoutHistory />
       </Box>
     )}
-
-    {/* Add ExerciseDatabase component below */}
-    <ExerciseDatabase />
     
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
