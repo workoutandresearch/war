@@ -574,13 +574,12 @@ const renderCollectionItems = () => {
           {/* ... (existing code for Text) */}
 
           {/* Buttons for Categories */}
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mt={8} justifyItems="center">
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} mt={8} justifyItems="center">
             <Button
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
               size="lg"
-              bgGradient={pageBgGradient}
               onClick={() => selectCategory('outerwear')}
             >
               Outerwear
@@ -590,7 +589,6 @@ const renderCollectionItems = () => {
               color={textColor}
               variant="solid"
               size="lg"
-              bgGradient={pageBgGradient}
               onClick={() => selectCategory('tshirts')}
             >
               T-Shirts
@@ -600,7 +598,6 @@ const renderCollectionItems = () => {
               color={textColor}
               variant="solid"
               size="lg"
-              bgGradient={pageBgGradient}
               onClick={() => selectCategory('hats')}
             >
               Hats
@@ -611,7 +608,6 @@ const renderCollectionItems = () => {
                 color={textColor}
                 variant="solid"
                 size="lg"
-                bgGradient={pageBgGradient}
                 onClick={() => selectCategory('accessories')}
               >
                 Accessories
