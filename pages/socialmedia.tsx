@@ -194,10 +194,21 @@ export default function Socialmedia() {
                 <Text fontWeight="bold" textAlign="center">Medium</Text>
                 </Box>
             </Link>
+                        {/* YouTube */}
+            <Link href="https://www.youtube.com/@WorkoutAndResearch" target="_blank" rel="noopener noreferrer">
+              <Box
+                p={5}
+                shadow="md"
+                bg={boxColorScheme}
+              >
+                <Text fontWeight="bold" textAlign="center">YouTube</Text>
+              </Box>
+            </Link>
+
             {/* Add more social media links here */}
-            </SimpleGrid>
+          </SimpleGrid>
         </Container>
-        </Box>
+      </Box>
     </Box>
   );
 }
