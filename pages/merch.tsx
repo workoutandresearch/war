@@ -85,13 +85,13 @@ export default function Merch() {
     {
       id: 1,
       name: "Baseball Cap",
-      description: "Comfortable hat for any day of the week",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Beanie",
-      description: "Warm hat for the cooler days",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -101,19 +101,19 @@ export default function Merch() {
     {
       id: 1,
       name: "Misc",
-      description: "Misc",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Misc",
-      description: "Misc",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Misc",
-      description: "Misc",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -123,20 +123,20 @@ export default function Merch() {
   const mensOuterwearCollection = [
     {
       id: 1,
-      name: "Mens Winter Jacket",
-      description: "Warm winter jacket for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Mens Winter Jacket",
-      description: "Warm winter jacket for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Mens Winter Jacket",
-      description: "Warm winter jacket for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -145,20 +145,20 @@ export default function Merch() {
   const womensOuterwearCollection = [
     {
       id: 1,
-      name: "Womens Winter Jacket",
-      description: "Warm winter jacket for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Womens Winter Jacket",
-      description: "Warm winter jacket for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Womens Winter Jacket",
-      description: "Warm winter jacket for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -167,20 +167,20 @@ export default function Merch() {
   const kidsOuterwearCollection = [
     {
       id: 1,
-      name: "Kids Winter Jacket",
-      description: "Warm winter jacket for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Kids Winter Jacket",
-      description: "Warm winter jacket for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Kids Winter Jacket",
-      description: "Warm winter jacket for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -189,32 +189,32 @@ export default function Merch() {
   const mensTshirtsCollection = [
     {
       id: 1,
-      name: "Mens Graphic Tee",
-      description: "Cool graphic t-shirt for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Mens Graphic Tee",
-      description: "Cool graphic t-shirt for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Mens Graphic Tee",
-      description: "Cool graphic t-shirt for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
-      name: "Mens Graphic Tee",
-      description: "Cool graphic t-shirt for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
-      name: "Mens Graphic Tee",
-      description: "Cool graphic t-shirt for men",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -223,32 +223,32 @@ export default function Merch() {
   const womensTshirtsCollection = [
     {
       id: 1,
-      name: "Womens Graphic Tee",
-      description: "Cool graphic t-shirt for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Womens Graphic Tee",
-      description: "Cool graphic t-shirt for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Womens Graphic Tee",
-      description: "Cool graphic t-shirt for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
-      name: "Womens Graphic Tee",
-      description: "Cool graphic t-shirt for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
-      name: "Womens Graphic Tee",
-      description: "Cool graphic t-shirt for women",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -257,32 +257,32 @@ export default function Merch() {
   const kidsTshirtsCollection = [
     {
       id: 1,
-      name: "Kids Graphic Tee",
-      description: "Cool graphic t-shirt for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Kids Graphic Tee 2",
-      description: "Cool graphic t-shirt for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
-      name: "Kids Graphic Tee 3",
-      description: "Cool graphic t-shirt for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
-      name: "Kids Graphic Tee 2",
-      description: "Cool graphic t-shirt for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
-      name: "Kids Graphic Tee 3",
-      description: "Cool graphic t-shirt for kids",
+      name: "Coming Soon",
+      description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
