@@ -90,13 +90,13 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
   const hatsCollection = [
     {
       id: 1,
-      name: "Baseball Cap",
+      name: "Coming Soon",
       description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Beanie",
+      name: "Coming Soon",
       description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
@@ -106,13 +106,13 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
   const accessoriesCollection = [
     {
       id: 1,
-      name: "Misc",
+      name: "Coming Soon",
       description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
-      name: "Misc",
+      name: "Coming Soon",
       description: "",
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
