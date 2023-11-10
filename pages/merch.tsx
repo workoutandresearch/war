@@ -340,71 +340,76 @@ export default function Merch() {
     return null; // Return nothing for other categories (hats, accessories)
   };
 
-// Function to render the selected collection items
-const renderCollectionItems = () => {
-  let collectionItems;
-  if (selectedCategory === 'outerwear') {
-    switch (selectedSubCategory) {
-      case 'Mens':
-        collectionItems = mensOuterwearCollection;
-        break;
-      case 'Womens':
-        collectionItems = womensOuterwearCollection;
-        break;
-      case 'Kids':
-        collectionItems = kidsOuterwearCollection;
-        break;
-      default:
-        collectionItems = outerwearCollection;
-        break;
+  const renderCollectionItems = () => {
+    let collectionItems;
+    if (selectedCategory === 'outerwear') {
+      switch (selectedSubCategory) {
+        case 'Mens':
+          collectionItems = mensOuterwearCollection;
+          break;
+        case 'Womens':
+          collectionItems = womensOuterwearCollection;
+          break;
+        case 'Kids':
+          collectionItems = kidsOuterwearCollection;
+          break;
+        default:
+          collectionItems = outerwearCollection;
+          break;
+      }
+    } else if (selectedCategory === 'tshirts') {
+      switch (selectedSubCategory) {
+        case 'Mens':
+          collectionItems = mensTshirtsCollection;
+          break;
+        case 'Womens':
+          collectionItems = womensTshirtsCollection;
+          break;
+        case 'Kids':
+          collectionItems = kidsTshirtsCollection;
+          break;
+        default:
+          collectionItems = tshirtsCollection;
+          break;
+      }
+    } else if (selectedCategory === 'hats') {
+      // Handle "Hats" category
+      switch (selectedSubCategory) {
+        // Add cases for Mens, Womens, and Kids if needed
+        default:
+          collectionItems = hatsCollection;
+          break;
+      }
+    } else if (selectedCategory === 'accessories') {
+      // Handle "Accessories" category
+      switch (selectedSubCategory) {
+        // Add cases for Mens, Womens, and Kids if needed
+        default:
+          collectionItems = accessoriesCollection;
+          break;
+      }
+    } else {
+      return <Text textAlign="center" backgroundColor="transparent">Select a category to view items.</Text>;
     }
-  } else if (selectedCategory === 'tshirts') {
-    switch (selectedSubCategory) {
-      case 'Mens':
-        collectionItems = mensTshirtsCollection;
-        break;
-      case 'Womens':
-        collectionItems = womensTshirtsCollection;
-        break;
-      case 'Kids':
-        collectionItems = kidsTshirtsCollection;
-        break;
-      default:
-        collectionItems = tshirtsCollection;
-        break;
-    }
-  } else if (selectedCategory === 'hats') { // Handle "Hats" category
-    switch (selectedSubCategory) {
-      // Add cases for Mens, Womens, and Kids if needed
-      default:
-        collectionItems = hatsCollection;
-        break;
-    }
-  } else if (selectedCategory === 'accessories') { // Handle "Accessories" category
-    switch (selectedSubCategory) {
-      // Add cases for Mens, Womens, and Kids if needed
-      default:
-        collectionItems = accessoriesCollection;
-        break;
-    }
-  } else {
-    return <Text textAlign="center" backgroundColor="transparent">Select a category to view items.</Text>;
-  }
 
     return (
       <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
-        {collectionItems.map((item) => (
-          <Box key={item.id} p={5} shadow="md" borderWidth="1px">
-            <Image
-              src={item.image}
-              alt={item.name}
-              boxSize="200px" // Set the desired image size
-              objectFit="cover" // Adjust as needed (e.g., "contain" or "fill")
-            />
+      {collectionItems.map((item) => (
+        <Center key={item.id}>
+          <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center">
+            <Box>
+              <Image
+                src={item.image}
+                alt={item.name}
+                boxSize="200px" // Set the desired image size
+                objectFit="cover" // Adjust as needed (e.g., "contain" or "fill")
+              />
+            </Box>
             <Text fontWeight="bold">{item.name}</Text>
             <Text>{item.description}</Text>
           </Box>
-        ))}
+        </Center>
+      ))}
       </SimpleGrid>
     );
   };
@@ -474,16 +479,28 @@ const renderCollectionItems = () => {
     />
   );
   
-    // Add the renderItems function here
-    function renderItems(items: any[]) {
-      return items.map((item: any) => (
-        <Box key={item.id} p={5} shadow="md" borderWidth="1px">
-          <Text fontWeight="bold">{item.name}</Text>
-          <Text>{item.description}</Text>
-        </Box>
-      ));
-    }
-  
+   // Function to render collection items with centered images
+  const renderItems = (items: any[]) => {
+    return (
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+        {items.map((item) => (
+          <Box key={item.id} p={5} shadow="md" borderWidth="1px" textAlign="center">
+            <Image
+              src={item.image}
+              alt={item.name}
+              mx="auto" // Center the image horizontally
+              boxSize="200px"
+              objectFit="cover"
+            />
+            <Text fontWeight="bold" mt={2}>
+              {item.name}
+            </Text>
+            <Text>{item.description}</Text>
+          </Box>
+        ))}
+      </SimpleGrid>
+    );
+  };
 
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
