@@ -345,3 +345,16 @@
     opacity: 1;
   }
   
+  .gradient-bg {
+    background: linear-gradient('#ff3a00', 'transparent'); /* Replace with your gradient colors */
+    position: absolute;
+    top: 10;
+    right: 10;
+    bottom: 10;
+    left: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  

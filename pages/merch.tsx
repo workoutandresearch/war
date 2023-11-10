@@ -58,6 +58,12 @@ export default function Merch() {
   const { activeAddress, signTransactions } = useWallet()
   const [loading, setLoading] = useState<boolean>(false)
   const [warTokenBalance, setWarTokenBalance] = useState(null);
+  // Define background color styles for light and dark mode
+  const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
+  const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
+
+// Use a ternary operator to set the background color based on the current color mode
+const background = colorMode === 'light' ? lightModeBg : darkModeBg;
 
   // Fetch WAR token balance
   const fetchWarTokenBalance = async (address: string) => {
@@ -393,16 +399,17 @@ export default function Merch() {
     }
 
     return (
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} bgColor="transparent">
       {collectionItems.map((item) => (
         <Center key={item.id}>
-          <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center">
+          <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center" bgColor="transparent" border={'black'}>
             <Box>
               <Image
                 src={item.image}
                 alt={item.name}
                 boxSize="200px" // Set the desired image size
                 objectFit="cover" // Adjust as needed (e.g., "contain" or "fill")
+                bg="transparent" // Set the background color to transparent
               />
             </Box>
             <Text fontWeight="bold">{item.name}</Text>
@@ -491,6 +498,7 @@ export default function Merch() {
               mx="auto" // Center the image horizontally
               boxSize="200px"
               objectFit="cover"
+              bg="transparent" // Set the background color to transparent
             />
             <Text fontWeight="bold" mt={2}>
               {item.name}
@@ -585,86 +593,103 @@ export default function Merch() {
         </Modal>
       </Box>
 
-      {/* Merch Section */}
-      <Box as="section" py={10} bgGradient={heroBgGradient}>
-        <VStack spacing={4} align="center">
-          {/* ... (existing code for Text) */}
+        {/* Hero Section */}
+        <Box bg={heroBgGradient} color="white" py={20} px={{ base: 4, md: 8 }}>
+            <Container maxW="6xl" textAlign="center">
+              <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold">
+                Welcome to the Workout and Research Merchandise Store
+              </Text>
+              <Text mt={4} fontSize={{ base: 'lg', md: 'xl' }}>
+                Discover our collection of high-quality workout and research merchandise.
+              </Text>
+            </Container>
+          </Box>
 
-          {/* Buttons for Categories */}
-          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} mt={8} justifyItems="center">
-            <Button
-              colorScheme={buttonColorScheme}
-              color={textColor}
-              variant="solid"
-              size="lg"
-              onClick={() => selectCategory('outerwear')}
-            >
-              Outerwear
-            </Button>
-            <Button
-              colorScheme={buttonColorScheme}
-              color={textColor}
-              variant="solid"
-              size="lg"
-              onClick={() => selectCategory('tshirts')}
-            >
-              T-Shirts
-            </Button>
-            <Button
-              colorScheme={buttonColorScheme}
-              color={textColor}
-              variant="solid"
-              size="lg"
-              onClick={() => selectCategory('hats')}
-            >
-              Hats
-            </Button>
-            <Box textAlign="center"> {/* Wrap the Accessories button in a Box */}
-              <Button
-                colorScheme={buttonColorScheme}
-                color={textColor}
-                variant="solid"
-                size="lg"
-                onClick={() => selectCategory('accessories')}
-              >
-                Accessories
-              </Button>
+          {/* Categories Section */}
+          <Box bg={aboutBgGradient} py={12} px={{ base: 4, md: 8 }}>
+            <Container maxW="6xl">
+              <VStack spacing={4} textAlign="center">
+                <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
+                  Explore Our Collections
+                </Text>
+                <Text fontSize={{ base: 'lg', md: 'xl' }}>
+                  Choose from a variety of categories and sub-categories to find the perfect workout and research merchandise for you.
+                </Text>
+              </VStack>
+              <Box mt={8}>
+                {/* Category Buttons */}
+                <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
+                  <Button
+                    colorScheme={buttonColorScheme}
+                    color={textColor}
+                    variant={selectedCategory === 'outerwear' ? 'solid' : 'outline'}
+                    size="lg"
+                    onClick={() => selectCategory('outerwear')}
+                  >
+                    Outerwear
+                  </Button>
+                  <Button
+                    colorScheme={buttonColorScheme}
+                    color={textColor}
+                    variant={selectedCategory === 'tshirts' ? 'solid' : 'outline'}
+                    size="lg"
+                    onClick={() => selectCategory('tshirts')}
+                  >
+                    T-Shirts
+                  </Button>
+                  <Button
+                    colorScheme={buttonColorScheme}
+                    color={textColor}
+                    variant={selectedCategory === 'hats' ? 'solid' : 'outline'}
+                    size="lg"
+                    onClick={() => selectCategory('hats')}
+                  >
+                    Hats
+                  </Button>
+                  <Button
+                    colorScheme={buttonColorScheme}
+                    color={textColor}
+                    variant={selectedCategory === 'accessories' ? 'solid' : 'outline'}
+                    size="lg"
+                    onClick={() => selectCategory('accessories')}
+                  >
+                    Accessories
+                  </Button>
+                </SimpleGrid>
+              </Box>
+              {/* Sub-categories */}
+              <Box mt={6}>{renderSubCategories()}</Box>
+            </Container>
+          </Box>
+
+        {/* Collection Section */}
+        <Box bg={background} py={12} px={{ base: 4, md: 8 }}>
+          <Container maxW="6xl">
+            <VStack spacing={4} textAlign="center" bg={background}>
+              <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
+                {selectedSubCategory ? `${selectedSubCategory} ${selectedCategory}` : 'All Collections'}
+              </Text>
+              <Text fontSize={{ base: 'lg', md: 'xl' }}>
+                Explore our latest collection of workout and research merchandise.
+              </Text>
+            </VStack>
+            <Box mt={8} bg={background}>
+              {/* Collection Items */}
+              {renderCollectionItems()}
             </Box>
-          </SimpleGrid>
+          </Container>
+        </Box>
 
-          {/* Render sub-categories based on selected category */}
-          {renderSubCategories()}
-        </VStack>
-      </Box>
-
-      {/* Render the selected collection */}
-      {renderCollectionItems()}
-
-      {/* About Section */}
-      <Box as="section" py={10} bgGradient={aboutBgGradient}>
-        <VStack spacing={4} align="center">
-          {/* Add a button with an onClick handler */}
-          <VStack spacing={4}>
-          <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
-            By clicking Opt In, you acknowledge and agree to the terms and conditions associated with this opt-in process.
-          </Text>
-          <Spacer h={4} />
-          <Text fontSize="sm" color={textColor} mt={4} textAlign="center">
-            Please review our <Link href="/termscond">Terms and Conditions</Link> and <Link href="/privacypolicy">Privacy Policy</Link> before proceeding.
-          </Text>
-          <Spacer h={4} />
-            <Button
-              as="a"
-              colorScheme={buttonColorScheme}
-              color={textColor}
-              onClick={sendOptIn} // Add onClick handler here
-            >
-              Opt In
-            </Button>
-          </VStack>
-        </VStack>
-      </Box>
-    </Box>
+          {/* Footer */}
+          <Box as="footer" bg={footerBgColor} py={8} px={{ base: 4, md: 8 }} textAlign="center">
+            <Text fontSize="lg" fontWeight="bold" color={textColor}>
+              Workout and Research
+            </Text>
+            <Text fontSize="sm" color={textColor}>
+              © 2023 Workout and Research. All rights reserved.
+            </Text>
+          </Box>
+        </Box>
   );
 }
 
