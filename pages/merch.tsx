@@ -31,7 +31,7 @@ import {
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
@@ -70,6 +70,343 @@ export default function Merch() {
       console.error('Error fetching WAR token balance:', error);
       setWarTokenBalance(null);
     }
+  };
+
+  // Sample data for collections
+  const outerwearCollection: never[] = [
+    // ... more items
+  ];
+
+  const tshirtsCollection: never[] = [
+    // ... more items
+  ];
+
+  const hatsCollection = [
+    {
+      id: 1,
+      name: "Baseball Cap",
+      description: "Comfortable hat for any day of the week",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Beanie",
+      description: "Warm hat for the cooler days",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const accessoriesCollection = [
+    {
+      id: 1,
+      name: "Misc",
+      description: "Misc",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Misc",
+      description: "Misc",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Misc",
+      description: "Misc",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  // Collections for sub-categories (Mens, Womens, Kids)
+  const mensOuterwearCollection = [
+    {
+      id: 1,
+      name: "Mens Winter Jacket",
+      description: "Warm winter jacket for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Mens Winter Jacket",
+      description: "Warm winter jacket for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Mens Winter Jacket",
+      description: "Warm winter jacket for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const womensOuterwearCollection = [
+    {
+      id: 1,
+      name: "Womens Winter Jacket",
+      description: "Warm winter jacket for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Womens Winter Jacket",
+      description: "Warm winter jacket for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Womens Winter Jacket",
+      description: "Warm winter jacket for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const kidsOuterwearCollection = [
+    {
+      id: 1,
+      name: "Kids Winter Jacket",
+      description: "Warm winter jacket for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Kids Winter Jacket",
+      description: "Warm winter jacket for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Kids Winter Jacket",
+      description: "Warm winter jacket for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const mensTshirtsCollection = [
+    {
+      id: 1,
+      name: "Mens Graphic Tee",
+      description: "Cool graphic t-shirt for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Mens Graphic Tee",
+      description: "Cool graphic t-shirt for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Mens Graphic Tee",
+      description: "Cool graphic t-shirt for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 4,
+      name: "Mens Graphic Tee",
+      description: "Cool graphic t-shirt for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 5,
+      name: "Mens Graphic Tee",
+      description: "Cool graphic t-shirt for men",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const womensTshirtsCollection = [
+    {
+      id: 1,
+      name: "Womens Graphic Tee",
+      description: "Cool graphic t-shirt for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Womens Graphic Tee",
+      description: "Cool graphic t-shirt for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Womens Graphic Tee",
+      description: "Cool graphic t-shirt for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 4,
+      name: "Womens Graphic Tee",
+      description: "Cool graphic t-shirt for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 5,
+      name: "Womens Graphic Tee",
+      description: "Cool graphic t-shirt for women",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+  
+  const kidsTshirtsCollection = [
+    {
+      id: 1,
+      name: "Kids Graphic Tee",
+      description: "Cool graphic t-shirt for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 2,
+      name: "Kids Graphic Tee 2",
+      description: "Cool graphic t-shirt for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 3,
+      name: "Kids Graphic Tee 3",
+      description: "Cool graphic t-shirt for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 4,
+      name: "Kids Graphic Tee 2",
+      description: "Cool graphic t-shirt for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    {
+      id: 5,
+      name: "Kids Graphic Tee 3",
+      description: "Cool graphic t-shirt for kids",
+      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
+    },
+    // ... more items
+  ];
+
+  const [selectedCategory, setSelectedCategory] = useState(''); // Track selected category (e.g., outerwear, tshirts, etc.)
+  const [selectedSubCategory, setSelectedSubCategory] = useState(''); // Track selected sub-category (e.g., Mens, Womens, Kids)
+
+  // Function to handle category selection
+  const selectCategory = (category: SetStateAction<string>) => {
+    setSelectedCategory(category);
+    setSelectedSubCategory(''); // Reset sub-category selection
+  };
+
+  // Function to handle sub-category selection
+  const selectSubCategory = (subCategory: SetStateAction<string>) => {
+    setSelectedSubCategory(subCategory);
+  };
+
+  // Function to render sub-categories based on the selected category
+  const renderSubCategories = () => {
+    if (selectedCategory === 'outerwear' || selectedCategory === 'tshirts') {
+      return (
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
+          <Button
+            colorScheme={buttonColorScheme}
+            color={textColor}
+            variant="solid"
+            size="lg"
+            onClick={() => selectSubCategory('Mens')}
+          >
+            Mens
+          </Button>
+          <Button
+            colorScheme={buttonColorScheme}
+            color={textColor}
+            variant="solid"
+            size="lg"
+            onClick={() => selectSubCategory('Womens')}
+          >
+            Womens
+          </Button>
+          <Button
+            colorScheme={buttonColorScheme}
+            color={textColor}
+            variant="solid"
+            size="lg"
+            onClick={() => selectSubCategory('Kids')}
+          >
+            Kids
+          </Button>
+        </SimpleGrid>
+      );
+    }
+    return null; // Return nothing for other categories (hats, accessories)
+  };
+
+// Function to render the selected collection items
+const renderCollectionItems = () => {
+  let collectionItems;
+  if (selectedCategory === 'outerwear') {
+    switch (selectedSubCategory) {
+      case 'Mens':
+        collectionItems = mensOuterwearCollection;
+        break;
+      case 'Womens':
+        collectionItems = womensOuterwearCollection;
+        break;
+      case 'Kids':
+        collectionItems = kidsOuterwearCollection;
+        break;
+      default:
+        collectionItems = outerwearCollection;
+        break;
+    }
+  } else if (selectedCategory === 'tshirts') {
+    switch (selectedSubCategory) {
+      case 'Mens':
+        collectionItems = mensTshirtsCollection;
+        break;
+      case 'Womens':
+        collectionItems = womensTshirtsCollection;
+        break;
+      case 'Kids':
+        collectionItems = kidsTshirtsCollection;
+        break;
+      default:
+        collectionItems = tshirtsCollection;
+        break;
+    }
+  } else if (selectedCategory === 'hats') { // Handle "Hats" category
+    switch (selectedSubCategory) {
+      // Add cases for Mens, Womens, and Kids if needed
+      default:
+        collectionItems = hatsCollection;
+        break;
+    }
+  } else if (selectedCategory === 'accessories') { // Handle "Accessories" category
+    switch (selectedSubCategory) {
+      // Add cases for Mens, Womens, and Kids if needed
+      default:
+        collectionItems = accessoriesCollection;
+        break;
+    }
+  } else {
+    return <Text textAlign="center" backgroundColor="transparent">Select a category to view items.</Text>;
+  }
+
+    return (
+      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
+        {collectionItems.map((item) => (
+          <Box key={item.id} p={5} shadow="md" borderWidth="1px">
+            <Image
+              src={item.image}
+              alt={item.name}
+              boxSize="200px" // Set the desired image size
+              objectFit="cover" // Adjust as needed (e.g., "contain" or "fill")
+            />
+            <Text fontWeight="bold">{item.name}</Text>
+            <Text>{item.description}</Text>
+          </Box>
+        ))}
+      </SimpleGrid>
+    );
   };
 
   // Effect to fetch the WAR token balance when the active address changes
@@ -136,6 +473,17 @@ export default function Merch() {
       color="white"
     />
   );
+  
+    // Add the renderItems function here
+    function renderItems(items: any[]) {
+      return items.map((item: any) => (
+        <Box key={item.id} p={5} shadow="md" borderWidth="1px">
+          <Text fontWeight="bold">{item.name}</Text>
+          <Text>{item.description}</Text>
+        </Box>
+      ));
+    }
+  
 
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
@@ -223,55 +571,61 @@ export default function Merch() {
       {/* Merch Section */}
       <Box as="section" py={10} bgGradient={heroBgGradient}>
         <VStack spacing={4} align="center">
-        <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">
-            Explore our merchandise collection.
-          </Text>
-          
-          {/* Buttons for Merch */}
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4} mt={8}>
-          <Button
-              as="a"
-              //href="/merch/outerwear" // Replace with the actual URL for your t-shirts
+          {/* ... (existing code for Text) */}
+
+          {/* Buttons for Categories */}
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4} mt={8} justifyItems="center">
+            <Button
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
               size="lg"
+              bgGradient={pageBgGradient}
+              onClick={() => selectCategory('outerwear')}
             >
               Outerwear
             </Button>
             <Button
-              as="a"
-              //href="/merch/t-shirts" // Replace with the actual URL for your t-shirts
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
               size="lg"
+              bgGradient={pageBgGradient}
+              onClick={() => selectCategory('tshirts')}
             >
               T-Shirts
             </Button>
             <Button
-              as="a"
-              //href="/merch/hats" // Replace with the actual URL for your hats
               colorScheme={buttonColorScheme}
               color={textColor}
               variant="solid"
               size="lg"
+              bgGradient={pageBgGradient}
+              onClick={() => selectCategory('hats')}
             >
               Hats
             </Button>
-            <Button
-              as="a"
-              //href="/merch/accessories" // Replace with the actual URL for your accessories
-              colorScheme={buttonColorScheme}
-              color={textColor}
-              variant="solid"
-              size="lg"
-            >
-              Accessories
-            </Button>
+            <Box textAlign="center"> {/* Wrap the Accessories button in a Box */}
+              <Button
+                colorScheme={buttonColorScheme}
+                color={textColor}
+                variant="solid"
+                size="lg"
+                bgGradient={pageBgGradient}
+                onClick={() => selectCategory('accessories')}
+              >
+                Accessories
+              </Button>
+            </Box>
           </SimpleGrid>
+
+          {/* Render sub-categories based on selected category */}
+          {renderSubCategories()}
         </VStack>
       </Box>
+
+      {/* Render the selected collection */}
+      {renderCollectionItems()}
 
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
@@ -299,4 +653,8 @@ export default function Merch() {
       </Box>
     </Box>
   );
+}
+
+function renderItems(collectionItems: any) {
+  throw new Error('Function not implemented.');
 }
