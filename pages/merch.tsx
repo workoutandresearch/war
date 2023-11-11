@@ -642,7 +642,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       {/* Drawer for Cart */}
       <Drawer isOpen={isCartDrawerOpen} placement="right" onClose={onCartDrawerClose}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
           <DrawerHeader>Cart</DrawerHeader>
           <DrawerBody>
             {renderCartItems()}
