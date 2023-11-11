@@ -33,7 +33,6 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { algodClient } from 'lib/algodClient';
 import { useWallet } from '@txnlab/use-wallet';
-import { Carousel } from 'react-responsive-carousel'; // Assuming you're using this library for Carousel
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -96,77 +95,45 @@ export default function Home() {
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       {/* Navbar */}
-      <Flex as="header" bg={headerBgColor} justify="space-between" align="center" py={4} px={8} boxShadow="sm">
-        {/* Hamburger Menu and Light/Dark Mode Toggle */}
-        <Flex align="center">
-          <IconButton
-            icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-            onClick={toggleMenu}
-            aria-label="Open Menu"
-            variant="ghost"
-            color={boxColorScheme}
-          />
-          <IconButton
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            onClick={toggleColorMode}
-            aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-            variant="ghost"
-            color={boxColorScheme}
-          />
+      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
+        <Flex justify="space-between" align="center">
+          {/* Hamburger Menu and Color Mode Toggle */}
+          <Flex align="center">
+            {/* Hamburger Menu Icon */}
+            <IconButton
+              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              variant="ghost"
+              color={boxColorScheme}
+            />
+
+            {/* Color Mode Toggle */}
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              variant="ghost"
+              color={boxColorScheme}
+            />
+          </Flex>
+
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
+          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+            Connect
+          </Button>
         </Flex>
-
-        <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
-          Workout and Research
-        </Text>
-
-        <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-          Connect
-        </Button>
-      </Flex>
-
-        {/* Carousel with Ads */}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Box w="full" h="60vh" bg={headerBgColor}>
-          <Center h="full" >
-            <Carousel 
-              showThumbs={false} 
-              showIndicators={false} 
-              showArrows={false} 
-              showStatus={false} 
-              infiniteLoop 
-              autoPlay 
-              emulateTouch 
-              interval={5000} 
-              swipeScrollTolerance={3}
-            >
-              <Box p={2} px={5}>
-                <a href='https://fallenorder.xyz/' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Fallen Order' src='fallenad1.png' />
-                </a>
-              </Box>
-              <Box p={6} py={2}>
-                <a href='https://algoxnft.com/shuffle/1385' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Join The Pards! - AlgoPard' src='algopardad1.png' />
-                </a>
-              </Box>
-              <Box p={2} px={5}>
-                <a href='https://angelsofares.xyz/ghost' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Ghosts Of Algo' src='ghost.png' />
-                </a>
-              </Box>
-              <Box p={2} px={5}>
-                <a href='https://www.algoleagues.com/' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='AlgoLeagues' src='alcad.png' />
-                </a>
-              </Box>
-            </Carousel>
-          </Center>
-        </Box>
-
-      {/* Drawer for Hamburger Menu */}
-      <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+        {/* Drawer for Hamburger Menu */}
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
           <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
@@ -190,17 +157,20 @@ export default function Home() {
           </DrawerContent>
         </Drawer>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent bg={drawerBgColor}>
-          <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Connect />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+        {/* Modal */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg={drawerBgColor}>
+            <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Connect />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Box>
 
+      {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
           <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">Empower Your Journey</Text>
@@ -208,11 +178,13 @@ export default function Home() {
         </Container>
       </Box>
 
+      {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
         <VStack spacing={6} align="center">
-          <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
-            Connect and Engage with Our Community
-          </Text>
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+          Connect and Engage with Our Community
+        </Text>
+
           <Box maxW="container.lg" mx="auto">
             <Text fontSize="xl" textAlign="center" color={textColor}>
               Connect with fellow enthusiasts, stay updated on the latest news, and engage in discussions about our project. Empower your journey with the latest tools added to the server!
@@ -224,60 +196,61 @@ export default function Home() {
         </VStack>
       </Box>
 
-            {/* Features Section */}
-            <Box as="section" py={10} bgGradient={featuresBgGradient}>
-              <Container maxW="container.lg">
-                <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>Community Participation</Text>
-                <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-                  {/* Roadmap */}
-                  <ScaleFade initialScale={0.9} in={true}>
-                    <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                      <Center>
-                      <Button as={Link} href="/roadmap" variant="ghost" color={textColor} w="full" justifyContent="center">
-                        Roadmap
-                      </Button>
-                      </Center>
-                      <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
-                    </Box>
-                  </ScaleFade>
+      {/* Features Section */}
+      <Box as="section" py={10} bgGradient={featuresBgGradient}>
+        <Container maxW="container.lg">
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>Community Participation</Text>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+            {/* Roadmap */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/roadmap" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Roadmap
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
+              </Box>
+            </ScaleFade>
 
-                  {/* Opt In */}
-                  <ScaleFade initialScale={0.9} in={true}>
-                    <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                      <Center>
-                      <Button as={Link} href="/optin" variant="ghost" color={textColor} w="full" justifyContent="center">
-                        Opt-In
-                      </Button>
-                      </Center>
-                      <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
-                    </Box>
-                  </ScaleFade>
+            {/* Opt In */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/optin" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Opt-In
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
+              </Box>
+            </ScaleFade>
 
-                  {/* Whitepaper */}
-                  <ScaleFade initialScale={0.9} in={true}>
-                    <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
-                      <Center>
-                      <Button as={Link} href="/whitepaper" variant="ghost" color={textColor} w="full" justifyContent="center">
-                        Whitepaper
-                      </Button>
-                      </Center>
-                      <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
-                    </Box>
-                  </ScaleFade>
-                  {/* More feature sections can follow the same pattern */}
-                </SimpleGrid>
-              </Container>
-            </Box>
-
-            {/* Footer */}
-            <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
-              <Flex direction="column" align="center" justify="center" color={textColor}>
-                <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
-                <Flex mt={2}>
-                  {/* Additional footer content can go here */}
-                </Flex>
-              </Flex>
-            </Box>
+            {/* Whitepaper */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/whitepaper" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Whitepaper
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
+              </Box>
+            </ScaleFade>
+            {/* More feature sections can follow the same pattern */}
+          </SimpleGrid>
+        </Container>
+      </Box>
+     
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Flex mt={2}>
+            {/* Additional footer content can go here */}
+          </Flex>
+        </Flex>
+      </Box>
     </Box>
   );
+  
 }
