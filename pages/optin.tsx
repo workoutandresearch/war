@@ -36,7 +36,6 @@ import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
 import { useWallet } from '@txnlab/use-wallet';
-import { Carousel } from 'react-responsive-carousel'; // Assuming you're using this library for Carousel
 
 export default function Merch() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -141,80 +140,50 @@ export default function Merch() {
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
-        <title>Workout and Research - Home</title>
-        <meta name="description" content="Your ultimate virtual workout and research platform" />
+        <title>Workout and Research - Opt In</title>
+        <meta name="description" content="Your opt in description goes here." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       {/* Navbar */}
-      <Flex as="header" bg={headerBgColor} justify="space-between" align="center" py={4} px={8} boxShadow="sm">
-        {/* Hamburger Menu and Light/Dark Mode Toggle */}
-        <Flex align="center">
-          <IconButton
-            icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-            onClick={toggleMenu}
-            aria-label="Open Menu"
-            variant="ghost"
-            color={boxColorScheme}
-          />
-          <IconButton
-            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-            onClick={toggleColorMode}
-            aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-            variant="ghost"
-            color={boxColorScheme}
-          />
+      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
+        <Flex justify="space-between" align="center">
+          {/* Hamburger Menu and Color Mode Toggle */}
+          <Flex align="center">
+            {/* Hamburger Menu Icon */}
+            <IconButton
+              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              variant="ghost"
+              color={boxColorScheme}
+            />
+
+            {/* Color Mode Toggle */}
+            <IconButton
+              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              onClick={toggleColorMode}
+              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+              variant="ghost"
+              color={boxColorScheme}
+            />
+          </Flex>
+
+          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+            Workout and Research
+          </Text>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
+          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+            Connect
+          </Button>
         </Flex>
 
-        <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
-          Workout and Research
-        </Text>
-
-        <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-          Connect
-        </Button>
-      </Flex>
-
-        {/* Carousel with Ads */}
-        <Box w="full" h="60vh" bg={headerBgColor}>
-          <Center h="full" >
-            <Carousel 
-              showThumbs={false} 
-              showIndicators={false} 
-              showArrows={false} 
-              showStatus={false} 
-              infiniteLoop 
-              autoPlay 
-              emulateTouch 
-              interval={5000} 
-              swipeScrollTolerance={3}
-            >
-              <Box p={2} px={5}>
-                <a href='https://fallenorder.xyz/' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Fallen Order' src='fallenad1.png' />
-                </a>
-              </Box>
-              <Box p={6} py={2}>
-                <a href='https://algoxnft.com/shuffle/1385' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Join The Pards! - AlgoPard' src='algopardad1.png' />
-                </a>
-              </Box>
-              <Box p={2} px={5}>
-                <a href='https://angelsofares.xyz/ghost' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Ghosts Of Algo' src='ghost.png' />
-                </a>
-              </Box>
-              <Box p={2} px={5}>
-                <a href='https://www.algoleagues.com/' target='_blank' rel='noreferrer'>
-                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='AlgoLeagues' src='alcad.png' />
-                </a>
-              </Box>
-            </Carousel>
-          </Center>
-        </Box>
-
-      {/* Drawer for Hamburger Menu */}
-      <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+        {/* Drawer for Hamburger Menu */}
+        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
           <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
@@ -238,16 +207,18 @@ export default function Merch() {
           </DrawerContent>
         </Drawer>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent bg={drawerBgColor}>
-          <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Connect />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
+        {/* Modal for Connecting Wallet */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent bg={drawerBgColor}>
+            <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Connect />
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      </Box>
 
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
