@@ -471,7 +471,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
                   <Text>{item.description}</Text>
 
                   {/* Add to Cart Button */}
-                  <Button colorScheme="blue" mt={3} onClick={() => handleAddToCart(item)}>
+                  <Button colorScheme={buttonColorScheme} mt={3} onClick={() => handleAddToCart(item)}>
                     Add to Cart
                   </Button>
                 </Box>
