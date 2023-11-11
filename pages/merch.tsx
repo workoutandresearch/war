@@ -39,7 +39,7 @@ import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
 import { useWallet } from '@txnlab/use-wallet';
 import { addToCart } from 'components/addtocart'; // Import the addToCart function
-import { CartIcon } from '@chakra-ui/icons';
+import { AiFillShop } from "react-icons/ai";
 
 export default function Merch() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -538,11 +538,9 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
     <IconButton
-      icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-      onClick={toggleColorMode}
-      aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-      variant="ghost"
-      color="white"
+      icon={<AiFillShop />}
+      onClick={onCartDrawerOpen}
+      aria-label="Open cart"
     />
   );
 
@@ -564,7 +562,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       {/* Navbar */}
       <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
-          {/* Hamburger Menu and Color Mode Toggle */}
+          {/* Left side - Hamburger Menu and Color Mode Toggle */}
           <Flex align="center">
             {/* Hamburger Menu Icon */}
             <IconButton
@@ -583,20 +581,37 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
               variant="ghost"
               color={boxColorScheme}
             />
+
+            {/* Cart Button */}
+            <IconButton
+              icon={<AiFillShop />}
+              colorScheme="blue"
+              onClick={onCartDrawerOpen}
+              aria-label="View Cart"
+              ml={3} // Margin-left for spacing
+              color={textColor}
+            />
           </Flex>
 
+          {/* Center - Title Text */}
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-              {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
-                <Text color={textColor} pr={4}>
-                  WAR Balance: {warTokenBalance}
-                </Text>
-              )}
-          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
-          </Button>
+
+          {/* Right side - Wallet Connection and Wallet Balance */}
+          <Flex align="center">
+            {/* Conditional rendering based on whether a wallet is connected */}
+            {activeAddress && warTokenBalance !== null && (
+              <Text color={textColor} pr={4}>
+                WAR Balance: {warTokenBalance}
+              </Text>
+            )}
+
+            {/* Connect Button */}
+            <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+              Connect
+            </Button>
+          </Flex>
         </Flex>
 
         {/* Drawer for Hamburger Menu */}
@@ -623,14 +638,6 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
             </DrawerBody>
           </DrawerContent>
         </Drawer>
-      
-      {/* Cart Button in the Header */}
-      <IconButton
-        icon={<CartIcon />}
-        colorScheme="blue"
-        onClick={onCartDrawerOpen}
-        aria-label="View Cart"
-      />
 
       {/* Drawer for Cart */}
       <Drawer isOpen={isCartDrawerOpen} placement="right" onClose={onCartDrawerClose}>
