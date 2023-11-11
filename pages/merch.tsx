@@ -418,6 +418,18 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     },
     // ... more items
   ];
+
+      // Define a type for cart items
+    interface CartItem {
+      name: string;
+      quantity: number;
+    }
+
+    // Define types for your collections if they are not defined yet
+    // For example:
+    interface CollectionItem {
+      // Define the properties of collection items
+    }
   
     useEffect(() => {
       // Check if window is defined (i.e., running in the browser)
@@ -506,7 +518,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     };
 
   const renderCollectionItems = () => {
-    let collectionItems;
+    let collectionItems: CollectionItem[] = [];
     if (selectedCategory === 'outerwear') {
       switch (selectedSubCategory) {
         case 'Mens':
