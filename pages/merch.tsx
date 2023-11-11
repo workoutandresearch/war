@@ -418,18 +418,6 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     },
     // ... more items
   ];
-
-      // Define a type for cart items
-    interface CartItem {
-      name: string;
-      quantity: number;
-    }
-
-    // Define types for your collections if they are not defined yet
-    // For example:
-    interface CollectionItem {
-      // Define the properties of collection items
-    }
   
     useEffect(() => {
       // Check if window is defined (i.e., running in the browser)
@@ -518,7 +506,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     };
 
   const renderCollectionItems = () => {
-    let collectionItems: CollectionItem[] = [];
+    let collectionItems;
     if (selectedCategory === 'outerwear') {
       switch (selectedSubCategory) {
         case 'Mens':
@@ -760,7 +748,6 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
         <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
           <DrawerHeader>Cart</DrawerHeader>
           <DrawerBody>
-            {renderCartItems()}
             {/* Checkout button inside the drawer */}
             <Button colorScheme="green" onClick={handleCheckout}>
               Checkout
@@ -901,32 +888,6 @@ function setSomeState(newValue: any) {
   throw new Error('Function not implemented.');
 }
 
-function prepareAlgorandTransaction(userAccountAddress: any, totalCost: any) {
-  const sender = userAccountAddress; // Sender's Algorand address
-  const receiver = 'RECEIVER_ALGORAND_ADDRESS'; // Receiver's Algorand address
-  const amount = totalCost; // Amount to send in microAlgos (microAlgo = 0.000001 Algo)
-
-  const params = algosdk.GetTransactionParams(); // Get suggested transaction parameters
-  const transaction = new algosdk.Transaction.Payment({
-    sender: sender,
-    fee: params.fee,
-    firstRound: params.lastRound + 1,
-    lastRound: params.lastRound + 1000,
-    genesisID: params.genesisID,
-    genesisHash: params.genesisHash,
-    receiver: receiver,
-    amount: amount,
-  });
-
-  return transaction;
-}
-
-
-function calculateTotalCost(cart: never[]) {
-  const totalCost = cart.reduce((acc, item) => acc + item.price, 0);
-  return totalCost;
-}
-
 function getUserAlgorandAddress() {
   // Implement logic to retrieve the user's Algorand address
   // e.g., fetch it from a user profile or wallet service
@@ -937,27 +898,6 @@ function getUserAlgorandMnemonic(): any {
   // Implement logic to securely retrieve the user's mnemonic or private key
   // e.g., retrieve it from a secure storage mechanism
   return 'USER_ALGORAND_MNEMONIC';
-}
-
-async function waitForConfirmation(txId: any) {
-  const client = new algosdk.Algodv2();
-  const status = await client.status().do();
-  let lastRound = status.lastRound;
-
-  while (true) {
-    const pendingInfo = await client.pendingTransactionInformation(txId).do();
-
-    if (pendingInfo !== undefined) {
-      if (pendingInfo.confirmedRound !== null && pendingInfo.confirmedRound > 0) {
-        return true; // Transaction confirmed
-      } else if (pendingInfo.poolError) {
-        return false; // Transaction failed
-      }
-    }
-
-    await client.statusAfterBlock(lastRound + 1).do();
-    lastRound++;
-  }
 }
 
 function checkout(cart: never[]) {
