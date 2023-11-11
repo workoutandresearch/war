@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import { Box, Button,  Image, Center, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
@@ -12,7 +12,8 @@ import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHis
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
-import CalorieCalculator from 'components/CalorieCalculator';
+import CalorieCalculator from 'components/CalorieCalculator'
+import { Carousel } from 'react-responsive-carousel'; // Assuming you're using this library for Carousel;
 import CalorieCounter from 'components/CalorieCounter';
 
 
@@ -156,43 +157,80 @@ export default function Tools() {
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
-        <title>Workout and Research - Tools</title>
+        <title>Workout and Research - Home</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
-        <Flex justify="space-between" align="center">
-          <Flex align="center">
-            <IconButton
-              icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
-              onClick={toggleMenu}
-              aria-label="Open Menu"
-              variant="ghost"
-              color={buttonTextColor}
-            />
-            <IconButton
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              onClick={toggleColorMode}
-              aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
-              variant="ghost"
-              color={buttonTextColor}
-            />
-          </Flex>
-          <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
-            Workout and Research
-          </Text>
-              {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
-                <Text color={textColor} pr={4}>
-                  WAR Balance: {warTokenBalance}
-                </Text>
-              )}
-          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
-          </Button>
+
+      {/* Navbar */}
+      <Flex as="header" bg={headerBgColor} justify="space-between" align="center" py={4} px={8} boxShadow="sm">
+        {/* Hamburger Menu and Light/Dark Mode Toggle */}
+        <Flex align="center">
+          <IconButton
+            icon={isMenuOpen ? <CloseIcon /> : <HamburgerIcon />}
+            onClick={toggleMenu}
+            aria-label="Open Menu"
+            variant="ghost"
+            color={textColor}
+          />
+          <IconButton
+            icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            onClick={toggleColorMode}
+            aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+            variant="ghost"
+            color={textColor}
+          />
         </Flex>
-        {/* Drawer for Hamburger Menu */}
-        <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
+
+        <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
+          Workout and Research
+        </Text>
+
+        <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+          Connect
+        </Button>
+      </Flex>
+
+        {/* Carousel with Ads */}
+        <Box w="full" h="60vh" bg={headerBgColor}>
+          <Center h="full" >
+            <Carousel 
+              showThumbs={false} 
+              showIndicators={false} 
+              showArrows={false} 
+              showStatus={false} 
+              infiniteLoop 
+              autoPlay 
+              emulateTouch 
+              interval={5000} 
+              swipeScrollTolerance={3}
+            >
+              <Box p={2} px={5}>
+                <a href='https://fallenorder.xyz/' target='_blank' rel='noreferrer'>
+                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Fallen Order' src='fallenad1.png' />
+                </a>
+              </Box>
+              <Box p={6} py={2}>
+                <a href='https://algoxnft.com/shuffle/1385' target='_blank' rel='noreferrer'>
+                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Join The Pards! - AlgoPard' src='algopardad1.png' />
+                </a>
+              </Box>
+              <Box p={2} px={5}>
+                <a href='https://angelsofares.xyz/ghost' target='_blank' rel='noreferrer'>
+                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='Ghosts Of Algo' src='ghost.png' />
+                </a>
+              </Box>
+              <Box p={2} px={5}>
+                <a href='https://www.algoleagues.com/' target='_blank' rel='noreferrer'>
+                  <Image borderTopRadius='xl' borderBottomRadius='xl' alt='AlgoLeagues' src='alcad.png' />
+                </a>
+              </Box>
+            </Carousel>
+          </Center>
+        </Box>
+
+      {/* Drawer for Hamburger Menu */}
+      <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
           <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
@@ -216,19 +254,17 @@ export default function Tools() {
           </DrawerContent>
         </Drawer>
 
-        {/* Modal */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent bg={drawerBgColor}>
-            <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Connect />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent bg={drawerBgColor}>
+          <ModalHeader>Connect Your Algorand Wallet</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Connect />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
         
-      </Box>
       <Head>
         <title>Workout and Research - Tools</title>
         <meta name="description" content="Your ultimate virtual workout and research platform" />
@@ -310,8 +346,14 @@ export default function Tools() {
       </Box>
     )}
     
-      <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
-        {/* ... (previous code) */}
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Flex mt={2}>
+            {/* Additional footer content can go here */}
+          </Flex>
+        </Flex>
       </Box>
     </Box>
   );
