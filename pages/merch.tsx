@@ -544,12 +544,12 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     />
   );
 
-  function onCartOpen(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
-    throw new Error('Function not implemented.');
+  function onCartOpen(event: React.MouseEvent<HTMLButtonElement>): void {
+    // Your implementation...
   }
-
+  
   function onCartClose(): void {
-    throw new Error('Function not implemented.');
+    // Your implementation...
   }
 
   return (
