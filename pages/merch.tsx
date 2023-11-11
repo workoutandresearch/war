@@ -27,6 +27,8 @@ import {
   DrawerHeader,
   DrawerOverlay,
   Spacer,
+  List,
+  ListItem,
 } from '@chakra-ui/react';
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
@@ -36,6 +38,8 @@ import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
 import { useWallet } from '@txnlab/use-wallet';
+import { addToCart } from 'components/addtocart'; // Import the addToCart function
+import { CartIcon } from '@chakra-ui/icons';
 
 export default function Merch() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -62,6 +66,13 @@ export default function Merch() {
   const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
 
+    // New disclosure for the cart drawer
+    const {
+      isOpen: isCartDrawerOpen,
+      onOpen: onCartDrawerOpen,
+      onClose: onCartDrawerClose
+    } = useDisclosure();
+
 // Use a ternary operator to set the background color based on the current color mode
 const background = colorMode === 'light' ? lightModeBg : darkModeBg;
 
@@ -77,6 +88,15 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       setWarTokenBalance(null);
     }
   };
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // Your event handling logic here
+  };
+
+  const handleCheckout = (event: React.MouseEvent<HTMLButtonElement>) => {
+    // Your checkout logic here
+  };
+  
 
   // Sample data for collections
   const outerwearCollection: never[] = [
@@ -294,6 +314,36 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     // ... more items
   ];
 
+    // Initialize cart state
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+      // Check if window is defined (i.e., running in the browser)
+      if (typeof window !== 'undefined') {
+        // Access localStorage
+        const storedCart = localStorage.getItem('cart');
+        setCart(storedCart ? JSON.parse(storedCart) : []);
+      }
+    }, []);
+
+  // Function to render cart items in the drawer
+  const renderCartItems = () => {
+    if (cart.length === 0) {
+      return <p>Your cart is empty.</p>;
+    }
+
+    return (
+      <List spacing={3}>
+        {cart.map((item: { name: any; quantity: any; }, index: any) => (
+          <ListItem key={index}>
+            {item.name} - Quantity: {item.quantity}
+            {/* Add more item details as needed */}
+          </ListItem>
+        ))}
+      </List>
+    );
+  };
+
   const [selectedCategory, setSelectedCategory] = useState(''); // Track selected category (e.g., outerwear, tshirts, etc.)
   const [selectedSubCategory, setSelectedSubCategory] = useState(''); // Track selected sub-category (e.g., Mens, Womens, Kids)
 
@@ -345,6 +395,12 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     }
     return null; // Return nothing for other categories (hats, accessories)
   };
+
+    // Handler for adding item to cart
+    const handleAddToCart = (item: { name: any; }) => {
+      addToCart(item, 1); // Assuming you want to add one quantity of the item
+      alert(`${item.name} added to cart.`); // Feedback to the user
+    };
 
   const renderCollectionItems = () => {
     let collectionItems;
@@ -399,27 +455,31 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     }
 
     return (
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} bgColor="transparent">
-      {collectionItems.map((item) => (
-        <Center key={item.id}>
-          <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center" bgColor="transparent" border={'black'}>
-            <Box>
-              <Image
-                src={item.image}
-                alt={item.name}
-                boxSize="200px" // Set the desired image size
-                objectFit="cover" // Adjust as needed (e.g., "contain" or "fill")
-                bg="transparent" // Set the background color to transparent
-              />
-            </Box>
-            <Text fontWeight="bold">{item.name}</Text>
-            <Text>{item.description}</Text>
-          </Box>
-        </Center>
-      ))}
-      </SimpleGrid>
-    );
-  };
+    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} bgColor="transparent">
+            {collectionItems.map((item) => (
+              <Center key={item.id}>
+                <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center" bgColor="transparent" border={'black'}>
+                  {/* Existing item display code */}
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    boxSize="200px"
+                    objectFit="cover"
+                    bg="transparent"
+                  />
+                  <Text fontWeight="bold">{item.name}</Text>
+                  <Text>{item.description}</Text>
+
+                  {/* Add to Cart Button */}
+                  <Button colorScheme="blue" mt={3} onClick={() => handleAddToCart(item)}>
+                    Add to Cart
+                  </Button>
+                </Box>
+              </Center>
+            ))}
+          </SimpleGrid>
+        );
+      };
 
   // Effect to fetch the WAR token balance when the active address changes
   useEffect(() => {
@@ -485,30 +545,14 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       color="white"
     />
   );
-  
-   // Function to render collection items with centered images
-  const renderItems = (items: any[]) => {
-    return (
-      <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4}>
-        {items.map((item) => (
-          <Box key={item.id} p={5} shadow="md" borderWidth="1px" textAlign="center">
-            <Image
-              src={item.image}
-              alt={item.name}
-              mx="auto" // Center the image horizontally
-              boxSize="200px"
-              objectFit="cover"
-              bg="transparent" // Set the background color to transparent
-            />
-            <Text fontWeight="bold" mt={2}>
-              {item.name}
-            </Text>
-            <Text>{item.description}</Text>
-          </Box>
-        ))}
-      </SimpleGrid>
-    );
-  };
+
+  function onCartOpen(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+    throw new Error('Function not implemented.');
+  }
+
+  function onCartClose(): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
@@ -579,6 +623,29 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
             </DrawerBody>
           </DrawerContent>
         </Drawer>
+      
+      {/* Cart Button in the Header */}
+      <IconButton
+        icon={<CartIcon />}
+        colorScheme="blue"
+        onClick={onCartDrawerOpen}
+        aria-label="View Cart"
+      />
+
+      {/* Drawer for Cart */}
+      <Drawer isOpen={isCartDrawerOpen} placement="right" onClose={onCartDrawerClose}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerHeader>Cart</DrawerHeader>
+          <DrawerBody>
+            {renderCartItems()}
+            {/* Checkout button inside the drawer */}
+            <Button colorScheme="green" onClick={handleCheckout}>
+              Checkout
+            </Button>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>       
 
         {/* Modal for Connecting Wallet */}
         <Modal isOpen={isOpen} onClose={onClose}>
