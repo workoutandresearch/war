@@ -271,7 +271,7 @@ export default function Disclaimer() {
                 <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} bg={headerBgColor}>
                 {/* Roadmap */}
                 <ScaleFade initialScale={0.9} in={true}>
-                    <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} bg={headerBgColor}>
+                    <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
                     <Center>
                         <Button as={Link} href="/roadmap" variant="ghost" color={textColor} w="full" justifyContent="center">
                         Roadmap
