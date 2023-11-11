@@ -556,7 +556,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
         <title>Workout and Research - Merch</title>
-        <meta name="description" content="Your opt in description goes here." />
+        <meta name="description" content="Merch Store" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Navbar */}
