@@ -34,6 +34,7 @@ import { useState } from 'react';
 import { FaMediumM } from "react-icons/fa";
 import { TfiTwitter, TfiYoutube, TfiInstagram  } from "react-icons/tfi";
  import { SiDiscord } from "react-icons/si";
+ import { TbBrandX } from "react-icons/tb";
 
 export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -152,7 +153,7 @@ export default function Socialmedia() {
           {/* Twitter */}
           <Link href="https://twitter.com/workoutresearch" target="_blank" rel="noopener noreferrer">
             <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <TfiTwitter size="24px" />
+              <TbBrandX size="24px" />
               <Text ml={2} fontWeight="bold">Twitter</Text>
             </Box>
           </Link>
