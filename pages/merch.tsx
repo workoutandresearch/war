@@ -42,6 +42,83 @@ import { addToCart } from 'components/addtocart'; // Import the addToCart functi
 import { AiFillShop } from "react-icons/ai";
 
 export default function Merch() {
+  const [cart, setCart] = useState([]); // Initialize cart state with an empty array
+
+  useEffect(() => {
+    // Check if window is defined (i.e., running in the browser)
+    if (typeof window !== 'undefined') {
+      // Access localStorage
+      const storedCart = localStorage.getItem('cart');
+      setCart(storedCart ? JSON.parse(storedCart) : []);
+    }
+  }, []);
+
+  const algosdk = require('algosdk');
+  const Merch = () => {
+  const [cart, setCart] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
+
+  // Function to add an item to the cart
+  const addToCart = (item: {
+    price: number; name: any; 
+}) => {
+    // Create a copy of the cart with the new item
+    const updatedCart = [...cart, item];
+    setCart(updatedCart);
+
+    // Calculate the total cost by iterating over the items in the cart
+    const updatedTotalCost = updatedCart.reduce((acc, cartItem) => acc + cartItem.price, 0);
+    setTotalCost(updatedTotalCost);
+  }};
+
+const handleCheckout = async (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    
+    if (!warTokenBalance || warTokenBalance <= 0) {
+      alert("Insufficient WAR token balance for checkout.");
+      return;
+    }
+
+    // Assuming totalCost is calculated based on the cart
+    function calculateTotalCost(cart: any[]) {
+      // Assuming each item in the cart has a 'price' property
+      const totalCost = cart.reduce((acc, item) => acc + item.price, 0);
+      return totalCost;
+    }
+
+    try {
+      // User's Algorand account details
+      const userAccountAddress = getUserAlgorandAddress(); // Implement this function
+      const userAccount = algosdk.mnemonicToSecretKey(getUserAlgorandMnemonic()); // Implement this function to securely retrieve user's mnemonic
+
+      // Prepare Algorand transaction
+      const transaction = await prepareAlgorandTransaction(userAccountAddress, totalCost); // Implement this function
+
+      // Sign the transaction
+      const signedTxn = algosdk.signTransaction(transaction, userAccount.sk);
+
+      // Submit the transaction
+      const sendTx = await algosdk.sendRawTransaction(signedTxn.blob);
+
+      // Wait for confirmation
+      const confirmedTxn = await waitForConfirmation(sendTx.txId); // Implement this function
+
+      if (confirmedTxn) {
+        const result = await checkout(cart); // Proceed with your checkout process
+        if (result.success) {
+          alert(`Checkout successful! Order ID: ${result.orderId}`);
+        } else {
+          alert("Checkout failed. Please try again.");
+        }
+      } else {
+        alert("Algorand transaction failed. Please try again.");
+      }
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert("An error occurred during checkout.");
+    }
+};
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');
@@ -65,6 +142,7 @@ export default function Merch() {
   // Define background color styles for light and dark mode
   const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
+  
 
     // New disclosure for the cart drawer
     const {
@@ -89,15 +167,13 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     }
   };
 
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // Your event handling logic here
-  };
-
-  const handleCheckout = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // Your checkout logic here
+  const handleButtonClick = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    // Perform your custom action here
+    console.log('Button clicked');
+    // Any other logic
   };
   
-
   // Sample data for collections
   const outerwearCollection: never[] = [
     // ... more items
@@ -112,12 +188,14 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -128,18 +206,21 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -151,18 +232,21 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -173,18 +257,21 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -195,18 +282,21 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -217,30 +307,35 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -251,30 +346,35 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
@@ -285,38 +385,40 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
       id: 1,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 2,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 3,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 4,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     {
       id: 5,
       name: "Coming Soon",
       description: "",
+      price: 19.99, // Replace with the actual price of the item
       image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
     },
     // ... more items
   ];
-
-    // Initialize cart state
-    const [cart, setCart] = useState([]);
-
+  
     useEffect(() => {
       // Check if window is defined (i.e., running in the browser)
       if (typeof window !== 'undefined') {
@@ -325,24 +427,25 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
         setCart(storedCart ? JSON.parse(storedCart) : []);
       }
     }, []);
+  
+    // Function to render cart items in the drawer
+    const renderCartItems = (cart: { name: any; quantity: any; }[] | undefined) => {
+      if (!cart || cart.length === 0) {
+        return <p>Your cart is empty.</p>;
+      }
 
-  // Function to render cart items in the drawer
-  const renderCartItems = () => {
-    if (cart.length === 0) {
-      return <p>Your cart is empty.</p>;
-    }
-
-    return (
-      <List spacing={3}>
-        {cart.map((item: { name: any; quantity: any; }, index: any) => (
-          <ListItem key={index}>
-            {item.name} - Quantity: {item.quantity}
-            {/* Add more item details as needed */}
-          </ListItem>
-        ))}
-      </List>
-    );
-  };
+      // Render the cart items here
+      return (
+        <List spacing={3}>
+          {cart.map((item: { name: any; quantity: any; }, index: any) => (
+            <ListItem key={index}>
+              {item.name} - Quantity: {item.quantity}
+              {/* Add more item details as needed */}
+            </ListItem>
+          ))}
+        </List>
+      );
+    };
 
   const [selectedCategory, setSelectedCategory] = useState(''); // Track selected category (e.g., outerwear, tshirts, etc.)
   const [selectedSubCategory, setSelectedSubCategory] = useState(''); // Track selected sub-category (e.g., Mens, Womens, Kids)
@@ -768,5 +871,88 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
 }
 
 function renderItems(collectionItems: any) {
+  return (
+    <div>
+      {collectionItems.map((item: any) => (
+        <div key={item.id}>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+          <p>Price: ${item.price}</p>
+          {/* Add more item details and UI elements as needed */}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function setSomeState(newValue: any) {
   throw new Error('Function not implemented.');
 }
+
+function prepareAlgorandTransaction(userAccountAddress: any, totalCost: any) {
+  const sender = userAccountAddress; // Sender's Algorand address
+  const receiver = 'RECEIVER_ALGORAND_ADDRESS'; // Receiver's Algorand address
+  const amount = totalCost; // Amount to send in microAlgos (microAlgo = 0.000001 Algo)
+
+  const params = algosdk.GetTransactionParams(); // Get suggested transaction parameters
+  const transaction = new algosdk.Transaction.Payment({
+    sender: sender,
+    fee: params.fee,
+    firstRound: params.lastRound + 1,
+    lastRound: params.lastRound + 1000,
+    genesisID: params.genesisID,
+    genesisHash: params.genesisHash,
+    receiver: receiver,
+    amount: amount,
+  });
+
+  return transaction;
+}
+
+
+function calculateTotalCost(cart: never[]) {
+  const totalCost = cart.reduce((acc, item) => acc + item.price, 0);
+  return totalCost;
+}
+
+function getUserAlgorandAddress() {
+  // Implement logic to retrieve the user's Algorand address
+  // e.g., fetch it from a user profile or wallet service
+  return 'USER_ALGORAND_ADDRESS';
+}
+
+function getUserAlgorandMnemonic(): any {
+  // Implement logic to securely retrieve the user's mnemonic or private key
+  // e.g., retrieve it from a secure storage mechanism
+  return 'USER_ALGORAND_MNEMONIC';
+}
+
+async function waitForConfirmation(txId: any) {
+  const client = new algosdk.Algodv2();
+  const status = await client.status().do();
+  let lastRound = status.lastRound;
+
+  while (true) {
+    const pendingInfo = await client.pendingTransactionInformation(txId).do();
+
+    if (pendingInfo !== undefined) {
+      if (pendingInfo.confirmedRound !== null && pendingInfo.confirmedRound > 0) {
+        return true; // Transaction confirmed
+      } else if (pendingInfo.poolError) {
+        return false; // Transaction failed
+      }
+    }
+
+    await client.statusAfterBlock(lastRound + 1).do();
+    lastRound++;
+  }
+}
+
+function checkout(cart: never[]) {
+  throw new Error('Function not implemented.');
+}
+
+function setCart(arg0: any) {
+  throw new Error('Function not implemented.');
+}
+

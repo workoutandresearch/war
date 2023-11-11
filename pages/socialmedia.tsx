@@ -31,6 +31,9 @@ import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { FaMediumM } from "react-icons/fa";
+import { TfiTwitter, TfiYoutube, TfiInstagram  } from "react-icons/tfi";
+ import { SiDiscord } from "react-icons/si";
 
 export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -136,79 +139,55 @@ export default function Socialmedia() {
           </ModalContent>
         </Modal>
       </Box>
-      {/* Social Media Section */}
-        <Box bgGradient={heroBgGradient} minH="100vh" py={10}>
-        <Container maxW="container.md" p={6} bg={boxColorScheme} boxShadow="lg" borderRadius="md">
-            <Text fontSize="xl" fontWeight="bold" mb={4} textAlign="center">
-            Social Media
-            </Text>
-            <Text fontSize="md" color={textColor} mb={4}textAlign="center">
-            Connect with us on social media to stay updated on the latest news and developments.
-            </Text>
-            <SimpleGrid columns={2} spacing={6}>
-            {/* Twitter */}
-            <Link href="https://twitter.com/workoutresearch" target="_blank" rel="noopener noreferrer">
-                <Box
-                p={5}
-                shadow="md"
-                bg={boxColorScheme} // Use boxColorScheme for background color
-                // Add styling and content for the Twitter link
-                >
-                {/* Add content for the Twitter link */}
-                <Text fontWeight="bold" textAlign="center">Twitter</Text>
-                </Box>
-            </Link>
-            {/* Instagram */}
-            <Link href="https://www.instagram.com/workoutandresearch" target="_blank" rel="noopener noreferrer">
-                <Box
-                p={5}
-                shadow="md"
-                bg={boxColorScheme} // Use boxColorScheme for background color
-                // Add styling and content for the Instagram link
-                >
-                {/* Add content for the Instagram link */}
-                <Text fontWeight="bold" textAlign="center">Instagram</Text>
-                </Box>
-            </Link>
-            {/* Discord */}
-            <Link href="https://discord.gg/JpwXaKAvGM" target="_blank" rel="noopener noreferrer">
-                <Box
-                p={5}
-                shadow="md"
-                bg={boxColorScheme} // Use boxColorScheme for background color
-                // Add styling and content for the Discord link
-                >
-                {/* Add content for the Discord link */}
-                <Text fontWeight="bold" textAlign="center">Discord</Text>
-                </Box>
-            </Link>
-            {/* Medium */}
-            <Link href="https://medium.com/@workoutandresearch" target="_blank" rel="noopener noreferrer">
-                <Box
-                p={5}
-                shadow="md"
-                bg={boxColorScheme} // Use boxColorScheme for background color
-                // Add styling and content for the Medium link
-                >
-                {/* Add content for the Medium link */}
-                <Text fontWeight="bold" textAlign="center">Medium</Text>
-                </Box>
-            </Link>
-                        {/* YouTube */}
-            <Link href="https://www.youtube.com/@WorkoutAndResearch" target="_blank" rel="noopener noreferrer">
-              <Box
-                p={5}
-                shadow="md"
-                bg={boxColorScheme}
-              >
-                <Text fontWeight="bold" textAlign="center">YouTube</Text>
-              </Box>
-            </Link>
-
-            {/* Add more social media links here */}
-          </SimpleGrid>
-        </Container>
-      </Box>
+    {/* Social Media Section */}
+    <Box bgGradient={heroBgGradient} minH="100vh" py={10} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+      <Container maxW="container.md" p={6} bg={boxColorScheme} boxShadow="lg" borderRadius="md" textAlign="center">
+        <Text fontSize="xl" fontWeight="bold" mb={4}>
+          Social Media
+        </Text>
+        <Text fontSize="md" color={textColor} mb={4}>
+          Connect with us on social media to stay updated on the latest news and developments.
+        </Text>
+        <SimpleGrid columns={2} spacing={6} width="100%">
+          {/* Twitter */}
+          <Link href="https://twitter.com/workoutresearch" target="_blank" rel="noopener noreferrer">
+            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
+              <TfiTwitter size="24px" />
+              <Text ml={2} fontWeight="bold">Twitter</Text>
+            </Box>
+          </Link>
+          {/* Instagram */}
+          <Link href="https://www.instagram.com/workoutandresearch" target="_blank" rel="noopener noreferrer">
+            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
+              <TfiInstagram size="24px" />
+              <Text ml={2} fontWeight="bold">Instagram</Text>
+            </Box>
+          </Link>
+          {/* Discord */}
+          <Link href="https://discord.gg/JpwXaKAvGM" target="_blank" rel="noopener noreferrer">
+            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
+              <SiDiscord size="24px" />
+              <Text ml={2} fontWeight="bold">Discord</Text>
+            </Box>
+          </Link>
+          {/* Medium */}
+          <Link href="https://medium.com/@workoutandresearch" target="_blank" rel="noopener noreferrer">
+            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
+              <FaMediumM size="24px" />
+              <Text ml={2} fontWeight="bold">Medium</Text>
+            </Box>
+          </Link>
+          {/* YouTube */}
+          <Link href="https://www.youtube.com/@WorkoutAndResearch" target="_blank" rel="noopener noreferrer">
+            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
+              <TfiYoutube size="24px" />
+              <Text ml={2} fontWeight="bold">YouTube</Text>
+            </Box>
+          </Link>
+          {/* Additional social media links here if needed */}
+        </SimpleGrid>
+      </Container>
+    </Box>
     </Box>
   );
 }
