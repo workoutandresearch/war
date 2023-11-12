@@ -194,7 +194,7 @@ export default function Home() {
               Connect with fellow enthusiasts, stay updated on the latest news, and engage in discussions about our project. Empower your journey with the latest tools added to the server!
             </Text>
           </Box>
-          <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank" color={buttonTextColor}>
+          <Button as={Link} href="https://discord.gg/JpwXaKAvGM" colorScheme={buttonColorScheme} target="_blank" color={buttonTextColor}>
             Join The Community 
           </Button>
           <SiDiscord size="24px" />
