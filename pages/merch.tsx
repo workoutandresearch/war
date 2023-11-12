@@ -153,6 +153,12 @@ export default function Merch() {
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
             <VStack spacing={4}>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                  <Text color={textColor} pr={4}>
+                    WAR Balance: {warTokenBalance}
+                  </Text>
+                )}
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>

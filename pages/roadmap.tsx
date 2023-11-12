@@ -31,6 +31,7 @@ import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { useWallet } from '@txnlab/use-wallet';
 
 export default function Roadmap() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,6 +51,10 @@ export default function Roadmap() {
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+
+  const { activeAddress, signTransactions } = useWallet()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [warTokenBalance, setWarTokenBalance] = useState(null);
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -106,6 +111,12 @@ export default function Roadmap() {
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
             <VStack spacing={4}>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                  <Text color={textColor} pr={4}>
+                    WAR Balance: {warTokenBalance}
+                  </Text>
+                )}
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>

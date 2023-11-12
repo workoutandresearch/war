@@ -35,6 +35,8 @@ import { FaMediumM } from "react-icons/fa";
 import { TfiTwitter, TfiYoutube, TfiInstagram  } from "react-icons/tfi";
  import { SiDiscord } from "react-icons/si";
  import { TbBrandX } from "react-icons/tb";
+import { useWallet } from '@txnlab/use-wallet';
+import { algodClient } from 'lib/algodClient';
 
 export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,6 +56,30 @@ export default function Socialmedia() {
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+
+  const { activeAddress, signTransactions } = useWallet()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [warTokenBalance, setWarTokenBalance] = useState(null);
+  // Define background color styles for light and dark mode
+  const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
+  const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
+
+  const lightDarkColor = useColorModeValue('black', 'white');
+
+ 
+
+   // Fetch WAR token balance
+   const fetchWarTokenBalance = async (address: string) => {
+    try {
+      const accountInfo = await algodClient.accountInformation(address).do();
+      const assets = accountInfo['assets'];
+      const warAsset = assets.find((asset: { [x: string]: any; }) => asset['asset-id'] === 1015673913); // Replace WAR_TOKEN_ID with actual ID
+      setWarTokenBalance(warAsset ? warAsset.amount : 0);
+    } catch (error) {
+      console.error('Error fetching WAR token balance:', error);
+      setWarTokenBalance(null);
+    }
+  };
 
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
@@ -110,6 +136,12 @@ export default function Socialmedia() {
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
             <VStack spacing={4}>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                  <Text color={textColor} pr={4}>
+                    WAR Balance: {warTokenBalance}
+                  </Text>
+                )}
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
