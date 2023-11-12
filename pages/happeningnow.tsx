@@ -39,6 +39,8 @@ import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import { SiAlgorand } from "react-icons/si";
 import TwitterSpaces from 'components/TwitterSpaces'; // Adjust the path as necessary
+import DiscordWidget from 'components/DiscordWidget';
+
 
 
 export default function Socialmedia() {
@@ -180,48 +182,18 @@ export default function Socialmedia() {
     <Box bgGradient={heroBgGradient} minH="100vh" py={10} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
       <Container maxW="container.md" p={6} bg={boxColorScheme} boxShadow="lg" borderRadius="md" textAlign="center">
         <Text fontSize="xl" fontWeight="bold" mb={4}>
-          Social Media
+          Workout and Research
         </Text>
         <Text fontSize="md" color={textColor} mb={4}>
-          Connect with us on social media to stay updated on the latest news and developments.
+          Discover what is happening right now!
         </Text>
-        <SimpleGrid columns={2} spacing={6} width="100%">
-          {/* Twitter */}
-          <Link href="https://twitter.com/workoutresearch" target="_blank" rel="noopener noreferrer">
-            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <TbBrandX size="24px" />
-              <Text ml={2} fontWeight="bold">Twitter</Text>
-            </Box>
-          </Link>
-          {/* Instagram */}
-          <Link href="https://www.instagram.com/workoutandresearch" target="_blank" rel="noopener noreferrer">
-            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <TfiInstagram size="24px" />
-              <Text ml={2} fontWeight="bold">Instagram</Text>
-            </Box>
-          </Link>
-          {/* Discord */}
-          <Link href="https://discord.gg/JpwXaKAvGM" target="_blank" rel="noopener noreferrer">
-            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <SiDiscord size="24px" />
-              <Text ml={2} fontWeight="bold">Discord</Text>
-            </Box>
-          </Link>
-          {/* Medium */}
-          <Link href="https://medium.com/@workoutandresearch" target="_blank" rel="noopener noreferrer">
-            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <FaMediumM size="24px" />
-              <Text ml={2} fontWeight="bold">Medium</Text>
-            </Box>
-          </Link>
-          {/* YouTube */}
-          <Link href="https://www.youtube.com/@WorkoutAndResearch" target="_blank" rel="noopener noreferrer">
-            <Box p={5} shadow="md" bg={boxColorScheme} display="flex" alignItems="center" justifyContent="center">
-              <TfiYoutube size="24px" />
-              <Text ml={2} fontWeight="bold">YouTube</Text>
-            </Box>
-          </Link>
+        <SimpleGrid columns={1} spacing={6} width="100%" alignItems="center" justifyContent="center">
+            
           {/* Additional social media links here if needed */}
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <DiscordWidget />
+            </div>
+
         </SimpleGrid>
       </Container>
     </Box>

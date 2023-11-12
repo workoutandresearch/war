@@ -156,6 +156,7 @@ export default function Merch() {
                   </Text>
                 )}
                 <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/happeningnow" onClick={toggleMenu}>Happening Now</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>

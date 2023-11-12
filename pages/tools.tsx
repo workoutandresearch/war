@@ -199,7 +199,8 @@ export default function Tools() {
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
             <VStack spacing={4}>
-                <Link href="/" onClick={toggleMenu}>Home</Link>
+            <Link href="/" onClick={toggleMenu}>Home</Link>
+                <Link href="/happeningnow" onClick={toggleMenu}>Happening Now</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
