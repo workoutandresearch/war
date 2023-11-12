@@ -34,6 +34,7 @@ import { useEffect, useState } from 'react';
 import { algodClient } from 'lib/algodClient';
 import { useWallet } from '@txnlab/use-wallet';
 import { SiDiscord } from 'react-icons/si';
+import { SiAlgorand } from "react-icons/si";
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -125,7 +126,7 @@ export default function Home() {
           </Text>
               
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}
@@ -136,7 +137,7 @@ export default function Home() {
             <DrawerBody>
             <VStack spacing={4}>
               {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
+                {activeAddress && warTokenBalance !== null && (
                   <Text color={textColor} pr={4}>
                     WAR Balance: {warTokenBalance}
                   </Text>

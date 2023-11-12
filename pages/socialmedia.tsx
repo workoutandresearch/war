@@ -37,6 +37,7 @@ import { TfiTwitter, TfiYoutube, TfiInstagram  } from "react-icons/tfi";
  import { TbBrandX } from "react-icons/tb";
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
+import { SiAlgorand } from "react-icons/si";
 
 export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -126,7 +127,7 @@ export default function Socialmedia() {
           <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}

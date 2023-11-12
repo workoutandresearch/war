@@ -14,6 +14,7 @@ import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHis
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
+import { SiAlgorand } from "react-icons/si";
 
 
 export default function Tools() {
@@ -188,7 +189,7 @@ export default function Tools() {
                 </Text>
               )}
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}

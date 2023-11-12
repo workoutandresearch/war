@@ -40,6 +40,7 @@ import toast from 'react-hot-toast';
 import { useWallet } from '@txnlab/use-wallet';
 import { addToCart } from 'components/addtocart'; // Import the addToCart function
 import { AiFillShop } from "react-icons/ai";
+import { SiAlgorand } from "react-icons/si";
 
 export default function Merch() {
 
@@ -138,7 +139,7 @@ export default function Merch() {
           </Text>
             
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}

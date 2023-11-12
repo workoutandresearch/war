@@ -35,6 +35,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { algodClient } from 'lib/algodClient';
 import { useWallet } from '@txnlab/use-wallet';
+import { SiAlgorand } from "react-icons/si";
 
 export default function Privacypolicy() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -118,7 +119,7 @@ export default function Privacypolicy() {
           <Text fontSize="2xl" fontWeight="bold" color="textColor" textAlign="center">Workout and Research</Text>
           
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}

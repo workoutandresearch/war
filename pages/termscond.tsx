@@ -33,6 +33,7 @@ import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { SiAlgorand } from "react-icons/si";
 
 export default function Termscond() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -100,7 +101,7 @@ export default function Termscond() {
           </Text>
 
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-            Connect
+          <SiAlgorand size="24px" />
           </Button>
         </Flex>
         {/* Drawer for Hamburger Menu */}
