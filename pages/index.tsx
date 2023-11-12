@@ -33,6 +33,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { algodClient } from 'lib/algodClient';
 import { useWallet } from '@txnlab/use-wallet';
+import { SiDiscord } from 'react-icons/si';
 
 export default function Home() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -191,8 +192,9 @@ export default function Home() {
             </Text>
           </Box>
           <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank" color={buttonTextColor}>
-            Join The Community
+            Join The Community 
           </Button>
+          <SiDiscord size="24px" />
         </VStack>
       </Box>
 

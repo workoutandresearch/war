@@ -42,82 +42,6 @@ import { addToCart } from 'components/addtocart'; // Import the addToCart functi
 import { AiFillShop } from "react-icons/ai";
 
 export default function Merch() {
-  const [cart, setCart] = useState([]); // Initialize cart state with an empty array
-
-  useEffect(() => {
-    // Check if window is defined (i.e., running in the browser)
-    if (typeof window !== 'undefined') {
-      // Access localStorage
-      const storedCart = localStorage.getItem('cart');
-      setCart(storedCart ? JSON.parse(storedCart) : []);
-    }
-  }, []);
-
-  const algosdk = require('algosdk');
-  const Merch = () => {
-  const [cart, setCart] = useState([]);
-  const [totalCost, setTotalCost] = useState(0);
-
-  // Function to add an item to the cart
-  const addToCart = (item: {
-    price: number; name: any; 
-}) => {
-    // Create a copy of the cart with the new item
-    const updatedCart = [...cart, item];
-    setCart(updatedCart);
-
-    // Calculate the total cost by iterating over the items in the cart
-    const updatedTotalCost = updatedCart.reduce((acc, cartItem) => acc + cartItem.price, 0);
-    setTotalCost(updatedTotalCost);
-  }};
-
-const handleCheckout = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    
-    if (!warTokenBalance || warTokenBalance <= 0) {
-      alert("Insufficient WAR token balance for checkout.");
-      return;
-    }
-
-    // Assuming totalCost is calculated based on the cart
-    function calculateTotalCost(cart: any[]) {
-      // Assuming each item in the cart has a 'price' property
-      const totalCost = cart.reduce((acc, item) => acc + item.price, 0);
-      return totalCost;
-    }
-
-    try {
-      // User's Algorand account details
-      const userAccountAddress = getUserAlgorandAddress(); // Implement this function
-      const userAccount = algosdk.mnemonicToSecretKey(getUserAlgorandMnemonic()); // Implement this function to securely retrieve user's mnemonic
-
-      // Prepare Algorand transaction
-      const transaction = await prepareAlgorandTransaction(userAccountAddress, totalCost); // Implement this function
-
-      // Sign the transaction
-      const signedTxn = algosdk.signTransaction(transaction, userAccount.sk);
-
-      // Submit the transaction
-      const sendTx = await algosdk.sendRawTransaction(signedTxn.blob);
-
-      // Wait for confirmation
-      const confirmedTxn = await waitForConfirmation(sendTx.txId); // Implement this function
-
-      if (confirmedTxn) {
-        const result = await checkout(cart); // Proceed with your checkout process
-        if (result.success) {
-          alert(`Checkout successful! Order ID: ${result.orderId}`);
-        } else {
-          alert("Checkout failed. Please try again.");
-        }
-      } else {
-        alert("Algorand transaction failed. Please try again.");
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      alert("An error occurred during checkout.");
-    }
-};
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
@@ -142,20 +66,13 @@ const handleCheckout = async (event: { preventDefault: () => void; }) => {
   // Define background color styles for light and dark mode
   const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
-  
 
-    // New disclosure for the cart drawer
-    const {
-      isOpen: isCartDrawerOpen,
-      onOpen: onCartDrawerOpen,
-      onClose: onCartDrawerClose
-    } = useDisclosure();
+  const lightDarkColor = useColorModeValue('black', 'white');
 
-// Use a ternary operator to set the background color based on the current color mode
-const background = colorMode === 'light' ? lightModeBg : darkModeBg;
+ 
 
-  // Fetch WAR token balance
-  const fetchWarTokenBalance = async (address: string) => {
+   // Fetch WAR token balance
+   const fetchWarTokenBalance = async (address: string) => {
     try {
       const accountInfo = await algodClient.accountInformation(address).do();
       const assets = accountInfo['assets'];
@@ -167,423 +84,6 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     }
   };
 
-  const handleButtonClick = (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
-    // Perform your custom action here
-    console.log('Button clicked');
-    // Any other logic
-  };
-  
-  // Sample data for collections
-  const outerwearCollection: never[] = [
-    // ... more items
-  ];
-
-  const tshirtsCollection: never[] = [
-    // ... more items
-  ];
-
-  const hatsCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const accessoriesCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  // Collections for sub-categories (Mens, Womens, Kids)
-  const mensOuterwearCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const womensOuterwearCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const kidsOuterwearCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const mensTshirtsCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 4,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 5,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const womensTshirtsCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 4,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 5,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-  const kidsTshirtsCollection = [
-    {
-      id: 1,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 2,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 3,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 4,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    {
-      id: 5,
-      name: "Coming Soon",
-      description: "",
-      price: 19.99, // Replace with the actual price of the item
-      image: `https://media.discordapp.net/attachments/1125446630775201882/1172564616988078120/Untitled_Artwork.png?ex=6560c6e5&is=654e51e5&hm=338aa89e964897cb7c9d29e85f9ab4c1752490bd07d387a71b2679d0c9d76244&=&width=625&height=625` // Replace with the actual path to the image
-    },
-    // ... more items
-  ];
-  
-    useEffect(() => {
-      // Check if window is defined (i.e., running in the browser)
-      if (typeof window !== 'undefined') {
-        // Access localStorage
-        const storedCart = localStorage.getItem('cart');
-        setCart(storedCart ? JSON.parse(storedCart) : []);
-      }
-    }, []);
-  
-    // Function to render cart items in the drawer
-    const renderCartItems = (cart: { name: any; quantity: any; }[] | undefined) => {
-      if (!cart || cart.length === 0) {
-        return <p>Your cart is empty.</p>;
-      }
-
-      // Render the cart items here
-      return (
-        <List spacing={3}>
-          {cart.map((item: { name: any; quantity: any; }, index: any) => (
-            <ListItem key={index}>
-              {item.name} - Quantity: {item.quantity}
-              {/* Add more item details as needed */}
-            </ListItem>
-          ))}
-        </List>
-      );
-    };
-
-  const [selectedCategory, setSelectedCategory] = useState(''); // Track selected category (e.g., outerwear, tshirts, etc.)
-  const [selectedSubCategory, setSelectedSubCategory] = useState(''); // Track selected sub-category (e.g., Mens, Womens, Kids)
-
-  // Function to handle category selection
-  const selectCategory = (category: SetStateAction<string>) => {
-    setSelectedCategory(category);
-    setSelectedSubCategory(''); // Reset sub-category selection
-  };
-
-  // Function to handle sub-category selection
-  const selectSubCategory = (subCategory: SetStateAction<string>) => {
-    setSelectedSubCategory(subCategory);
-  };
-
-  // Function to render sub-categories based on the selected category
-  const renderSubCategories = () => {
-    if (selectedCategory === 'outerwear' || selectedCategory === 'tshirts') {
-      return (
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={4}>
-          <Button
-            colorScheme={buttonColorScheme}
-            color={textColor}
-            variant="solid"
-            size="lg"
-            onClick={() => selectSubCategory('Mens')}
-          >
-            Mens
-          </Button>
-          <Button
-            colorScheme={buttonColorScheme}
-            color={textColor}
-            variant="solid"
-            size="lg"
-            onClick={() => selectSubCategory('Womens')}
-          >
-            Womens
-          </Button>
-          <Button
-            colorScheme={buttonColorScheme}
-            color={textColor}
-            variant="solid"
-            size="lg"
-            onClick={() => selectSubCategory('Kids')}
-          >
-            Kids
-          </Button>
-        </SimpleGrid>
-      );
-    }
-    return null; // Return nothing for other categories (hats, accessories)
-  };
-
-    // Handler for adding item to cart
-    const handleAddToCart = (item: { name: any; }) => {
-      addToCart(item, 1); // Assuming you want to add one quantity of the item
-      alert(`${item.name} added to cart.`); // Feedback to the user
-    };
-
-  const renderCollectionItems = () => {
-    let collectionItems;
-    if (selectedCategory === 'outerwear') {
-      switch (selectedSubCategory) {
-        case 'Mens':
-          collectionItems = mensOuterwearCollection;
-          break;
-        case 'Womens':
-          collectionItems = womensOuterwearCollection;
-          break;
-        case 'Kids':
-          collectionItems = kidsOuterwearCollection;
-          break;
-        default:
-          collectionItems = outerwearCollection;
-          break;
-      }
-    } else if (selectedCategory === 'tshirts') {
-      switch (selectedSubCategory) {
-        case 'Mens':
-          collectionItems = mensTshirtsCollection;
-          break;
-        case 'Womens':
-          collectionItems = womensTshirtsCollection;
-          break;
-        case 'Kids':
-          collectionItems = kidsTshirtsCollection;
-          break;
-        default:
-          collectionItems = tshirtsCollection;
-          break;
-      }
-    } else if (selectedCategory === 'hats') {
-      // Handle "Hats" category
-      switch (selectedSubCategory) {
-        // Add cases for Mens, Womens, and Kids if needed
-        default:
-          collectionItems = hatsCollection;
-          break;
-      }
-    } else if (selectedCategory === 'accessories') {
-      // Handle "Accessories" category
-      switch (selectedSubCategory) {
-        // Add cases for Mens, Womens, and Kids if needed
-        default:
-          collectionItems = accessoriesCollection;
-          break;
-      }
-    } else {
-      return <Text textAlign="center" backgroundColor="transparent">Select a category to view items.</Text>;
-    }
-
-    return (
-    <SimpleGrid columns={{ base: 1, md: 4 }} spacing={4} bgColor="transparent">
-            {collectionItems.map((item) => (
-              <Center key={item.id}>
-                <Box p={5} shadow="md" borderWidth="1px" textAlign="center" display="flex" flexDirection="column" alignItems="center" bgColor="transparent" border={'black'}>
-                  {/* Existing item display code */}
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    boxSize="200px"
-                    objectFit="cover"
-                    bg="transparent"
-                  />
-                  <Text fontWeight="bold">{item.name}</Text>
-                  <Text>{item.description}</Text>
-
-                  {/* Add to Cart Button */}
-                  <Button colorScheme={buttonColorScheme} mt={3} onClick={() => handleAddToCart(item)}>
-                    Add to Cart
-                  </Button>
-                </Box>
-              </Center>
-            ))}
-          </SimpleGrid>
-        );
-      };
-
   // Effect to fetch the WAR token balance when the active address changes
   useEffect(() => {
     if (activeAddress) {
@@ -591,81 +91,28 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
     }
   }, [activeAddress]);
 
-  const sendOptIn = async () => {
-    setLoading(true);
-    try {
-      if (!activeAddress) {
-        // Wallet Not Connected, open the modal
-        onOpen();
-        setLoading(false);
-        return;
-      }
-  
-      const suggestedParams = await algodClient.getTransactionParams().do()
-      suggestedParams.fee = 1000
-      suggestedParams.flatFee = true
-      const note = Uint8Array.from('Successfully Opted In To Workout and Research!'.split("").map(x => x.charCodeAt(0)))
-  
-      const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
-                  from: activeAddress,
-                  to: activeAddress,
-                  amount: 0,
-                  assetIndex: 1015673913,
-                  suggestedParams,
-                  note,
-                })
-
-      const encodedTransaction = algosdk.encodeUnsignedTransaction(txn)
-
-      toast.loading('Awaiting Signature...', { id: 'txn', duration: Infinity })
-
-      const signedTransaction = await signTransactions([encodedTransaction])
-
-      toast.loading('Sending transaction...', { id: 'txn', duration: Infinity })
-
-      algodClient.sendRawTransaction(signedTransaction).do()
-
-      console.log(`Successfully Opted In!`)
-
-      toast.success(`Transaction Successful!`, {
-        id: 'txn',
-        duration: 5000
-      })
-      setLoading(false)
-    } catch (error) {
-      console.error(error);
-      toast.error('Oops! Opt In Failed!', { id: 'txn' });
-    }
-  };
-
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
     <IconButton
-      icon={<AiFillShop />}
-      onClick={onCartDrawerOpen}
-      aria-label="Open cart"
+      icon={colorMode === 'light' ? <MoonIcon color={lightDarkColor} /> : <SunIcon color={lightDarkColor} />}
+      onClick={toggleColorMode}
+      aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
+      variant="ghost"
+      color={lightDarkColor}
     />
   );
-
-  function onCartOpen(event: React.MouseEvent<HTMLButtonElement>): void {
-    // Your implementation...
-  }
-  
-  function onCartClose(): void {
-    // Your implementation...
-  }
 
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
       <Head>
         <title>Workout and Research - Merch</title>
-        <meta name="description" content="Merch Store" />
+        <meta name="description" content="Merch Coming Soon" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* Navbar */}
       <Box as="header" bg={headerBgColor} py={4} px={8} boxShadow="sm">
         <Flex justify="space-between" align="center">
-          {/* Left side - Hamburger Menu and Color Mode Toggle */}
+          {/* Hamburger Menu and Color Mode Toggle */}
           <Flex align="center">
             {/* Hamburger Menu Icon */}
             <IconButton
@@ -684,39 +131,21 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
               variant="ghost"
               color={boxColorScheme}
             />
-
-            {/* Cart Button */}
-            <IconButton
-              icon={<AiFillShop />}
-              colorScheme="blue"
-              onClick={onCartDrawerOpen}
-              aria-label="View Cart"
-              ml={3} // Margin-left for spacing
-              color={textColor}
-            />
           </Flex>
 
-          {/* Center - Title Text */}
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-
-          {/* Right side - Wallet Connection and Wallet Balance */}
-          <Flex align="center">
-            {/* Conditional rendering based on whether a wallet is connected */}
-            {activeAddress && warTokenBalance !== null && (
-              <Text color={textColor} pr={4}>
-                WAR Balance: {warTokenBalance}
-              </Text>
-            )}
-
-            {/* Connect Button */}
-            <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
-              Connect
-            </Button>
-          </Flex>
+              {/* Conditional rendering based on whether a wallet is connected */}
+              {activeAddress && warTokenBalance !== null && (
+                <Text color={textColor} pr={4}>
+                  WAR Balance: {warTokenBalance}
+                </Text>
+              )}
+          <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
+            Connect
+          </Button>
         </Flex>
-
         {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
@@ -742,21 +171,7 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
           </DrawerContent>
         </Drawer>
 
-      {/* Drawer for Cart */}
-      <Drawer isOpen={isCartDrawerOpen} placement="right" onClose={onCartDrawerClose}>
-        <DrawerOverlay />
-        <DrawerContent bg={drawerBgColor}> {/* Set the background color here */}
-          <DrawerHeader>Cart</DrawerHeader>
-          <DrawerBody>
-            {/* Checkout button inside the drawer */}
-            <Button colorScheme="green" onClick={handleCheckout}>
-              Checkout
-            </Button>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>       
-
-        {/* Modal for Connecting Wallet */}
+        {/* Modal */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent bg={drawerBgColor}>
@@ -769,142 +184,87 @@ const background = colorMode === 'light' ? lightModeBg : darkModeBg;
         </Modal>
       </Box>
 
-        {/* Hero Section */}
-        <Box bg={heroBgGradient} color="white" py={20} px={{ base: 4, md: 8 }}>
-            <Container maxW="6xl" textAlign="center">
-              <Text fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold">
-                Welcome to the Workout and Research Merchandise Store
-              </Text>
-              <Text mt={4} fontSize={{ base: 'lg', md: 'xl' }}>
-                Discover our collection of high-quality workout and research merchandise.
-              </Text>
-            </Container>
-          </Box>
+      {/* Hero Section */}
+      <Box as="section" bgGradient={heroBgGradient} h="60vh">
+        <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
+          <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">Merch Coming Soon</Text>
+          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">Website Under Construction</Text>
+        </Container>
+      </Box>
 
-          {/* Categories Section */}
-          <Box bg={aboutBgGradient} py={12} px={{ base: 4, md: 8 }}>
-            <Container maxW="6xl">
-              <VStack spacing={4} textAlign="center">
-                <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
-                  Explore Our Collections
-                </Text>
-                <Text fontSize={{ base: 'lg', md: 'xl' }}>
-                  Choose from a variety of categories and sub-categories to find the perfect workout and research merchandise for you.
-                </Text>
-              </VStack>
-              <Box mt={8}>
-                {/* Category Buttons */}
-                <SimpleGrid columns={{ base: 2, md: 4 }} spacing={4}>
-                  <Button
-                    colorScheme={buttonColorScheme}
-                    color={textColor}
-                    variant={selectedCategory === 'outerwear' ? 'solid' : 'outline'}
-                    size="lg"
-                    onClick={() => selectCategory('outerwear')}
-                  >
-                    Outerwear
-                  </Button>
-                  <Button
-                    colorScheme={buttonColorScheme}
-                    color={textColor}
-                    variant={selectedCategory === 'tshirts' ? 'solid' : 'outline'}
-                    size="lg"
-                    onClick={() => selectCategory('tshirts')}
-                  >
-                    T-Shirts
-                  </Button>
-                  <Button
-                    colorScheme={buttonColorScheme}
-                    color={textColor}
-                    variant={selectedCategory === 'hats' ? 'solid' : 'outline'}
-                    size="lg"
-                    onClick={() => selectCategory('hats')}
-                  >
-                    Hats
-                  </Button>
-                  <Button
-                    colorScheme={buttonColorScheme}
-                    color={textColor}
-                    variant={selectedCategory === 'accessories' ? 'solid' : 'outline'}
-                    size="lg"
-                    onClick={() => selectCategory('accessories')}
-                  >
-                    Accessories
-                  </Button>
-                </SimpleGrid>
+      {/* About Section */}
+      <Box as="section" py={10} bgGradient={aboutBgGradient}>
+        <VStack spacing={6} align="center">
+        <Text fontSize="4xl" fontWeight="bold" textAlign="center" color={textColor}>
+          Connect and Engage with Our Community
+        </Text>
+
+          <Box maxW="container.lg" mx="auto">
+            <Text fontSize="xl" textAlign="center" color={textColor}>
+              Connect with fellow enthusiasts, stay updated on the latest news, and engage in discussions about our project. Empower your journey with the latest tools added to the server!
+            </Text>
+          </Box>
+          <Button as={Link} href="https://discord.gg/nRvacAzV" colorScheme={buttonColorScheme} target="_blank" color={buttonTextColor}>
+            Join The Community
+          </Button>
+        </VStack>
+      </Box>
+
+      {/* Features Section */}
+      <Box as="section" py={10} bgGradient={featuresBgGradient}>
+        <Container maxW="container.lg">
+          <Text fontSize="4xl" fontWeight="bold" textAlign="center" mb={6} color={textColor}>Community Participation</Text>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+            {/* Roadmap */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/roadmap" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Roadmap
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">The steps we are taking to bring our project to fruition and give you an understanding of what to expect from us.</Text>
               </Box>
-              {/* Sub-categories */}
-              <Box mt={6}>{renderSubCategories()}</Box>
-            </Container>
-          </Box>
+            </ScaleFade>
 
-        {/* Collection Section */}
-        <Box bg={background} py={12} px={{ base: 4, md: 8 }}>
-          <Container maxW="6xl">
-            <VStack spacing={4} textAlign="center" bg={background}>
-              <Text fontSize={{ base: 'xl', md: '2xl' }} fontWeight="bold">
-                {selectedSubCategory ? `${selectedSubCategory} ${selectedCategory}` : 'All Collections'}
-              </Text>
-              <Text fontSize={{ base: 'lg', md: 'xl' }}>
-                Explore our latest collection of workout and research merchandise.
-              </Text>
-            </VStack>
-            <Box mt={8} bg={background}>
-              {/* Collection Items */}
-              {renderCollectionItems()}
-            </Box>
-          </Container>
-        </Box>
+            {/* Opt In */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/optin" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Opt-In
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">By clicking this button, you will be directed to opt in to WAR, a coin that offers unique features and benefits.</Text>
+              </Box>
+            </ScaleFade>
 
-          {/* Footer */}
-          <Box as="footer" bg={footerBgColor} py={8} px={{ base: 4, md: 8 }} textAlign="center">
-            <Text fontSize="lg" fontWeight="bold" color={textColor}>
-              Workout and Research
-            </Text>
-            <Text fontSize="sm" color={textColor}>
-              © 2023 Workout and Research. All rights reserved.
-            </Text>
-          </Box>
-        </Box>
+            {/* Whitepaper */}
+            <ScaleFade initialScale={0.9} in={true}>
+              <Box p={5} shadow="md" borderWidth="1px" borderColor="black" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+                <Center>
+                <Button as={Link} href="/whitepaper" variant="ghost" color={textColor} w="full" justifyContent="center">
+                  Whitepaper
+                </Button>
+                </Center>
+                <Text fontSize="md" color={textColor} textAlign="center">Our whitepaper provides valuable insights and information that can help you make informed decisions.</Text>
+              </Box>
+            </ScaleFade>
+            {/* More feature sections can follow the same pattern */}
+          </SimpleGrid>
+        </Container>
+      </Box>
+     
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+          <Flex mt={2}>
+            {/* Additional footer content can go here */}
+          </Flex>
+        </Flex>
+      </Box>
+    </Box>
   );
+  
 }
-
-function renderItems(collectionItems: any) {
-  return (
-    <div>
-      {collectionItems.map((item: any) => (
-        <div key={item.id}>
-          <h3>{item.name}</h3>
-          <p>{item.description}</p>
-          <p>Price: ${item.price}</p>
-          {/* Add more item details and UI elements as needed */}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function setSomeState(newValue: any) {
-  throw new Error('Function not implemented.');
-}
-
-function getUserAlgorandAddress() {
-  // Implement logic to retrieve the user's Algorand address
-  // e.g., fetch it from a user profile or wallet service
-  return 'USER_ALGORAND_ADDRESS';
-}
-
-function getUserAlgorandMnemonic(): any {
-  // Implement logic to securely retrieve the user's mnemonic or private key
-  // e.g., retrieve it from a secure storage mechanism
-  return 'USER_ALGORAND_MNEMONIC';
-}
-
-function checkout(cart: never[]) {
-  throw new Error('Function not implemented.');
-}
-
-function setCart(arg0: any) {
-  throw new Error('Function not implemented.');
-}
-
