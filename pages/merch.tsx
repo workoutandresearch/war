@@ -136,12 +136,7 @@ export default function Merch() {
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
-              {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
-                <Text color={textColor} pr={4}>
-                  WAR Balance: {warTokenBalance}
-                </Text>
-              )}
+            
           <Button colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>
             Connect
           </Button>
