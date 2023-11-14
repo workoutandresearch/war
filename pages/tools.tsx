@@ -110,7 +110,7 @@ export default function Tools() {
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
-      { name: 'Body Fat Percentage', id: 'bodyfat' }, // Update the id to 'bodyfat'
+      { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       // Add more tools as needed
     ];
 
