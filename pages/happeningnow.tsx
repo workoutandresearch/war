@@ -197,6 +197,13 @@ export default function Socialmedia() {
         </SimpleGrid>
       </Container>
     </Box>
+
+    {/* Footer */}
+    <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+        </Flex>
+      </Box>
     </Box>
   );
 }

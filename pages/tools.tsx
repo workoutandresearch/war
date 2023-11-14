@@ -8,8 +8,11 @@ import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
 import BodyFatCalculator from 'components/BodyFatCalculator';
+import OneRepMaxCalculator from 'components/Onerepmax'; // Import the OneRepMaxCalculator component
+import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the OneRepMaxCalculator component
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -111,7 +114,9 @@ export default function Tools() {
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
-      // Add more tools as needed
+      { name: '1RM Calculator', id: 'onerepmax' },
+      { name: 'Progressive Overload Calc.', id: 'progressiveoverload' }, // Add this line
+            // Add more tools as needed
     ];
 
   // Fetch WAR token balance
@@ -241,7 +246,7 @@ export default function Tools() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Flex justify="center" align="center" my={4} bgGradient={heroBgGradient}>
-        <Grid templateColumns="repeat(3, 1fr)" gap={4}>
+        <Grid templateColumns="repeat(3, 2fr)" gap={4}>
           {tools.map((tool) => (
             <Button
               key={tool.id}
@@ -334,8 +339,43 @@ export default function Tools() {
       </Box>
     )}
 
-      <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
-        {/* ... (previous code) */}
+    {selectedTool === 'onerepmax' && (
+        <Box
+            borderWidth="1px"
+            borderRadius="lg"
+            border="black"
+            overflow="hidden"
+            p={4}
+            m={4}
+            color={textColor}
+            textAlign="center"
+            bgGradient={aboutBgGradient}
+        >
+            <OneRepMaxCalculator />
+        </Box>
+    )}
+
+    {selectedTool === 'progressiveoverload' && (
+            <Box
+                borderWidth="1px"
+                borderRadius="lg"
+                border="black"
+                overflow="hidden"
+                p={4}
+                m={4}
+                color={textColor}
+                textAlign="center"
+                bgGradient={aboutBgGradient}
+            >
+                <ProgressiveOverload />
+            </Box>
+        )}
+
+      {/* Footer */}
+      <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
+        <Flex direction="column" align="center" justify="center" color={textColor}>
+          <Text textAlign="center">&copy; {new Date().getFullYear()} Workout and Research. All rights reserved.</Text>
+        </Flex>
       </Box>
     </Box>
   );
