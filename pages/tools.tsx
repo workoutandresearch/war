@@ -9,6 +9,7 @@ import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
 import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
+import BodyFatCalculator from 'components/BodyFatCalculator';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -41,6 +42,11 @@ export default function Tools() {
   const { activeAddress, signTransactions } = useWallet();
   const [loading, setLoading] = useState<boolean>(false);
   const [warTokenBalance, setWarTokenBalance] = useState(null);
+
+  const handleToolChange = (tool: React.SetStateAction<string>) => {
+    console.log('Selected Tool:', tool); // Add this line to debug
+    setSelectedTool(tool);
+  };  
   
   const calisthenicsExercises = [
     {
@@ -104,6 +110,7 @@ export default function Tools() {
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
       { name: 'Timer', id: 'timer' },
+      { name: 'Body Fat Percentage', id: 'bodyfat' }, // Update the id to 'bodyfat'
       // Add more tools as needed
     ];
 
@@ -150,9 +157,6 @@ export default function Tools() {
     setIsCountingDown(true);
   };
   const [selectedTool, setSelectedTool] = useState('calisthenics');
-  const handleToolChange = (tool: React.SetStateAction<string>) => {
-    setSelectedTool(tool);
-  };
   
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
@@ -311,7 +315,25 @@ export default function Tools() {
         <Timer />
       </Box>
     )}
-    
+
+      
+      {/* Render the Body Fat Percentage Calculator when selectedTool is 'bodyfat' */}
+      {selectedTool === 'bodyfat' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={aboutBgGradient}
+      >
+        <BodyFatCalculator />
+      </Box>
+    )}
+
       <Box as="footer" bg={footerBgColor} color={textColor} py={4} px={8}>
         {/* ... (previous code) */}
       </Box>
