@@ -51,7 +51,7 @@ const OneRepMaxCalculator = () => {
                 <option value="epley">Epley</option>
                 <option value="brzycki">Brzycki</option>
                 <option value="lombardi">Lombardi</option>
-                // ... other formulas ...
+                {/* ... other formulas ... */}
             </Select>
             <Button onClick={calculateOneRepMax} colorScheme="blue">Calculate</Button>
             {oneRepMax && <Text mt={4}>Estimated 1RM: {oneRepMax} lbs</Text>}

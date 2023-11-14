@@ -11,6 +11,7 @@ const ProgressiveOverload = () => {
     const [currentReps, setCurrentReps] = useState('');
     const [currentSets, setCurrentSets] = useState('');
     const textColor = useColorModeValue('#000000', 'inherit');
+    const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
 
     const addWorkout = () => {
         const newWorkout = {
@@ -38,16 +39,15 @@ const ProgressiveOverload = () => {
         <Box>
             <Text fontSize="xl" mb={4}>Progressive Overload Tracker</Text>
             <VStack spacing={4}>
-                <Select placeholder="Select Exercise" onChange={(e) => setCurrentExercise(e.target.value)}           color={textColor}
->
+                <Select placeholder="Select Exercise" onChange={(e) => setCurrentExercise(e.target.value)} color={textColor}>
                     {/* Add exercise options here */}
                 </Select>
                 <HStack>
-                    <Input placeholder="Weight" type="number" onChange={(e) => setCurrentWeight(e.target.value)} />
-                    <Input placeholder="Reps" type="number" onChange={(e) => setCurrentReps(e.target.value)} />
-                    <Input placeholder="Sets" type="number" onChange={(e) => setCurrentSets(e.target.value)} />
+                    <Input placeholder="Weight" type="number" onChange={(e) => setCurrentWeight(e.target.value)} color={textColor} />
+                    <Input placeholder="Reps" type="number" onChange={(e) => setCurrentReps(e.target.value)} color={textColor} />
+                    <Input placeholder="Sets" type="number" onChange={(e) => setCurrentSets(e.target.value)} color={textColor} />
                 </HStack>
-                <Button colorScheme="blue" onClick={addWorkout}>Add Workout</Button>
+                <Button colorScheme={boxColorScheme} onClick={addWorkout}>Add Workout</Button>
             </VStack>
 
             {workouts.length > 0 && (
