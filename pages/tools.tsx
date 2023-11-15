@@ -123,7 +123,7 @@ export default function Tools() {
       { name: 'Timer', id: 'timer' },
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       { name: '1RM Calculator', id: 'onerepmax' },
-      { name: 'Prog. Overload Calc.', id: 'progressiveoverload' }, // Add this line
+      { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
             // Add more tools as needed
     ];
 
