@@ -4,33 +4,6 @@ import React, { useState } from 'react';
 import { Input, Center } from '@chakra-ui/react';
 import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { Select, Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@chakra-ui/react';
-import dynamic from 'next/dynamic';
-
-// Dynamically import Doughnut component from react-chartjs-2
-const Doughnut = dynamic(() => import('react-chartjs-2').then((mod) => {
-    // Make sure the gauge chart plugin is imported here, so it's only used client-side
-    require('chartjs-chart-radial-gauge');
-    return mod.Doughnut;
-  }), { ssr: false });
-
-  const OneRepMaxGauge = ({ oneRepMax }) => {
-    const data = {
-        datasets: [{
-            data: [oneRepMax, 100 - oneRepMax], // Update according to your max scale
-            backgroundColor: ['green', 'lightgrey'],
-            borderWidth: 0,
-        }]
-    };
-
-    const options = {
-        circumference: 180,
-        rotation: -90,
-        cutoutPercentage: 80,
-        // Customize other options as needed
-    };
-
-    return <Doughnut data={data} options={options} />;
-};
 
 const OneRepMaxCalculator = () => {
     const [weight, setWeight] = useState('');
