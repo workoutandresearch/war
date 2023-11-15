@@ -26,7 +26,6 @@ import {
   DrawerContent,
   DrawerHeader,
   DrawerBody,
-  Slider,
 } from '@chakra-ui/react';
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
@@ -37,6 +36,7 @@ import { useWallet } from '@txnlab/use-wallet';
 import { SiDiscord } from 'react-icons/si';
 import { SiAlgorand } from "react-icons/si";
 import { features } from 'process';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
