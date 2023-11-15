@@ -12,8 +12,6 @@ import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHis
 import BodyFatCalculator from 'components/BodyFatCalculator';
 import OneRepMaxCalculator from 'components/Onerepmax'; // Import the OneRepMaxCalculator component
 import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the OneRepMaxCalculator component
-import { useMutation } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
@@ -21,6 +19,17 @@ import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
 import { SiAlgorand } from "react-icons/si";
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import dynamic from 'next/dynamic';
+
+// Dynamically import the Doughnut component from react-chartjs-2 with no SSR
+const Doughnut = dynamic(
+  () => import('react-chartjs-2').then((mod) => {
+    // Import the gauge plugin here
+    require('chartjs-chart-radial-gauge');
+    return mod.Doughnut;
+  }),
+  { ssr: false }
+);
 
 export const client = new ApolloClient({
     uri: 'https://blue-surf-910004.us-east-1.aws.cloud.dgraph.io/graphql',
@@ -174,13 +183,6 @@ export default function Tools() {
   // Define the disclaimer text as a constant
   const disclaimerText =
     "Disclaimer: Please note that if you refresh or exit this page, your progress may be lost.";
-
-
-  const App = () => (
-    <ApolloProvider client={client}>
-        <ProgressiveOverload />
-    </ApolloProvider>
-);
   
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>

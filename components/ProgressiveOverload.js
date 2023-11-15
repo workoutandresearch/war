@@ -82,9 +82,9 @@ const ProgressiveOverload = () => {
                 </HStack>
                 <Button colorScheme={boxColorScheme} onClick={addWorkout} textColor={textColor}>Add Workout</Button>
                 <HStack my={4}>
-                <Checkbox isChecked={showWeight} onChange={(e) => setShowWeight(e.target.checked)}>Weight</Checkbox>
-                <Checkbox isChecked={showReps} onChange={(e) => setShowReps(e.target.checked)}>Reps</Checkbox>
-                <Checkbox isChecked={showSets} onChange={(e) => setShowSets(e.target.checked)}>Sets</Checkbox>
+                <Checkbox isChecked={showWeight} onChange={(e) => setShowWeight(e.target.checked)} style={inputStyle}>Weight</Checkbox>
+                <Checkbox isChecked={showReps} onChange={(e) => setShowReps(e.target.checked)} style={inputStyle}>Reps</Checkbox>
+                <Checkbox isChecked={showSets} onChange={(e) => setShowSets(e.target.checked)} style={inputStyle}>Sets</Checkbox>
             </HStack>
             </VStack>
 
@@ -97,9 +97,9 @@ const ProgressiveOverload = () => {
                     <YAxis yAxisId="right" orientation="right" stroke={lineColor} allowDecimals={false} />
                     <Tooltip />
                     <Legend />
-                    {showWeight && <Line yAxisId="left" type="monotone" dataKey="weight" stroke="#8884d8" activeDot={{ r: 8 }} />}
-                    {showReps && <Line yAxisId="right" type="monotone" dataKey="reps" stroke="#82ca9d" />}
-                    {showSets && <Line yAxisId="right" type="monotone" dataKey="sets" stroke="#ffc658" />}
+                    {showWeight && <Line yAxisId="left" type="monotone" dataKey="weight" stroke="#FF0000" activeDot={{ r: 8 }} />}
+                    {showReps && <Line yAxisId="right" type="monotone" dataKey="reps" stroke="#00FF00" />}
+                    {showSets && <Line yAxisId="right" type="monotone" dataKey="sets" stroke="#00CCCC" />}
                 </LineChart>
             </ResponsiveContainer>
         )}
