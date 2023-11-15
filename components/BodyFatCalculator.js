@@ -79,7 +79,7 @@ function BodyFatCalculator() {
           <option value="female">Female</option>
         </select>
       </label>
-      <button onClick={calculateBodyFatPercentage} colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>Calculate</button>
+      <button onClick={calculateBodyFatPercentage} colorScheme={buttonColorScheme} variant="solid" color={textColor}>Calculate</button>
 
       {bodyFatPercentage !== null && (
         <div>
