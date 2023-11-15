@@ -39,7 +39,9 @@ import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import { SiAlgorand } from "react-icons/si";
 import TwitterSpaces from 'components/TwitterSpaces'; // Adjust the path as necessary
-
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Socialmedia() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -68,8 +70,71 @@ export default function Socialmedia() {
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
 
   const lightDarkColor = useColorModeValue('black', 'white');
-
- 
+  const adImages = [
+    // Array of ad image URLs
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    // Add more ad images as needed
+  ];
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    swipe: true,
+    responsive: [
+      {
+        breakpoint: 1024, // Applies to screens smaller than 1024px
+        settings: {
+          arrows: false, // Hides arrows on smaller screens
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 600, // Applies to screens smaller than 600px
+        settings: {
+          arrows: false, // Hides arrows on very small screens
+          slidesToShow: 1,
+          dots: false // Optionally hide dots on very small screens for more space
+        }
+      }
+    ]
+  };
+  
+  const AdCarousel = () => {
+    // Use the same color value as used for the header background
+    const borderColor = useColorModeValue('#ff3a00', 'transparent');
+  
+    return (
+    <Box as="section" py={10} bg={headerBgColor}>
+      <Slider {...settings}>
+          {adImages.map((img, index) => (
+            <Box 
+              key={index} 
+              p={2} // Padding around each image
+              bg={headerBgColor}
+              borderWidth="1px" // Border width
+              borderColor={borderColor} // Matching the header background color
+              borderRadius="lg" // Rounded edges
+            >
+              <Image 
+                src={img} 
+                alt={`Ad ${index + 1}`} 
+                w="full" 
+                h="auto" 
+                objectFit="contain" 
+                borderRadius="lg" // Rounded edges for the image
+              />
+            </Box>
+          ))}
+        </Slider>
+      </Box>
+    );
+  };
 
    // Fetch WAR token balance
    const fetchWarTokenBalance = async (address: string) => {
@@ -176,6 +241,8 @@ export default function Socialmedia() {
           </ModalContent>
         </Modal>
       </Box>
+
+      <AdCarousel />
     {/* Social Media Section */}
     <Box bgGradient={heroBgGradient} minH="100vh" py={10} display="flex" flexDirection="column" alignItems="center" justifyContent="center">
       <Container maxW="container.md" p={6} bg={boxColorScheme} boxShadow="lg" borderRadius="md" textAlign="center">

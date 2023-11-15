@@ -248,7 +248,6 @@ export default function Home() {
 
       <AdCarousel />
 
-
       {/* Hero Section */}
       <Box as="section" bgGradient={heroBgGradient} h="60vh">
         <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">

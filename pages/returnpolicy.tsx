@@ -36,6 +36,9 @@ import { useState } from 'react';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import { SiAlgorand } from "react-icons/si";
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function Returnpolicy() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -55,6 +58,72 @@ export default function Returnpolicy() {
   const footerBgColor = useColorModeValue('#ffca80', 'transparent');
   const pageBgGradient = useColorModeValue('none', 'linear(to-b, #0000FF, #000000)'); // Seamless gradient for dark mode
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
+
+  const adImages = [
+    // Array of ad image URLs
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+    // Add more ad images as needed
+  ];
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    swipe: true,
+    responsive: [
+      {
+        breakpoint: 1024, // Applies to screens smaller than 1024px
+        settings: {
+          arrows: false, // Hides arrows on smaller screens
+          slidesToShow: 1
+        }
+      },
+      {
+        breakpoint: 600, // Applies to screens smaller than 600px
+        settings: {
+          arrows: false, // Hides arrows on very small screens
+          slidesToShow: 1,
+          dots: false // Optionally hide dots on very small screens for more space
+        }
+      }
+    ]
+  };
+  
+  const AdCarousel = () => {
+    // Use the same color value as used for the header background
+    const borderColor = useColorModeValue('#ff3a00', 'transparent');
+  
+    return (
+    <Box as="section" py={10} bg={headerBgColor}>
+      <Slider {...settings}>
+          {adImages.map((img, index) => (
+            <Box 
+              key={index} 
+              p={2} // Padding around each image
+              bg={headerBgColor}
+              borderWidth="1px" // Border width
+              borderColor={borderColor} // Matching the header background color
+              borderRadius="lg" // Rounded edges
+            >
+              <Image 
+                src={img} 
+                alt={`Ad ${index + 1}`} 
+                w="full" 
+                h="auto" 
+                objectFit="contain" 
+                borderRadius="lg" // Rounded edges for the image
+              />
+            </Box>
+          ))}
+        </Slider>
+      </Box>
+    );
+  };
 
   const { activeAddress, signTransactions } = useWallet()
   const [loading, setLoading] = useState<boolean>(false)
@@ -166,20 +235,22 @@ export default function Returnpolicy() {
         </Modal>
       </Box>
 
+      <AdCarousel />
+
         {/* About Section (You can modify this section for your opt-in) */}
-        <Box as="section" py={10} bgGradient={heroBgGradient}>
-        <VStack spacing={4} align="center">
+        <Box as="section" py={10} bgGradient={heroBgGradient} border={'black'}>
+        <VStack spacing={4} align="center" border={'black'}>
             {/* Container for Box 1 and Box 2 */}
             <Box>
             {/* Return Policy - Part 1 */}
-            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} border={'black'}>
                 <Text fontSize="lg" color={textColor} textAlign="center">
                 Thank you for shopping with us. We value your business and strive to provide you with exceptional products and services.
                 </Text>
             </Box>
 
             {/* Return Policy - Part 2 */}
-            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} border={'black'}>
                 <Text fontSize="lg" color={textColor} textAlign="center">
                 In order to maintain the highest level of customer satisfaction, we kindly ask you to familiarize yourself with our No Return Policy.
                 </Text>
@@ -190,13 +261,13 @@ export default function Returnpolicy() {
             {/* Container for Box 3 and Box 4 */}
             <Box>
             {/* Return Policy - Part 3 */}
-            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} border={'black'}>
                 <Text fontSize="lg" color={textColor} textAlign="center">
                 Please note that all sales are final, and we do not accept returns on items purchased. This policy has been established to ensure the quality and authenticity of our products.
                 </Text>
             </Box>
             {/* Return Policy - Part 4 */}
-            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} border={'black'}>
                 <Text fontSize="lg" color={textColor} textAlign="center">
                 As a result, we encourage you to review the product descriptions, images, and sizing information carefully before making a purchase.
                 </Text>
@@ -205,7 +276,7 @@ export default function Returnpolicy() {
             <Spacer h={4} />
             <Box>
             {/* Return Policy - Part 5 */}
-            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }}>
+            <Box p={4} borderWidth="1px" borderRadius="lg" bg={boxColorScheme} _hover={{ shadow: "lg" }} border={'black'}>
                 <Text fontSize="lg" color={textColor} textAlign="center">
                 If you have any questions or concerns, please do not hesitate to reach out to our Customer Support team. We are always here to help and ensure you have the best possible shopping experience.
                 </Text>

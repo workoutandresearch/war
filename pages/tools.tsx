@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+import { Box, Button, Image, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
 import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
@@ -20,6 +20,9 @@ import CalorieCounter from 'components/CalorieCounter';
 import { SiAlgorand } from "react-icons/si";
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import dynamic from 'next/dynamic';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 // Dynamically import the Doughnut component from react-chartjs-2 with no SSR
 const Doughnut = dynamic(
@@ -183,6 +186,72 @@ export default function Tools() {
   // Define the disclaimer text as a constant
   const disclaimerText =
     "Disclaimer: Please note that if you refresh or exit this page, your progress may be lost.";
+
+    const adImages = [
+      // Array of ad image URLs
+      'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+      'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+      'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
+      // Add more ad images as needed
+    ];
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      swipe: true,
+      responsive: [
+        {
+          breakpoint: 1024, // Applies to screens smaller than 1024px
+          settings: {
+            arrows: false, // Hides arrows on smaller screens
+            slidesToShow: 1
+          }
+        },
+        {
+          breakpoint: 600, // Applies to screens smaller than 600px
+          settings: {
+            arrows: false, // Hides arrows on very small screens
+            slidesToShow: 1,
+            dots: false // Optionally hide dots on very small screens for more space
+          }
+        }
+      ]
+    };
+    
+    const AdCarousel = () => {
+      // Use the same color value as used for the header background
+      const borderColor = useColorModeValue('#ff3a00', 'transparent');
+    
+      return (
+      <Box as="section" py={10} bg={headerBgColor}>
+        <Slider {...settings}>
+            {adImages.map((img, index) => (
+              <Box 
+                key={index} 
+                p={2} // Padding around each image
+                bg={headerBgColor}
+                borderWidth="1px" // Border width
+                borderColor={borderColor} // Matching the header background color
+                borderRadius="lg" // Rounded edges
+              >
+                <Image 
+                  src={img} 
+                  alt={`Ad ${index + 1}`} 
+                  w="full" 
+                  h="auto" 
+                  objectFit="contain" 
+                  borderRadius="lg" // Rounded edges for the image
+                />
+              </Box>
+            ))}
+          </Slider>
+        </Box>
+      );
+    };
   
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
@@ -259,6 +328,8 @@ export default function Tools() {
             </ModalBody>
           </ModalContent>
         </Modal>
+
+        <AdCarousel />
         
       </Box>
       <Head>
