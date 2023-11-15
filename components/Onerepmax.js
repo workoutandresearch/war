@@ -7,9 +7,14 @@ import { Select, Slider, SliderTrack, SliderFilledTrack, SliderThumb } from '@ch
 
 const OneRepMaxCalculator = () => {
     const [weight, setWeight] = useState('');
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [reps, setReps] = useState(5); // Default reps value
     const [formula, setFormula] = useState('epley');
     const [oneRepMax, setOneRepMax] = useState(null);
+    const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
+    const lightDarkColor = useColorModeValue('black', 'white');
+    const buttonColorScheme = useColorModeValue('orange', 'blue');
+    const textColor = useColorModeValue('#000000', 'inherit');
 
     const calculateOneRepMax = () => {
         let max = 0;
@@ -41,7 +46,7 @@ const OneRepMaxCalculator = () => {
                 mb={2}
             />
             <Text mb={2}>Number of Reps: {reps}</Text>
-            <Slider defaultValue={5} min={1} max={12} onChange={setReps}>
+            <Slider defaultValue={5} min={1} max={12} onChange={setReps} >
                 <SliderTrack>
                     <SliderFilledTrack />
                 </SliderTrack>
@@ -53,7 +58,7 @@ const OneRepMaxCalculator = () => {
                 <option value="lombardi">Lombardi</option>
                 {/* ... other formulas ... */}
             </Select>
-            <Button onClick={calculateOneRepMax} colorScheme="blue">Calculate</Button>
+            <Button onClick={calculateOneRepMax} colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>Calculate</Button>
             {oneRepMax && <Text mt={4}>Estimated 1RM: {oneRepMax} lbs</Text>}
         </Box>
     );

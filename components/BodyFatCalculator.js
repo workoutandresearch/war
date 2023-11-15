@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useColorMode, useColorModeValue } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 
 function BodyFatCalculator() {
   const [weight, setWeight] = useState('');
@@ -9,6 +9,9 @@ function BodyFatCalculator() {
   const [bodyFatPercentage, setBodyFatPercentage] = useState(null);
   const { colorMode } = useColorMode();
   const aboutBgGradient = useColorModeValue('linear(to-b, #ff7e00, #ffa040)', 'none');
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const buttonColorScheme = useColorModeValue('orange', 'blue');
+  const textColor = useColorModeValue('#000000', 'inherit');
 
   const calculateBodyFatPercentage = () => {
     // Perform the body fat percentage calculation here
@@ -76,7 +79,7 @@ function BodyFatCalculator() {
           <option value="female">Female</option>
         </select>
       </label>
-      <button onClick={calculateBodyFatPercentage}>Calculate</button>
+      <button onClick={calculateBodyFatPercentage} colorScheme={buttonColorScheme} variant="solid" onClick={onOpen} color={textColor}>Calculate</button>
 
       {bodyFatPercentage !== null && (
         <div>
