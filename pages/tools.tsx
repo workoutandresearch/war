@@ -8,18 +8,26 @@ import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
 import BodyFatCalculator from 'components/BodyFatCalculator';
 import OneRepMaxCalculator from 'components/Onerepmax'; // Import the OneRepMaxCalculator component
 import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the OneRepMaxCalculator component
+import { useMutation } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 
 // Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
 import { SiAlgorand } from "react-icons/si";
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
+export const client = new ApolloClient({
+    uri: 'https://blue-surf-910004.us-east-1.aws.cloud.dgraph.io/graphql',
+    cache: new InMemoryCache()
+});
+
+  
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -115,7 +123,7 @@ export default function Tools() {
       { name: 'Timer', id: 'timer' },
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       { name: '1RM Calculator', id: 'onerepmax' },
-      { name: 'Progressive Overload Calc.', id: 'progressiveoverload' }, // Add this line
+      { name: 'Prog. Overload Calc.', id: 'progressiveoverload' }, // Add this line
             // Add more tools as needed
     ];
 
@@ -162,6 +170,12 @@ export default function Tools() {
     setIsCountingDown(true);
   };
   const [selectedTool, setSelectedTool] = useState('calisthenics');
+
+  const App = () => (
+    <ApolloProvider client={client}>
+        <ProgressiveOverload />
+    </ApolloProvider>
+);
   
   return (
     <Box bgGradient={colorMode === 'dark' ? pageBgGradient : 'none'}>
