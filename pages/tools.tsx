@@ -171,6 +171,11 @@ export default function Tools() {
   };
   const [selectedTool, setSelectedTool] = useState('calisthenics');
 
+  // Define the disclaimer text as a constant
+  const disclaimerText =
+    "Disclaimer: Please note that if you refresh or exit this page, your progress may be lost.";
+
+
   const App = () => (
     <ApolloProvider client={client}>
         <ProgressiveOverload />
@@ -384,6 +389,18 @@ export default function Tools() {
                 <ProgressiveOverload />
             </Box>
         )}
+
+      {/* Disclaimer Section */}
+      <Box
+        p={4}
+        borderRadius="md"
+        m={4}
+        textAlign="center"
+        fontSize="sm"
+        bgGradient={aboutBgGradient}
+      >
+        {disclaimerText}
+      </Box>
 
       {/* Footer */}
       <Box as="footer" bg={footerBgColor} color="white" py={4} px={8}>
