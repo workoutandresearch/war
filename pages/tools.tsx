@@ -130,7 +130,7 @@ export default function Tools() {
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       { name: '1RM Calculator', id: 'onerepmax' },
       { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
-      { id: 'bodyweightworkouts', name: 'Bodyweight Workouts' },
+      { id: 'bodyweightworkouts', name: 'BdWght Workouts' },
             // Add more tools as needed
     ];
 
