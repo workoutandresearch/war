@@ -65,11 +65,11 @@ export default function Privacypolicy() {
 
   const adImages = [
     // Array of ad image URLs
-    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
-    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
-    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=65678063&is=65550b63&hm=f4d1b0fab7188e58a634891f93aec04ce1b94aa5c369250ca2edecb315002201&public/algopardad1.png',
-    // Add more ad images as needed
+    'https://cdn.discordapp.com/attachments/1125446630775201882/1174531316566466570/Untitled_Artwork.png?ex=6567ee87&is=65557987&hm=6d5746616708cc4db9084658dd90e03010761fa35a06cee3ad0d2e1ea2d4f37c&',
+    'https://cdn.discordapp.com/attachments/1125446630775201882/1174540521381826612/Untitled_Artwork.png?ex=6567f71a&is=6555821a&hm=bd7b5ae3c3c4a01cbfbb810af707f394f2d7c95faac19f705c802c6bd7efeb06&',
+    'https://cdn.discordapp.com/attachments/1125446630775201882/1174539986100568124/Untitled_Artwork.png?ex=6567f69a&is=6555819a&hm=a36ce5c1d33be9c4263048923faa00fdc994d3c51423f32ca5a94625cb86a7ab&',
   ];
+  
   const settings = {
     dots: true,
     infinite: true,
