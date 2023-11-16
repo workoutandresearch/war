@@ -18,6 +18,7 @@ function WorkoutTracker() {
     const workoutTypes = {
         barbell: ['Barbell Squat', 'Barbell Deadlift', 'Barbell Lunges', 'Barbell Bench Press', 'Incline Bench Press', 'Decline Bench Press', 'Close Grip Bench Press', 'Wide Grip Bench Press', 'Barbell Shoulder Press', 'Barbell Lateral Raise', 'Barbell Row', 'Barbell Bicep Curl', 'Barbell Tricep Extension', 'Barbell Tricep Skull Crushers'],
         dumbbell: ['Dumbbell Squat', 'Dumbbell Deadlift', 'Dumbbell Lunges', 'Dumbbell Bench Press', 'Dumbbell Incline Bench Press', 'Dumbbell Decline Bench Press', 'Dumbbell Bicep Curl', 'Dumbbell Preacher Curl', 'Dumbbell Tricep Extension', 'Dumbbell Tricep Skull Crushers', 'Dumbbell Lateral Raise', 'Dumbbell Row', 'Dumbbell Shoulder Press', 'Dumbbell Tricep Pushdown','Dumbbell Chest Flys', 'Dumbbell Crush Press', 'Dumbbell Pullover'],
+        kettlebell: ['Kettlebell Squat', 'Kettlebell Deadlift', 'Kettlebell Lunges', 'Kettlebell Bench Press', 'Kettlebell Incline Bench Press', 'Kettlebell Decline Bench Press', 'Kettlebell Bicep Curl', 'Kettlebell Preacher Curl', 'Kettlebell Tricep Extension', 'Kettlebell Tricep Skull Crushers', 'Kettlebell Lateral Raise', 'Kettlebell Row', 'Kettlebell Shoulder Press', 'Kettlebell Tricep Pushdown', 'Kettlebell Chest Flys', 'Kettlebell Crush Press', 'Kettlebell Pullover'],
         weighted_vest: ['Weighted Push-ups', 'Weighted Pull-ups', 'Weighted Chin-ups', 'Weighted Sit-ups', 'Weighted Squats', 'Weighted Lunges', 'Weighted Burpees', 'Weighted Jumping Jacks', 'Weighted Mountain Climbers','Weighted Dips',],
         bodyweight: ['Push-ups', 'Pull-ups', 'Chin-ups', 'Sit-ups', 'Squats', 'Lunges', 'Burpees',  'Jumping Jacks', 'Mountain Climbers', 'Dips',],
         cardio: ['Indoor/Outdoor Walk', 'Indoor/Outdoor Jog', 'Indoor/Outdoor Run/Sprint', 'Indoor/Outdoor Speed-Walk', 'Treadmill', 'Elliptical', 'Stationary Bike']
@@ -36,8 +37,10 @@ function WorkoutTracker() {
         switch(selectedType) {
             case 'barbell':
             case 'dumbbell':
+            case 'kettlebell':
             case 'weighted_vest':
             case 'bodyweight':
+            
                 // For weight-based workouts, log exercise, weight, reps, and sets
                 if (!exercise || !weight || !reps || !sets) {
                     alert('Please fill all fields');
@@ -81,6 +84,7 @@ function WorkoutTracker() {
             switch(selectedType) {
                     case 'barbell':
                     case 'dumbbell':
+                    case 'kettlebell':
                     case 'weighted_vest':
                         return (
                             <>
@@ -98,7 +102,7 @@ function WorkoutTracker() {
                 case 'cardio':
                     return (
                         <>
-                            <Input placeholder="Distance" color={textColor} type="number" value={distance} onChange={(e) => setDistance(e.target.value)} />
+                            <Input placeholder="Distance" color={textColor} type="number" value={distance} onChange={(e) => setDistance(e.target.value)} style={inputStyle}/>
                             <RadioGroup onChange={setUnit} value={unit}>
                                 <Stack direction="row">
                                     <Radio value="miles">Miles</Radio>
