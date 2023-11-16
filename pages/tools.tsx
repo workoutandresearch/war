@@ -12,16 +12,20 @@ import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHis
 import BodyFatCalculator from 'components/BodyFatCalculator';
 import OneRepMaxCalculator from 'components/Onerepmax'; // Import the OneRepMaxCalculator component
 import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the OneRepMaxCalculator component
-
-// Import the CalisthenicsSession component
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
+import BodyweightWorkouts from 'components/bodyweightworkouts'; // Adjust the path as per your file structure
 import { SiAlgorand } from "react-icons/si";
 
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import {
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink,
+} from '@apollo/client';
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,10 +47,18 @@ export default function Tools() {
   const lightDarkColor = useColorModeValue('black', 'white');
   const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
   const headerBgGradient = useColorModeValue('#ff3a00', 'transparent');
-
+  const GRAPHQL_ENDPOINT = process.env.REACT_APP_GRAPHQL_ENDPOINT;
   const { activeAddress, signTransactions } = useWallet();
   const [loading, setLoading] = useState<boolean>(false);
   const [warTokenBalance, setWarTokenBalance] = useState(null);
+  const httpLink = createHttpLink({
+    uri: GRAPHQL_ENDPOINT,
+    // headers: { Authorization: `Bearer ${YOUR_AUTH_TOKEN}` } // Uncomment if using a token
+  });
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
 
   const handleToolChange = (tool: React.SetStateAction<string>) => {
     console.log('Selected Tool:', tool); // Add this line to debug
@@ -118,6 +130,7 @@ export default function Tools() {
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       { name: '1RM Calculator', id: 'onerepmax' },
       { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
+      { id: 'bodyweightworkouts', name: 'Bodyweight Workouts' },
             // Add more tools as needed
     ];
 
@@ -393,10 +406,7 @@ export default function Tools() {
       >
         <Timer />
       </Box>
-    )}
-
-      
-      {/* Render the Body Fat Percentage Calculator when selectedTool is 'bodyfat' */}
+    )}      
       {selectedTool === 'bodyfat' && (
       <Box
         borderWidth="1px"
@@ -444,6 +454,23 @@ export default function Tools() {
                 <ProgressiveOverload />
             </Box>
         )}
+
+    {selectedTool === 'bodyweightworkouts' && (
+            <Box
+                borderWidth="1px"
+                borderRadius="lg"
+                border="black"
+                overflow="hidden"
+                p={4}
+                m={4}
+                color={textColor}
+                textAlign="center"
+                bgGradient={aboutBgGradient}
+            >
+                <BodyweightWorkouts />
+            </Box>
+        )}
+
 
       {/* Disclaimer Section */}
       <Box
