@@ -27,7 +27,7 @@ function WorkoutTracker() {
         background: 'transparent', // Ensures a transparent background
         borderColor: 'gray.300', // You can adjust this to match your design
         color: textColor, // Dynamic text color based on color mode
-        _placeholder: { color: 'gray.500' }, // Style for placeholder text
+        _placeholder: { color: textColor }, // Style for placeholder text
     };
 
     const logWorkout = () => {
@@ -75,7 +75,7 @@ function WorkoutTracker() {
             const inputStyle = {
                 background: 'transparent', // Ensures a transparent background
                 borderColor: 'gray.300', // You can adjust this to match your design
-                _placeholder: { color: 'gray.500' }, // Style for placeholder text
+                _placeholder: { color: textColor }, // Style for placeholder text
             };
             
             switch(selectedType) {

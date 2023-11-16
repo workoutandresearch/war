@@ -8,7 +8,6 @@ import { useWallet } from '@txnlab/use-wallet';
 import { algodClient } from 'lib/algodClient';
 import Connect from 'components/Connect';
 import Timer from 'components/Timer'; // Import the Timer component
-import WorkoutHistory from 'components/WorkoutHistory'; // Import the WorkoutHistory component
 import BodyFatCalculator from 'components/BodyFatCalculator';
 import OneRepMaxCalculator from 'components/Onerepmax'; // Import the OneRepMaxCalculator component
 import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the OneRepMaxCalculator component
