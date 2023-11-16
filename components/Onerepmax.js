@@ -16,6 +16,13 @@ const OneRepMaxCalculator = () => {
     const buttonColorScheme = useColorModeValue('orange', 'blue');
     const textColor = useColorModeValue('#000000', 'inherit');
 
+    const inputStyle = {
+        background: 'transparent', // Ensures a transparent background
+        borderColor: 'gray.300', // You can adjust this to match your design
+        color: textColor, // Dynamic text color based on color mode
+        _placeholder: { color: 'gray.500' }, // Style for placeholder text
+    };
+
     const calculateOneRepMax = () => {
         let max = 0;
         if (weight && reps) {
@@ -44,6 +51,7 @@ const OneRepMaxCalculator = () => {
                 onChange={(e) => setWeight(e.target.value)}
                 type="number"
                 mb={2}
+                style={inputStyle}
             />
             <Text mb={2}>Number of Reps: {reps}</Text>
             <Slider defaultValue={5} min={1} max={12} onChange={setReps} >

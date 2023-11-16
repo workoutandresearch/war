@@ -15,7 +15,7 @@ import ProgressiveOverload from 'components/ProgressiveOverload'; // Import the 
 import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
-import BodyweightWorkouts from 'components/bodyweightworkouts'; // Adjust the path as per your file structure
+import WorkoutTracker from 'components/workoutracker'; // Adjust the path as per your file structure
 import { SiAlgorand } from "react-icons/si";
 
 import Slider from 'react-slick';
@@ -130,7 +130,7 @@ export default function Tools() {
       { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
       { name: '1RM Calculator', id: 'onerepmax' },
       { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
-      { id: 'bodyweightworkouts', name: 'BdWght Workouts' },
+      { name: 'Workout Tracker', id: 'workouttracker' }, // Add this line
             // Add more tools as needed
     ];
 
@@ -455,7 +455,7 @@ export default function Tools() {
             </Box>
         )}
 
-    {selectedTool === 'bodyweightworkouts' && (
+    {selectedTool === 'workouttracker' && (
             <Box
                 borderWidth="1px"
                 borderRadius="lg"
@@ -467,10 +467,9 @@ export default function Tools() {
                 textAlign="center"
                 bgGradient={aboutBgGradient}
             >
-                <BodyweightWorkouts />
+                <WorkoutTracker />
             </Box>
         )}
-
 
       {/* Disclaimer Section */}
       <Box
