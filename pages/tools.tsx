@@ -51,14 +51,7 @@ export default function Tools() {
   const { activeAddress, signTransactions } = useWallet();
   const [loading, setLoading] = useState<boolean>(false);
   const [warTokenBalance, setWarTokenBalance] = useState(null);
-  const httpLink = createHttpLink({
-    uri: GRAPHQL_ENDPOINT,
-    // headers: { Authorization: `Bearer ${YOUR_AUTH_TOKEN}` } // Uncomment if using a token
-  });
-  const client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-  });
+
 
   const handleToolChange = (tool: React.SetStateAction<string>) => {
     console.log('Selected Tool:', tool); // Add this line to debug
