@@ -1,5 +1,4 @@
 // pages/tools.tsx
-
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Box, Button, Image, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
@@ -25,6 +24,8 @@ import {
   InMemoryCache,
   createHttpLink,
 } from '@apollo/client';
+import CreateUserProfile from 'components/CreateUserProfile';
+
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,7 +51,7 @@ export default function Tools() {
   const { activeAddress, signTransactions } = useWallet();
   const [loading, setLoading] = useState<boolean>(false);
   const [warTokenBalance, setWarTokenBalance] = useState(null);
-
+  const [ userID, setUserID ] = useState<any>(null)
 
   const handleToolChange = (tool: React.SetStateAction<string>) => {
     console.log('Selected Tool:', tool); // Add this line to debug
@@ -179,13 +180,16 @@ export default function Tools() {
       'https://cdn.discordapp.com/attachments/1125446630775201882/1174531316566466570/Untitled_Artwork.png?ex=6567ee87&is=65557987&hm=6d5746616708cc4db9084658dd90e03010761fa35a06cee3ad0d2e1ea2d4f37c&',
       'https://cdn.discordapp.com/attachments/1125446630775201882/1174540521381826612/Untitled_Artwork.png?ex=6567f71a&is=6555821a&hm=bd7b5ae3c3c4a01cbfbb810af707f394f2d7c95faac19f705c802c6bd7efeb06&',
       'https://cdn.discordapp.com/attachments/1125446630775201882/1174539986100568124/Untitled_Artwork.png?ex=6567f69a&is=6555819a&hm=a36ce5c1d33be9c4263048923faa00fdc994d3c51423f32ca5a94625cb86a7ab&',
+      'https://cdn.discordapp.com/attachments/1125446630775201882/1174531316566466570/Untitled_Artwork.png?ex=6567ee87&is=65557987&hm=6d5746616708cc4db9084658dd90e03010761fa35a06cee3ad0d2e1ea2d4f37c&',
+      'https://cdn.discordapp.com/attachments/1125446630775201882/1174540521381826612/Untitled_Artwork.png?ex=6567f71a&is=6555821a&hm=bd7b5ae3c3c4a01cbfbb810af707f394f2d7c95faac19f705c802c6bd7efeb06&',
+      'https://cdn.discordapp.com/attachments/1125446630775201882/1174539986100568124/Untitled_Artwork.png?ex=6567f69a&is=6555819a&hm=a36ce5c1d33be9c4263048923faa00fdc994d3c51423f32ca5a94625cb86a7ab&',
     ];
     
     const settings = {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 2,
       slidesToScroll: 1,
       autoplay: true,
       autoplaySpeed: 3000,
@@ -195,14 +199,14 @@ export default function Tools() {
           breakpoint: 1024, // Applies to screens smaller than 1024px
           settings: {
             arrows: false, // Hides arrows on smaller screens
-            slidesToShow: 1
+            slidesToShow: 2
           }
         },
         {
           breakpoint: 600, // Applies to screens smaller than 600px
           settings: {
             arrows: false, // Hides arrows on very small screens
-            slidesToShow: 1,
+            slidesToShow: 2,
             dots: false // Optionally hide dots on very small screens for more space
           }
         }
