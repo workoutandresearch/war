@@ -30,7 +30,7 @@ const WorkoutAndResearchGPT = () => {
         variant="outline"
         mt={2}
       >
-        WorkoutAndResearchGPT
+        GPT Model
       </Button>
     </div>
   );
