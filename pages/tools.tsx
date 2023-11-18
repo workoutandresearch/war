@@ -14,6 +14,7 @@ import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
 import WorkoutTracker from 'components/workoutracker'; // Adjust the path as per your file structure
+import WorkoutandResearchGPT from 'components/workoutandresearchGPT';
 import { SiAlgorand } from "react-icons/si";
 
 import Slider from 'react-slick';
@@ -25,6 +26,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import CreateUserProfile from 'components/CreateUserProfile';
+import WorkoutAndResearchGPT from 'components/workoutandresearchGPT';
 
 
 export default function Tools() {
@@ -116,6 +118,7 @@ export default function Tools() {
     ];
 
     const tools = [
+      { name: 'WorkoutandResearchGPT', id: 'workoutandresearchGPT' },
       { name: 'Calisthenics', id: 'calisthenics' },
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
@@ -342,7 +345,21 @@ export default function Tools() {
           ))}
         </Grid>
       </Flex>
-
+      {selectedTool === 'workoutandresearchGPT' && (
+        <Box
+          borderWidth="1px"
+          borderRadius="lg"
+          border="black"
+          overflow="hidden"
+          p={4}
+          m={4}
+          color={textColor}
+          textAlign="center"
+          bgGradient={heroBgGradient}
+        >
+          <WorkoutAndResearchGPT/>
+        </Box>
+      )}
       {selectedTool === 'calisthenics' && (
         <Box
           borderWidth="1px"
