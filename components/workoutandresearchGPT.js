@@ -1,13 +1,13 @@
 import React from 'react';
-import {
-  Box,
-  Button,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Button, Image, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, useColorMode, useColorModeValue, useDisclosure, useInterval } from '@chakra-ui/react';
+
 
 const WorkoutAndResearchGPT = () => {
+    const { colorMode, toggleColorMode } = useColorMode();
   const textColor = useColorModeValue('#000000', 'inherit');
+  const buttonColorScheme = useColorModeValue('orange', 'blue');
+  const boxColorScheme = useColorModeValue('#ff3a00', '#ffa040');
+  const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
 
   const redirectToLink = () => {
     // Redirect the user to the specified link
@@ -26,7 +26,7 @@ const WorkoutAndResearchGPT = () => {
       </div>
       <Button
         onClick={redirectToLink}
-        colorScheme="teal"
+        colorScheme={textColor}
         variant="outline"
         mt={2}
       >
