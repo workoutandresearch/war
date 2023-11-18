@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Image, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, IconButton, Link, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, VStack, HStack, useColorMode, useColorModeValue, useDisclosure, useInterval, Input, Spinner } from '@chakra-ui/react';
 import axios from 'axios';
+import { Alert, AlertIcon } from "@chakra-ui/react";
 
 const Macro = () => {
 const { colorMode, toggleColorMode } = useColorMode();
