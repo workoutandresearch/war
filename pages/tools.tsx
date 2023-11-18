@@ -118,7 +118,7 @@ export default function Tools() {
     ];
 
     const tools = [
-      { name: 'WorkoutandResearchGPT', id: 'workoutandresearchGPT' },
+      { name: 'GPT Model', id: 'workoutandresearchGPT' },
       { name: 'Calisthenics', id: 'calisthenics' },
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
