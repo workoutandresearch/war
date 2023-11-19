@@ -39,6 +39,7 @@ import { SiAlgorand } from "react-icons/si";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import CustomLogo from 'components/BookPress';
 
 export default function Disclaimer() {
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,6 +51,7 @@ export default function Disclaimer() {
   
     // Corrected gradient and color variables for light mode
     const headerBgColor = useColorModeValue('#ff3a00', 'transparent');
+    const buttonTextColor = colorMode === 'dark' ? 'white' : 'inherit'; // Use colorMode to determine text color
     const featuresBgGradient = useColorModeValue('linear(to-b, #ffa040, #ffca80)', 'none');
     const boxColorScheme = useColorModeValue('ff3a00', '##ffa040');
     const drawerBgColor = useColorModeValue('#ff3a00', 'blue');
@@ -231,13 +233,11 @@ export default function Disclaimer() {
             />
 
             {/* Color Mode Toggle */}
-            <IconButton
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            <CustomLogo
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color={boxColorScheme}
-            />
+              color={buttonTextColor} icon={undefined} ariaLabel={undefined}          />
           </Flex>
 
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">

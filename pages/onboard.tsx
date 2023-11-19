@@ -41,6 +41,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { motion } from 'framer-motion';
+import CustomLogo from 'components/BookPress';
 
 
 export default function Onboard() {
@@ -203,13 +204,11 @@ export default function Onboard() {
             />
 
             {/* Color Mode Toggle */}
-            <IconButton
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            <CustomLogo
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color={boxColorScheme}
-            />
+              color={buttonTextColor} icon={undefined} ariaLabel={undefined}          />
           </Flex>
 
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">

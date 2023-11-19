@@ -44,6 +44,7 @@ import { SiAlgorand } from "react-icons/si";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import CustomLogo from 'components/BookPress';
 
 export default function Merch() {
 
@@ -195,13 +196,11 @@ export default function Merch() {
             />
 
             {/* Color Mode Toggle */}
-            <IconButton
-              icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            <CustomLogo
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color={boxColorScheme}
-            />
+              color={buttonTextColor} icon={undefined} ariaLabel={undefined}          />
           </Flex>
 
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
