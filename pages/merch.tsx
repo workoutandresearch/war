@@ -81,6 +81,13 @@ export default function Merch() {
     'https://cdn.discordapp.com/attachments/1125446630775201882/1174539986100568124/Untitled_Artwork.png?ex=6567f69a&is=6555819a&hm=a36ce5c1d33be9c4263048923faa00fdc994d3c51423f32ca5a94625cb86a7ab&',
     'https://cdn.discordapp.com/attachments/1125446630775201882/1175592549445017660/Untitled_Artwork.png?ex=656bcae1&is=655955e1&hm=867bb807ff34e173e94d5e7cbc09d737946f2b9d47e3ad49f0e4596ff779cbc4&',
   ];
+
+  const adUrls = [
+    'https://algorandtechnologies.com/',
+    'https://discord.gg/gj4BVrVuBD',
+    'https://vestige.fi/asset/1015673913',
+    'https://chat.openai.com/g/g-dGy79T36H-workout-and-research',
+  ];  
   
   const settings = {
     dots: true,
@@ -118,26 +125,28 @@ export default function Merch() {
     <Box as="section" py={10} bg={headerBgColor}>
       <Slider {...settings}>
           {adImages.map((img, index) => (
-            <Box 
-              key={index} 
-              p={2} // Padding around each image
-              bg={headerBgColor}
-              borderWidth="1px" // Border width
-              borderColor={borderColor} // Matching the header background color
-              borderRadius="lg" // Rounded edges
-            >
-              <Image 
-                src={img} 
-                alt={`Ad ${index + 1}`} 
-                w="full" 
-                h="auto" 
-                objectFit="contain" 
-                borderRadius="lg" // Rounded edges for the image
-              />
-            </Box>
-          ))}
-        </Slider>
-      </Box>
+          <Box 
+          key={index} 
+          p={2} // Padding around each image
+          bg={headerBgColor}
+          borderWidth="1px" // Border width
+          borderColor={borderColor} // Matching the header background color
+          borderRadius="lg" // Rounded edges
+        >
+          <Link href={adUrls[index]} isExternal>
+            <Image 
+              src={img} 
+              alt={`Ad ${index + 1}`} 
+              w="full" 
+              h="auto" 
+              objectFit="contain" 
+              borderRadius="lg" // Rounded edges for the image
+            />
+          </Link>
+        </Box>
+      ))}
+    </Slider>
+  </Box>
     );
   };
 
