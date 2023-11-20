@@ -6,6 +6,10 @@ import bodyweightExercises from 'components/bodyweightExercises';
 import weightedVestExercises from 'components/weighted-vest-beltExercises';
 import dumbbellExercises from 'components/dumbbellExercises';
 
+const exerciseNameStyle = {
+    fontFamily: 'Share Tech Mono', // Apply the "Share Tech Mono" font
+  };
+
 const allExercises = [
   ...barbellExercises,
   ...dumbbellExercises,
@@ -47,7 +51,7 @@ const WorkoutLibrary = () => {
 
   return (
     <Box p={4}>
-      <Heading as="h2" size="md" mb={4}>
+      <Heading as="h2" size="md" mb={4} style={exerciseNameStyle}>
         Workout Library
       </Heading>
 
@@ -62,7 +66,7 @@ const WorkoutLibrary = () => {
       </Select>
 
       {/* Muscle group filter dropdown */}
-      <Select value={selectedMuscleGroup} onChange={handleMuscleGroupChange} mb={4}>
+      <Select value={selectedMuscleGroup} onChange={handleMuscleGroupChange} mb={4} style={exerciseNameStyle}> 
         <option value="all">All Muscle Groups</option>
         {/* Dynamically generate muscle group options */}
         {allExercises.reduce((uniqueGroups, exercise) => {
@@ -77,7 +81,7 @@ const WorkoutLibrary = () => {
       </Select>
 
       {/* Display filtered workouts */}
-      <VStack spacing={4}>
+      <VStack spacing={4} style={exerciseNameStyle}>
         {filteredExercises.map((workout, index) => (
           <Box
             key={workout.id}
@@ -88,7 +92,7 @@ const WorkoutLibrary = () => {
             cursor="pointer"
             onClick={() => handleExerciseClick(workout)}
           >
-            <Heading as="h3" size="md">
+            <Heading as="h3" size="md" style={exerciseNameStyle}> 
               {workout.name}
             </Heading>
             <p>{workout.description}</p>
