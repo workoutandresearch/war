@@ -15,7 +15,6 @@ import CalisthenicsSession from '../components/CalisthenicsSession';
 import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
 import WorkoutTracker from 'components/workoutracker'; // Adjust the path as per your file structure
-import WorkoutandResearchGPT from 'components/workoutandresearchGPT';
 import { SiAlgorand } from "react-icons/si";
 
 
@@ -29,6 +28,8 @@ import {
 } from '@apollo/client';
 import CreateUserProfile from 'components/CreateUserProfile';
 import WorkoutAndResearchGPT from 'components/workoutandresearchGPT';
+import WorkoutLibrary from 'components/WorkoutLibrary';
+
 import Macro from 'components/Macro'; // Adjust the path as per your file structure
 
 export default function Tools() {
@@ -130,6 +131,7 @@ export default function Tools() {
       { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
       { name: 'Workout Tracker', id: 'workouttracker' }, // Add this line
       { name: 'Macros Calc.', id: 'macro' },
+      { name: 'Workout Library', id: 'WorkoutLibrary' },
             // Add more tools as needed
     ];
 
@@ -507,6 +509,22 @@ export default function Tools() {
                 <Macro />
             </Box>
         )}
+
+      {selectedTool === 'WorkoutLibrary' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={featuresBgGradient}
+      >
+        <WorkoutLibrary/>
+      </Box>
+    )}  
 
       {/* Disclaimer Section */}
       <Box
