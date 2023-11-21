@@ -81,7 +81,6 @@ const MeditationLibrary = () => {
               </Heading>
               <p>Type: {technique.type}</p>
               <p>Duration: {technique.duration}</p>
-              <p>Description: {technique.description}</p>
             </Box>
           </GridItem>
         ))}
