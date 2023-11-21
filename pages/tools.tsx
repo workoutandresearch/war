@@ -121,6 +121,8 @@ export default function Tools() {
 
     const tools = [
       { name: 'GPT Model', id: 'workoutandresearchGPT' },
+      { name: 'Workout Library', id: 'WorkoutLibrary' },
+      { name: 'Meditation Tech', id: 'MeditationLibrary' },
       { name: 'Calisthenics', id: 'calisthenics' },
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
@@ -130,8 +132,6 @@ export default function Tools() {
       { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
       { name: 'Workout Tracker', id: 'workouttracker' }, // Add this line
       { name: 'Macros Calc.', id: 'macro' },
-      { name: 'Workout Library', id: 'WorkoutLibrary' },
-      { name: 'Meditation Tech', id: 'MeditationLibrary' },
       // Add more tools as needed
     ];
 
