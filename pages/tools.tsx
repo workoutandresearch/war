@@ -16,8 +16,6 @@ import CalorieCalculator from 'components/CalorieCalculator';
 import CalorieCounter from 'components/CalorieCounter';
 import WorkoutTracker from 'components/workoutracker'; // Adjust the path as per your file structure
 import { SiAlgorand } from "react-icons/si";
-
-
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -29,8 +27,9 @@ import {
 import CreateUserProfile from 'components/CreateUserProfile';
 import WorkoutAndResearchGPT from 'components/workoutandresearchGPT';
 import WorkoutLibrary from 'components/WorkoutLibrary';
-
 import Macro from 'components/Macro'; // Adjust the path as per your file structure
+import MeditationLibrary from 'components/MeditationLibrary'; // Import a list of meditation techniques
+import meditationTechniquesData from 'components/meditationTechniques'; // Import a list of meditation techniques
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -132,7 +131,8 @@ export default function Tools() {
       { name: 'Workout Tracker', id: 'workouttracker' }, // Add this line
       { name: 'Macros Calc.', id: 'macro' },
       { name: 'Workout Library', id: 'WorkoutLibrary' },
-            // Add more tools as needed
+      { name: 'Meditation Tech', id: 'MeditationLibrary' },
+      // Add more tools as needed
     ];
 
   // Fetch WAR token balance
@@ -524,7 +524,23 @@ export default function Tools() {
       >
         <WorkoutLibrary/>
       </Box>
-    )}  
+    )}
+
+    {selectedTool === 'MeditationLibrary' && (
+      <Box
+        borderWidth="1px"
+        borderRadius="lg"
+        border="black"
+        overflow="hidden"
+        p={4}
+        m={4}
+        color={textColor}
+        textAlign="center"
+        bgGradient={featuresBgGradient}
+      >
+        <MeditationLibrary />
+      </Box>
+    )}
 
       {/* Disclaimer Section */}
       <Box
