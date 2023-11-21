@@ -7,6 +7,7 @@ const MeditationLibrary = () => {
   const [selectedDuration, setSelectedDuration] = useState('all');
   const [selectedTechnique, setSelectedTechnique] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const heroBgGradient = useColorModeValue('orange', 'blue');
 
   const handleTypeChange = (event) => {
     setSelectedType(event.target.value);
@@ -90,7 +91,7 @@ const MeditationLibrary = () => {
       {selectedTechnique && (
         <Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
           <ModalOverlay />
-          <ModalContent align="center">
+          <ModalContent bg={heroBgGradient}>
             <ModalHeader>{selectedTechnique.name}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
