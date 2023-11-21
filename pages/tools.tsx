@@ -120,20 +120,20 @@ export default function Tools() {
     ];
 
     const tools = [
-      { name: 'GPT Model', id: 'workoutandresearchGPT' },
-      { name: 'Workout Library', id: 'WorkoutLibrary' },
-      { name: 'Meditation Tech', id: 'MeditationLibrary' },
-      { name: 'Calisthenics', id: 'calisthenics' },
+      { name: '1RM Calculator', id: 'onerepmax' },
+      { name: 'Body Fat %', id: 'bodyfat' },
       { name: 'Cal. Calculator', id: 'calculator' },
       { name: 'Cal. Counter', id: 'counter' },
-      { name: 'Timer', id: 'timer' },
-      { name: 'Body Fat %', id: 'bodyfat' }, // Update the id to 'bodyfat'
-      { name: '1RM Calculator', id: 'onerepmax' },
-      { name: 'Prog. Overload', id: 'progressiveoverload' }, // Add this line
-      { name: 'Workout Tracker', id: 'workouttracker' }, // Add this line
+      { name: 'Calisthenics', id: 'calisthenics' },
+      { name: 'GPT Model', id: 'workoutandresearchGPT' },
       { name: 'Macros Calc.', id: 'macro' },
+      { name: 'Meditation Tech', id: 'MeditationLibrary' },
+      { name: 'Prog. Overload', id: 'progressiveoverload' },
+      { name: 'Timer', id: 'timer' },
+      { name: 'Workout Library', id: 'WorkoutLibrary' },
+      { name: 'Workout Tracker', id: 'workouttracker' }
       // Add more tools as needed
-    ];
+    ];    
 
   // Fetch WAR token balance
   const fetchWarTokenBalance = async (address: string) => {
