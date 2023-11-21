@@ -166,7 +166,7 @@ const meals = [
           '2 tsp. Cinnamon',
           '2 tbsp. xylitol (optional)'
         ],
-        duration: '35 minutes',
+        duration: '10 minutes',
         instructions: [
           'Sift together coconut flour, protein powder, baking powder, and salt',
           'Whisk together melted coconut oil, egg, vanilla, and honey',
@@ -203,7 +203,7 @@ const meals = [
           '1 cup chopped cucumber',
           'Tatziki Sauce: ½ cup non-fat Greek yogurt, ½ tsp dry dill, Splash of lemon juice, Salt & Pepper to taste'
         ],
-        duration: 'Marinate 2-3 hours, Cook 20 minutes',
+        duration: '20 minutes',
         instructions: [
           'Mix together all ingredients for Tatziki sauce and refrigerate',
           'Marinate chicken with olive oil, vinegar, garlic powder, lemon juice, and oregano for 2-3 hours or overnight',
@@ -235,7 +235,7 @@ const meals = [
           '¼ cup shredded cheddar cheese',
           '1 cup shredded lettuce'
         ],
-        duration: 'Prep 30 minutes, Cook 20 minutes',
+        duration: '20 minutes',
         instructions: [
           'Toss cooked rice with cilantro, lime juice, and salt',
           'Season and cook chicken as desired, then cut into bite-size pieces',
@@ -264,7 +264,7 @@ const meals = [
           '2-3 tbsp chipotle seasoning, adjusted to taste',
           'Salsa for dipping (optional)'
         ],
-        duration: 'Approx. 15 minutes',
+        duration: '15 minutes',
         instructions: [
           'Grill sliced pepper, onion, and mushroom until tender',
           'Mix cottage cheese with chipotle seasoning',
@@ -296,7 +296,7 @@ const meals = [
           '1 cup Sour Cream',
           '1 cup Salsa'
         ],
-        duration: 'Prep 1 hour, Cook 20 minutes',
+        duration: '20 minutes',
         instructions: [
           'Cube chicken and mix with cilantro, garlic, lime zest, lime juice, olive oil, salt, and pepper for marinade',
           'Marinate for 30 to 60 minutes in the refrigerator',
@@ -321,7 +321,7 @@ const meals = [
           '½ cup favorite BBQ sauce',
           '1 cup reduced fat shredded cheddar cheese'
         ],
-        duration: 'Prep 10 minutes, Cook 1 hour 20 minutes',
+        duration: '1 hour 20 minutes',
         instructions: [
           'Preheat oven to 425 degrees and line a baking sheet with foil',
           'Rinse potatoes, pierce with a fork, and bake for about 1 hour until tender',
@@ -338,6 +338,35 @@ const meals = [
           fat: '7g'
         },
         imageUrl: 'https://cdn.muscleandstrength.com/sites/default/files/field/feature-image/recipe/bbq-chicken-potato-skin-recipe.jpg',
+        servings: 4
+      },
+      {
+        name: 'Sesame CranButter Sirloin Steak Tip Skewers',
+        ingredients: [
+          '1lb. Sirloin Tip Steak',
+          '¾ cup Nuts N More High Protein Sesame Cranbutter',
+          '1 tbsp. Braggs Liquid Aminos (or soy sauce)',
+          '1 tsp. Minced Garlic',
+          '1/3 cup hot water',
+          'Sesame Seeds and Cranberries (optional)',
+          'Skewers'
+        ],
+        duration: '20 minutes',
+        instructions: [
+          'Mix sesame cranbutter, liquid aminos, garlic, and hot water for marinade',
+          'Cut steak into strips or chunks and marinate with half the mixture for 3-4 hours',
+          'Soak skewers in water if using wood',
+          'Thread marinated meat onto skewers',
+          'Grill to desired doneness',
+          'Serve with remaining marinade as dipping sauce'
+        ],
+        nutrition: {
+          calories: '274',
+          protein: '33.6g',
+          carbs: '10.2g',
+          fat: '10.4g'
+        },
+        imageUrl: 'https://cdn.muscleandstrength.com/sites/default/files/field/feature-image/recipe/ss_feature.jpg',
         servings: 4
       },
       // ... other meals
