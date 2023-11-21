@@ -92,55 +92,31 @@ const WorkoutLibrary = () => {
         ))}
       </Select>
 
-        {/* Grid to display filtered workouts */}
-        <Grid templateColumns="repeat(2, 1fr)" gap={4} style={exerciseNameStyle}>
+      {/* Grid to display filtered workouts */}
+      <Grid templateColumns="repeat(2, 1fr)" gap={4} style={exerciseNameStyle}>
         {filteredExercises.map((workout, index) => (
-            <GridItem key={workout.id} w="100%">
+          <GridItem key={workout.id} w="100%">
             <Box
-                borderWidth="1px"
-                borderRadius="lg"
-                p={4}
-                boxShadow="md"
-                cursor="pointer"
-                onClick={() => handleExerciseClick(workout)}
+              borderWidth="1px"
+              borderRadius="lg"
+              p={4}
+              boxShadow="md"
+              cursor="pointer"
+              onClick={() => handleExerciseClick(workout)}
             >
-                <Heading as="h3" size="md" style={exerciseNameStyle}> 
+              <Heading as="h3" size="md" style={exerciseNameStyle}> 
                 {workout.name}
-                </Heading>
-                <p>{workout.description}</p>
-                {selectedExercise === workout && (
-                <div>
-                    <strong>Muscle Groups:</strong>
-                    <ul>
-                    {workout.muscleGroups ? (
-                        workout.muscleGroups.map((group) => (
-                        <li key={group}>{group}</li>
-                        ))
-                    ) : (
-                        <li>No muscle groups specified</li>
-                    )}
-                    </ul>
-                    <strong>Tips:</strong>
-                    <ul>
-                    {workout.tips.map((tip, index) => (
-                        <li key={index}>{tip}</li>
-                    ))}
-                    </ul>
-                    <strong>What Not to Do:</strong>
-                    <ul>
-                    {workout.whatNotToDo.map((notToDo, index) => (
-                        <li key={index}>{notToDo}</li>
-                    ))}
-                    </ul>
-                </div>
-                )}
+              </Heading>
+              <p>{workout.description}</p>
+              {/* Removed the expanded details box */}
             </Box>
-            </GridItem>
+          </GridItem>
         ))}
-        </Grid>
+      </Grid>
+
       {/* Modal for displaying exercise details */}
       {selectedExercise && (
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
           <ModalOverlay />
           <ModalContent bg={heroBgGradient}>
             <ModalHeader>{selectedExercise.name}</ModalHeader>
