@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Heading, Select, Grid, GridItem, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
+import { Box, Heading, Select, Grid, GridItem, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useColorModeValue } from '@chakra-ui/react';
 import meditationTechniquesData from 'components/meditationTechniques'; // Import a list of meditation techniques
 
 const MeditationLibrary = () => {
@@ -95,9 +95,26 @@ const MeditationLibrary = () => {
             <ModalHeader>{selectedTechnique.name}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {/* Details about the selected technique */}
-              <p>{selectedTechnique.description}</p>
-              {/* You can add more details about the technique here */}
+              <strong>Type:</strong> {selectedTechnique.type}
+              <br />
+              <strong>Duration:</strong> {selectedTechnique.duration}
+              <br />
+              <strong>Description:</strong> {selectedTechnique.description}
+              <br />
+              <strong>What to Do:</strong>
+              <ul>
+                {selectedTechnique.whatToDo &&
+                  selectedTechnique.whatToDo.split('\n').map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+              </ul>
+              <strong>What Not to Do:</strong>
+              <ul>
+                {selectedTechnique.whatNotToDo &&
+                  selectedTechnique.whatNotToDo.split('\n').map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+              </ul>
             </ModalBody>
           </ModalContent>
         </Modal>
