@@ -358,3 +358,48 @@
     align-items: center;
   }
   
+
+  .meal-dispenser {
+    text-align: center;
+    font-family: 'Share Tech Mono', sans-serif;
+  }
+  
+  .meal-container {
+    border: 1px solid #000000;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    max-width: 600px;
+    background-color: linear-gradient('#ff3a00', 'transparent');
+  }
+  
+  .meal-image {
+    max-width: 50%; /* Adjust size as needed */
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto; /* Centers the image */
+  }
+  
+  .meal-title {
+    margin-top: 10px;
+  }
+  
+  .meal-info {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .ingredients, .instructions {
+    background-color: linear-gradient('#ff3a00', 'transparent');
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  ul, ol {
+    padding-left: 20px;
+  }
+  
