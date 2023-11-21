@@ -220,23 +220,6 @@ const bodyweightExercises = [
         'Use proper form to protect your shoulders.'
       ]
     },
-    {
-      id: 14,
-      name: 'Squats',
-      equipment: 'bodyweight',
-      description: 'Squats are a lower-body exercise that primarily target the quadriceps, hamstrings, and glutes.',
-      muscleGroups: ['Quadriceps', 'Hamstrings', 'Glutes'],
-      tips: [
-        'Stand with your feet shoulder-width apart.',
-        'Lower your body by bending your knees and hips, keeping your back straight.',
-        'Return to the starting position by pushing through your heels.'
-      ],
-      whatNotToDo: [
-        'Avoid letting your knees collapse inward.',
-        'Don\'t allow your back to round during the squat.',
-        'Engage your leg muscles for proper form.'
-      ]
-    }
     // Add more bodyweight exercises as needed
   ];
   
