@@ -1,5 +1,5 @@
 import React, { useState, useMemo  } from 'react';
-import { Box, Heading, Image, Center, Select, Grid, GridItem, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from '@chakra-ui/react';
+import { Box, Heading, Image, Center, Select, Grid, GridItem, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, useColorModeValue } from '@chakra-ui/react';
 import meals from 'components/meals';
 import 'styles/glow.module.css';
 
