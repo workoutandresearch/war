@@ -8,6 +8,7 @@ const MealDispenser = () => {
     const [selectedServings, setSelectedServings] = useState('all');
     const [selectedMeal, setSelectedMeal] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const heroBgGradient = useColorModeValue('orange', 'blue');
 
     const durationToMinutes = (duration) => {
         let totalMinutes = 0;
@@ -117,7 +118,7 @@ const MealDispenser = () => {
             {selectedMeal && (
                 <Modal isOpen={isModalOpen} onClose={closeModal} isCentered>
                     <ModalOverlay />
-                    <ModalContent>
+                    <ModalContent bg={heroBgGradient}>
                         <ModalHeader>{selectedMeal.name}</ModalHeader>
                         <ModalCloseButton />
                         <ModalBody>
