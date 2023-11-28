@@ -30,7 +30,6 @@ import WorkoutLibrary from 'components/WorkoutLibrary';
 import Macro from 'components/Macro'; // Adjust the path as per your file structure
 import MeditationLibrary from 'components/MeditationLibrary'; // Import a list of meditation techniques
 import meditationTechniquesData from 'components/meditationTechniques'; // Import a list of meditation techniques
-import MealDispenser from 'components/mealDispenser'; // Adjust the path accordingly
 
 export default function Tools() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -128,7 +127,6 @@ export default function Tools() {
       { name: 'Calisthenics', id: 'calisthenics' },
       { name: 'GPT Model', id: 'workoutandresearchGPT' },
       { name: 'Macros Calc.', id: 'macro' },
-      { name: 'Meal Dispenser', id: 'mealDispenser' },
       { name: 'Meditation Tech', id: 'MeditationLibrary' },
       { name: 'Prog. Overload', id: 'progressiveoverload' },
       { name: 'Timer', id: 'timer' },
@@ -541,22 +539,6 @@ export default function Tools() {
         bgGradient={featuresBgGradient}
       >
         <MeditationLibrary />
-      </Box>
-    )}
-
-    {selectedTool === 'mealDispenser' && (
-      <Box
-        borderWidth="1px"
-        borderRadius="lg"
-        border="black"
-        overflow="hidden"
-        p={4}
-        m={4}
-        color={textColor}
-        textAlign="center"
-        bgGradient={featuresBgGradient}
-      >
-        <MealDispenser />
       </Box>
     )}
 
