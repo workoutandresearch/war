@@ -47,7 +47,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CustomLogo from 'components/BookPress';
-import Checkout from 'components/Checkout.js'; // Use the correct relative path
+import Checkout from '../components/Checkout';
 
 export default function Merch() {
 
