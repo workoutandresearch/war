@@ -1,15 +1,22 @@
 import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
+import error from 'next/error';
+
+// Define types for your function parameters as needed
+interface CartItem {
+  price: number;
+  quantity: number;
+}
 
 // Assuming getCartItems and getWarPrice are related functions, let's keep them together
-const getCartItems = () => {
+const getCartItems = (): CartItem[] => {
   if (typeof window !== "undefined") {
     return JSON.parse(localStorage.getItem('cart') || '[]');
   }
   return [];
 };
 
-const getWarPrice = (usdPrice, usdToAlgoRate, algoToWarRate) => {
+const getWarPrice = (usdPrice: number, usdToAlgoRate: number, algoToWarRate: number): number => {
   if (!usdToAlgoRate || !algoToWarRate) {
     throw new Error('Invalid rate values');
   }
@@ -17,8 +24,8 @@ const getWarPrice = (usdPrice, usdToAlgoRate, algoToWarRate) => {
   return Math.floor(warPrice);
 };
 
-// Function to handle the WAR transaction
-const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
+// Define types for the parameters of sendWarTransaction
+const sendWarTransaction = async (amount: number, activeAddress: string, signTransactions: (transactions: Uint8Array[]) => Promise<{ blob: Uint8Array }>) => {
   try {
     const projectAddress = "6KD7NSIJGA3ONUX4TPIQ3TCRDM3Q4HMW53QZOFVD5NIDW4WNZ3L2MF23MY"; // Replace with your project's address
     const params = await algodClient.getTransactionParams().do();
@@ -38,12 +45,11 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
     console.log("Transaction successful with ID: ", sendTx.txId);
   } catch (error) {
     console.error('Error sending WAR transaction:', error);
-    throw error; // Rethrow the error to be handled by the caller
   }
 };
 
-// The main Checkout function
-const Checkout = async (signTransactions, activeAddress, usdToAlgoRate, algoToWarRate) => {
+// Define types for the parameters of Checkout
+const handleCheckout = async (signTransactions: (transactions: Uint8Array[]) => Promise<{ blob: Uint8Array }>, activeAddress: string, usdToAlgoRate: number, algoToWarRate: number) => {
   try {
     const cartItems = getCartItems();
     const totalWar = cartItems.reduce((total, item) => total + getWarPrice(item.price, usdToAlgoRate, algoToWarRate) * item.quantity, 0);
