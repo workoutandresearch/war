@@ -29,11 +29,13 @@ import {
   Spacer,
   List,
   ListItem,
+  DrawerFooter,
 } from '@chakra-ui/react';
 import Connect from 'components/Connect';
 import { SunIcon, MoonIcon } from '@chakra-ui/icons';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { SetStateAction, useEffect, useState } from 'react';
+import { HamburgerIcon, CloseIcon, } from '@chakra-ui/icons';
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { JSXElementConstructor, Key, ReactElement, ReactFragment, ReactPortal, SetStateAction, useEffect, useState } from 'react';
 import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
@@ -45,6 +47,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import CustomLogo from 'components/BookPress';
+import Checkout from 'components/Checkout.js'; // Use the correct relative path
 
 export default function Merch() {
 
@@ -71,9 +74,107 @@ export default function Merch() {
   // Define background color styles for light and dark mode
   const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
-
   const lightDarkColor = useColorModeValue('black', 'white');
+  
 
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const toggleCartModal = () => setIsCartModalOpen(!isCartModalOpen);
+  // Function to update cart items count (you'll need to implement the logic)
+  const updateCartItemCount = () => {
+  const cart = JSON.parse(localStorage.getItem('cart') ?? '[]');
+    const itemCount = cart.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
+    setCartItemCount(itemCount);
+  };
+  
+  useEffect(() => {
+    updateCartItemCount();
+    // Add a listener for local storage changes
+    window.addEventListener('storage', updateCartItemCount);
+    
+    return () => {
+      // Cleanup the listener when the component unmounts
+      window.removeEventListener('storage', updateCartItemCount);
+    };
+  }, []);
+
+  // Function to fetch cart items from local storage
+  const getCartItems = () => {
+    // Check if window is defined (i.e., running in the browser)
+    if (typeof window !== "undefined") {
+      return JSON.parse(localStorage.getItem('cart') || '[]');
+    }
+    // Return a default value if not running in a browser
+    return [];
+  };  
+
+  // Function to remove an item from the cart
+  const removeFromCart = (productId: any) => {
+    let cartItems = getCartItems();
+    cartItems = cartItems.filter((item: { id: any; }) => item.id !== productId);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+    updateCartItemCount(); // Update the cart item count
+    // Re-render the component to reflect changes
+    // Depending on your setup, you may need to use a state variable to trigger a re-render
+  };
+  
+  const products = [
+    // Example product data
+    { id: 1, name: "Beanie", price: 50, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1092867880057573557/beanie-removebg-preview.png?width=486&height=450" },
+    { id: 2, name: "Baseball Cap", price: 55, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1097212741502107881/preview-removebg-preview.png?width=468&height=467" },
+    // ... more products
+  ];
+
+  const [usdToAlgoRate, setUsdToAlgoRate] = useState(0);
+  const [algoToWarRate, setAlgoToWarRate] = useState(0);
+
+  useEffect(() => {
+    // Function to fetch USD to ALGO rate
+    const fetchUsdToAlgoRate = async () => {
+      const cgBaseUrl = "https://api.coingecko.com/api/v3";
+      const cgEndpoint = "/simple/price";
+      const cgParams = new URLSearchParams({
+        ids: "algorand",
+        vs_currencies: "usd"
+      });
+    
+      try {
+        const response = await fetch(`${cgBaseUrl}${cgEndpoint}?${cgParams.toString()}`);
+        const data = await response.json();
+        const usdToAlgo = data.algorand.usd;
+        setUsdToAlgoRate(usdToAlgo); // Assuming you have a state variable 'setUsdToAlgoRate'
+      } catch (error) {
+        console.error('Error fetching USD to ALGO rate:', error);
+        // Handle errors appropriately
+      }
+    };    
+  
+    // Function to fetch ALGO to WAR rate
+    const fetchAlgoToWarRate = async () => {
+      const asaId = "1015673913"; // Replace with your actual ASA ID
+      const url = `https://free-api.vestige.fi/asset/${asaId}/price?currency=%24WAR`;
+    
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        const algoToWar = 1 /data.price; // Assuming the API returns the WAR to ALGO rate
+        setAlgoToWarRate(algoToWar); // Assuming you have a state variable 'setAlgoToWarRate'
+      } catch (error) {
+        console.error('Error fetching ALGO to WAR rate:', error);
+        // Handle errors appropriately
+      }
+    };    
+  
+    fetchUsdToAlgoRate();
+    fetchAlgoToWarRate();
+    // Any other data fetching logic
+  }, []);
+  
+  const getWarPrice = (usdPrice: number) => {
+    const warPrice = usdPrice / usdToAlgoRate * algoToWarRate;
+    return Math.floor(warPrice); // Round down to the nearest whole number
+  };  
+  
   const adImages = [
     // Array of ad image URLs
     'https://cdn.discordapp.com/attachments/1125446630775201882/1174531316566466570/Untitled_Artwork.png?ex=6567ee87&is=65557987&hm=6d5746616708cc4db9084658dd90e03010761fa35a06cee3ad0d2e1ea2d4f37c&',
@@ -207,9 +308,50 @@ export default function Merch() {
               onClick={toggleColorMode}
               aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
               variant="ghost"
-              color={buttonTextColor} icon={undefined} ariaLabel={undefined}          />
-          </Flex>
+              color={buttonTextColor} icon={undefined} ariaLabel={undefined}          
+              />
 
+              {/* Shopping Cart Icon */}
+              <Button variant="ghost" onClick={toggleCartModal}>
+                <MdOutlineShoppingCart fontSize='md' />
+                {cartItemCount > 0 && (
+                  <Box as="span" ml={2} color={textColor}>
+                    {cartItemCount}
+                  </Box>
+                )}
+              </Button>
+
+            {/* Shopping Cart Drawer */}
+            <Drawer isOpen={isCartModalOpen} placement="right" onClose={toggleCartModal}>
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerHeader borderBottomWidth="1px">Your Shopping Cart</DrawerHeader>
+                <DrawerBody>
+                  {getCartItems().map((item: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; quantity: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; id: any; }, index: Key | null | undefined) => (
+                    <Box key={index} justifyContent="space-between" alignItems="center" p={2}>
+                      <Flex direction="column" align="center" flexGrow={1}>
+                        <Text>{item.name} - Qty: {item.quantity}</Text>
+                        <Button size="sm" onClick={() => removeFromCart(item.id)}>Remove</Button>
+                      </Flex>
+                    </Box>
+                  ))}
+
+                  {getCartItems().length === 0 ? (
+                    <Text>Your cart is empty.</Text>
+                  ) : (
+                    <Text textAlign="center">Total in WAR: {getCartItems().reduce((total: number, item: { price: number; quantity: number; }) => total + getWarPrice(item.price) * item.quantity, 0).toFixed()} WAR</Text>
+                  )}
+                </DrawerBody>
+                <DrawerFooter>
+                  <Button variant="outline" mr={3} onClick={toggleCartModal}>
+                    Close
+                  </Button>
+                  <Button colorScheme={buttonColorScheme} onClick={Checkout}>Checkout</Button>
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+          </Flex>
+        
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
             Workout and Research
           </Text>
@@ -218,6 +360,7 @@ export default function Merch() {
           <SiAlgorand size="24px" />
           </Button>
         </Flex>
+
         {/* Drawer for Hamburger Menu */}
         <Drawer isOpen={isMenuOpen} placement="left" onClose={toggleMenu} >
           <DrawerOverlay />
@@ -265,13 +408,23 @@ export default function Merch() {
 
       <AdCarousel />
 
-      {/* Hero Section */}
-      <Box as="section" bgGradient={heroBgGradient} h="60vh">
-        <Container maxW="container.lg" h="full" display="flex" flexDirection="column" justifyContent="center">
-          <Text fontSize="5xl" fontWeight="bold" color={textColor} textAlign="center">Merch Coming Soon</Text>
-          <Text fontSize="xl" color={textColor} mt={4} textAlign="center">Website Under Construction</Text>
-        </Container>
-      </Box>
+    {/* Hero Section */}
+    <Box as="section" bgGradient={heroBgGradient} h="60vh" textAlign="center">
+    <Container maxW="container.xl">
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} alignItems="center">
+          {products.map((product) => (
+            <Box key={product.id} shadow="md" borderWidth="1px" borderRadius="lg" p={5} border="black">
+              <Image src={product.imageUrl} alt={product.name} borderRadius="lg" />
+              <Text fontSize="xl" fontWeight="bold" mt={2}>{product.name}</Text>
+              <Text fontSize="md" mt={1}>{getWarPrice(product.price)} WAR</Text>
+              <Button colorScheme={buttonColorScheme} textColor={buttonTextColor} mt={4} onClick={() => addToCart(product, 1)}>
+                Add to Cart
+              </Button>
+            </Box>
+          ))}
+        </SimpleGrid>
+      </Container>
+    </Box>
 
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
@@ -347,5 +500,5 @@ export default function Merch() {
       </Box>
     </Box>
   );
-  
+
 }
