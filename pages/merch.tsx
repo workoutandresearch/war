@@ -99,6 +99,7 @@ export default function Merch() {
   }, []);
 
   // Function to fetch cart items from local storage
+  
   const getCartItems = () => {
     // Check if window is defined (i.e., running in the browser)
     if (typeof window !== "undefined") {
