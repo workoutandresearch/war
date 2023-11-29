@@ -76,7 +76,6 @@ export default function Merch() {
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
   const lightDarkColor = useColorModeValue('black', 'white');
   
-
   const [cartItemCount, setCartItemCount] = useState(0);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const toggleCartModal = () => setIsCartModalOpen(!isCartModalOpen);
