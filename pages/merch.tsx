@@ -75,7 +75,27 @@ export default function Merch() {
   const lightModeBg = useColorModeValue('linear(to-b, #ff3a00, #ff7e00)', 'none');
   const darkModeBg =  useColorModeValue('none', 'linear(to-b, #0000FF, #000000)');
   const lightDarkColor = useColorModeValue('black', 'white');
+
+  const internationalForm = "https://forms.gle/MNLYN8ZfePExb2B7A";
+  const unitedStatesForm = "https://forms.gle/KjrWr2MSpJrQuzwbA";
+
+    // Add a state to store customer's location
+    const [customerLocation, setCustomerLocation] = useState(null);
+
+    // Modify the Checkout function to include redirection
+    const handleCheckout = async () => {
+      // Assuming Checkout function handles the transaction process
+      try {
+        await Checkout(signTransactions, activeAddress, usdToAlgoRate, algoToWarRate);
   
+        // Redirect to the appropriate form based on location
+        const formURL = customerLocation === 'UnitedStates' ? unitedStatesForm : internationalForm;
+        window.location.href = formURL;
+      } catch (error) {
+        console.error('Error in Checkout process:', error);
+      }
+    };
+    
   const [cartItemCount, setCartItemCount] = useState(0);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const toggleCartModal = () => setIsCartModalOpen(!isCartModalOpen);
@@ -321,11 +341,17 @@ export default function Merch() {
               </Button>
 
             {/* Shopping Cart Drawer */}
-            <Drawer isOpen={isCartModalOpen} placement="right" onClose={toggleCartModal}>
+            <Drawer isOpen={isCartModalOpen} placement="left" onClose={toggleCartModal}>
               <DrawerOverlay />
-              <DrawerContent>
+              <DrawerContent  bg={buttonColorScheme}>
                 <DrawerHeader borderBottomWidth="1px">Your Shopping Cart</DrawerHeader>
                 <DrawerBody>
+                {/* Conditional rendering based on whether a wallet is connected */}
+                {activeAddress && warTokenBalance !== null && (
+                    <Text color={textColor} pr={4}>
+                      WAR Balance: {warTokenBalance}
+                    </Text>
+                  )}
                   {getCartItems().map((item: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; quantity: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; id: any; }, index: Key | null | undefined) => (
                     <Box key={index} justifyContent="space-between" alignItems="center" p={2}>
                       <Flex direction="column" align="center" flexGrow={1}>
@@ -345,7 +371,7 @@ export default function Merch() {
                   <Button variant="outline" mr={3} onClick={toggleCartModal}>
                     Close
                   </Button>
-                  <Button colorScheme={buttonColorScheme} onClick={Checkout}>Checkout</Button>
+                  <Button colorScheme={buttonColorScheme} onClick={handleCheckout}>Checkout</Button>
                 </DrawerFooter>
               </DrawerContent>
             </Drawer>
@@ -367,12 +393,6 @@ export default function Merch() {
             <DrawerHeader borderBottomWidth="1px" textAlign="center">Menu</DrawerHeader>
             <DrawerBody>
             <VStack spacing={4}>
-              {/* Conditional rendering based on whether a wallet is connected */}
-              {activeAddress && warTokenBalance !== null && (
-                  <Text color={textColor} pr={4}>
-                    WAR Balance: {warTokenBalance}
-                  </Text>
-                )}
                 <Link href="/" onClick={toggleMenu}>Home</Link>
                 <Link href="/happeningnow" onClick={toggleMenu}>Happening Now</Link>
                 <Link href="/tools" onClick={toggleMenu}>Tools</Link>
@@ -407,23 +427,34 @@ export default function Merch() {
 
       <AdCarousel />
 
-    {/* Hero Section */}
-    <Box as="section" bgGradient={heroBgGradient} h="60vh" textAlign="center">
+  {/* Hero Section */}
+  <Box as="section" bgGradient={heroBgGradient} h="60vh" textAlign="center">
     <Container maxW="container.xl">
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} alignItems="center">
-          {products.map((product) => (
-            <Box key={product.id} shadow="md" borderWidth="1px" borderRadius="lg" p={5} border="black">
-              <Image src={product.imageUrl} alt={product.name} borderRadius="lg" />
-              <Text fontSize="xl" fontWeight="bold" mt={2}>{product.name}</Text>
-              <Text fontSize="md" mt={1}>{getWarPrice(product.price)} WAR</Text>
-              <Button colorScheme={buttonColorScheme} textColor={buttonTextColor} mt={4} onClick={() => addToCart(product, 1)}>
-                Add to Cart
-              </Button>
-            </Box>
-          ))}
-        </SimpleGrid>
-      </Container>
-    </Box>
+      <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={10}>
+        {products.map((product) => (
+          <Flex 
+            key={product.id} 
+            direction="column" 
+            align="center" 
+            justify="center" 
+            shadow="md" 
+            borderWidth="1px" 
+            borderRadius="lg" 
+            p={5} 
+            border="black"
+          >
+          <Image src={product.imageUrl} alt={product.name} borderRadius="lg" objectFit="contain" maxW="100%" maxHeight="500px" />
+            <Text fontSize="xl" fontWeight="bold" mt={2}>{product.name}</Text>
+            <Text fontSize="xl" mt={1}>{getWarPrice(product.price)} WAR</Text>
+            <Button colorScheme={buttonColorScheme} textColor={buttonTextColor} mt={4} onClick={() => addToCart(product, 1)}>
+              Add to Cart
+            </Button>
+          </Flex>
+        ))}
+      </SimpleGrid>
+    </Container>
+  </Box>
+
 
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
