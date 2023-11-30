@@ -321,9 +321,9 @@ export default function Merch() {
               </Button>
 
             {/* Shopping Cart Drawer */}
-            <Drawer isOpen={isCartModalOpen} placement="right" onClose={toggleCartModal}>
+            <Drawer isOpen={isCartModalOpen} placement="left" onClose={toggleCartModal}>
               <DrawerOverlay />
-              <DrawerContent>
+              <DrawerContent bg={drawerBgColor}>
                 <DrawerHeader borderBottomWidth="1px">Your Shopping Cart</DrawerHeader>
                 <DrawerBody>
                   {getCartItems().map((item: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; quantity: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; id: any; }, index: Key | null | undefined) => (
@@ -410,7 +410,7 @@ export default function Merch() {
     {/* Hero Section */}
     <Box as="section" bgGradient={heroBgGradient} h="60vh" textAlign="center">
     <Container maxW="container.xl">
-        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} alignItems="center">
+        <SimpleGrid columns={{ base: 2, md: 2, lg: 3 }} spacing={10} alignItems="center">
           {products.map((product) => (
             <Box key={product.id} shadow="md" borderWidth="1px" borderRadius="lg" p={5} border="black">
               <Image src={product.imageUrl} alt={product.name} borderRadius="lg" />
