@@ -407,23 +407,23 @@ export default function Merch() {
 
       <AdCarousel />
 
-    {/* Hero Section */}
-    <Box as="section" bgGradient={heroBgGradient} h="60vh" textAlign="center">
+  {/* Hero Section with Modern Enhancements */}
+  <Box as="section" bgGradient={heroBgGradient} minH="60vh" textAlign="center">
     <Container maxW="container.xl">
-        <SimpleGrid columns={{ base: 2, md: 2, lg: 3 }} spacing={10} alignItems="center">
-          {products.map((product) => (
-            <Box key={product.id} shadow="md" borderWidth="1px" borderRadius="lg" p={5} border="black">
-              <Image src={product.imageUrl} alt={product.name} borderRadius="lg" />
-              <Text fontSize="xl" fontWeight="bold" mt={2}>{product.name}</Text>
-              <Text fontSize="md" mt={1}>{getWarPrice(product.price)} WAR</Text>
-              <Button colorScheme={buttonColorScheme} textColor={buttonTextColor} mt={4} onClick={() => addToCart(product, 1)}>
-                Add to Cart
-              </Button>
-            </Box>
-          ))}
-        </SimpleGrid>
-      </Container>
-    </Box>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={10} alignItems="center">
+        {products.map((product) => (
+          <Box key={product.id} shadow="md" borderWidth="1px" borderRadius="lg" p={5} border="black" transition="transform 0.3s" _hover={{ transform: 'scale(1.05)' }}>
+            <Image src={product.imageUrl} alt={product.name} borderRadius="lg" loading="lazy" />
+            <Text fontSize="xl" fontWeight="bold" mt={2}>{product.name}</Text>
+            <Text fontSize="md" mt={1}>{getWarPrice(product.price)} WAR</Text>
+            <Button colorScheme={buttonColorScheme} textColor={buttonTextColor} mt={4} onClick={() => addToCart(product, 1)} _hover={{ opacity: 0.8 }}>
+              Coming Soon
+            </Button>
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Container>
+  </Box>
 
       {/* About Section */}
       <Box as="section" py={10} bgGradient={aboutBgGradient}>
