@@ -227,7 +227,6 @@ export default function Socialmedia() {
                 <Link href="/whitepaper" onClick={toggleMenu}>Whitepaper</Link>
                 <Link href="/roadmap" onClick={toggleMenu}>Roadmap</Link>
                 <Link href="/optin" onClick={toggleMenu}>Opt In</Link>
-                <Link href="/merch" onClick={toggleMenu}>Merch</Link>
                 <Link href="/socialmedia" onClick={toggleMenu}>Social Media</Link>
                 <Link href="/termscond" onClick={toggleMenu}>Terms and Conditions</Link>
                 <Link href="/privacypolicy" onClick={toggleMenu}>Privacy Policy</Link>
