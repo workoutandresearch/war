@@ -119,7 +119,7 @@ export default function Merch() {
   
   const products = [
     // Example product data
-    { id: 1, name: "Beanie", price: 50, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1092867880057573557/beanie-removebg-preview.png?width=486&height=450" },
+    { id: 1, name: "Beanie", price: 1, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1092867880057573557/beanie-removebg-preview.png?width=486&height=450" },
     { id: 2, name: "Baseball Cap", price: 55, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1097212741502107881/preview-removebg-preview.png?width=468&height=467" },
     // ... more products
   ];
@@ -311,7 +311,7 @@ export default function Merch() {
               />
 
               {/* Shopping Cart Icon */}
-              <Button variant="ghost" onClick={toggleCartModal}>
+              <Button colorScheme={buttonColorScheme} onClick={toggleCartModal}>
                 <MdOutlineShoppingCart fontSize='md' />
                 {cartItemCount > 0 && (
                   <Box as="span" ml={2} color={textColor}>
@@ -320,35 +320,35 @@ export default function Merch() {
                 )}
               </Button>
 
-            {/* Shopping Cart Drawer */}
-            <Drawer isOpen={isCartModalOpen} placement="left" onClose={toggleCartModal}>
-              <DrawerOverlay />
-              <DrawerContent bg={drawerBgColor}>
-                <DrawerHeader borderBottomWidth="1px">Your Shopping Cart</DrawerHeader>
-                <DrawerBody>
-                  {getCartItems().map((item: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; quantity: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; id: any; }, index: Key | null | undefined) => (
-                    <Box key={index} justifyContent="space-between" alignItems="center" p={2}>
-                      <Flex direction="column" align="center" flexGrow={1}>
-                        <Text>{item.name} - Qty: {item.quantity}</Text>
-                        <Button size="sm" onClick={() => removeFromCart(item.id)}>Remove</Button>
-                      </Flex>
-                    </Box>
-                  ))}
+              {/* Shopping Cart Drawer */}
+              <Drawer isOpen={isCartModalOpen} placement="left" onClose={toggleCartModal}>
+                <DrawerOverlay />
+                <DrawerContent bg={drawerBgColor}>
+                  <DrawerHeader borderBottomWidth="1px">Your Shopping Cart</DrawerHeader>
+                  <DrawerBody>
+                    {getCartItems().map((item: { name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; quantity: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | null | undefined; id: any; }, index: Key | null | undefined) => (
+                      <Box key={index} justifyContent="space-between" alignItems="center" p={2}>
+                        <Flex direction="column" align="center" flexGrow={1}>
+                          <Text>{item.name} - Qty: {item.quantity}</Text>
+                          <Button size="sm" onClick={() => removeFromCart(item.id)}>Remove</Button>
+                        </Flex>
+                      </Box>
+                    ))}
 
-                  {getCartItems().length === 0 ? (
-                    <Text>Your cart is empty.</Text>
-                  ) : (
-                    <Text textAlign="center">Total in WAR: {getCartItems().reduce((total: number, item: { price: number; quantity: number; }) => total + getWarPrice(item.price) * item.quantity, 0).toFixed()} WAR</Text>
-                  )}
-                </DrawerBody>
-                <DrawerFooter>
-                  <Button variant="outline" mr={3} onClick={toggleCartModal}>
-                    Close
-                  </Button>
-                  <Button colorScheme={buttonColorScheme} onClick={Checkout}>Checkout</Button>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
+                    {getCartItems().length === 0 ? (
+                      <Text>Your cart is empty.</Text>
+                    ) : (
+                      <Text textAlign="center">Total in WAR: {getCartItems().reduce((total: number, item: { price: number; quantity: number; }) => total + getWarPrice(item.price) * item.quantity, 0).toFixed()} WAR</Text>
+                    )}
+                  </DrawerBody>
+                  <DrawerFooter>
+                    <Button variant="outline" mr={3} onClick={toggleCartModal}>
+                      Close
+                    </Button>
+                    <Button colorScheme={buttonColorScheme} onClick={() => Checkout(signTransactions, activeAddress, usdToAlgoRate, algoToWarRate)}>Checkout</Button>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
           </Flex>
         
           <Text fontSize="2xl" fontWeight="bold" color={textColor} textAlign="center">
