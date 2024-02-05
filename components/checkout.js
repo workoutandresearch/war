@@ -27,15 +27,19 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
       undefined,
       amount,
       undefined,
-      1015673913,
+      1015673913, // Assuming this is the asset ID for WAR tokens
       params
     );
 
     const signedTxn = await signTransactions([txn.toByte()]);
     const sendTx = await algodClient.sendRawTransaction(signedTxn.blob).do();
     console.log("Transaction successful with ID: ", sendTx.txId);
+    
+    // Show a success message or perform additional actions after the transaction is successfully sent
+    toast.success("Transaction successful!");
   } catch (error) {
     console.error('Error sending WAR transaction:', error);
+    toast.error("Error sending WAR transaction");
     throw error;
   }
 };
