@@ -81,18 +81,16 @@ export default function Merch() {
   const toggleCartModal = () => setIsCartModalOpen(!isCartModalOpen);
   // Function to update cart items count (you'll need to implement the logic)
   const updateCartItemCount = () => {
-  const cart = JSON.parse(localStorage.getItem('cart') ?? '[]');
-    const itemCount = cart.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
+    const cart = getCartItems();
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
     setCartItemCount(itemCount);
   };
-  
+
   useEffect(() => {
     updateCartItemCount();
-    // Add a listener for local storage changes
     window.addEventListener('storage', updateCartItemCount);
     
     return () => {
-      // Cleanup the listener when the component unmounts
       window.removeEventListener('storage', updateCartItemCount);
     };
   }, []);
