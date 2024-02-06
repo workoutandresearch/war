@@ -82,7 +82,7 @@ export default function Merch() {
   // Function to update cart items count (you'll need to implement the logic)
   const updateCartItemCount = () => {
     const cart = getCartItems();
-    const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
+    const itemCount = cart.reduce((total: any, item: { quantity: any; }) => total + item.quantity, 0);
     setCartItemCount(itemCount);
   };
 
