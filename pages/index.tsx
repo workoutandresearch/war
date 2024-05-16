@@ -165,7 +165,7 @@ export default function Home() {
   // Function to handle color mode toggle and provide an appropriate icon
   const ToggleColorModeButton = () => (
     <IconButton
-      icon={colorMode === 'light' ? <MoonIcon color={lightDarkColor} /> : <SunIcon color={lightDarkColor} />}
+      icon={colorMode === 'light' ? <SunIcon color={lightDarkColor} /> : <MoonIcon color={lightDarkColor} />}
       onClick={toggleColorMode}
       aria-label={`Toggle ${colorMode === 'light' ? 'Dark' : 'Light'} Mode`}
       variant="ghost"
