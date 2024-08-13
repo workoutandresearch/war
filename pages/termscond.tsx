@@ -60,10 +60,10 @@ export default function Termscond() {
 
   const adImages = [
     // Array of ad image URLs
-    'https://media.discordapp.net/attachments/999962417163419701/1240715667502792785/Untitled_Artwork_1.png?ex=66479202&is=66464082&hm=f25ed94e312b6118d59a2910d54707d0702e76ad80d67ad124ebfdc5ab1548d0&=&format=webp&quality=lossless&width=1393&height=325',
-    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=6646f6a3&is=6645a523&hm=7ccd840614073b44bee5523e0b907f8a81c7ac376af7a51fe9cc9c84534137ba&',
-    'https://media.discordapp.net/attachments/999962417163419701/1240715667255066686/Untitled_Artwork_2.png?ex=66479202&is=66464082&hm=da7776a3b0efccb92736bc9aae141073a359ea07dda41ab8de9d378c271a7fa8&=&format=webp&quality=lossless&width=1393&height=325',
-    'https://media.discordapp.net/attachments/999962417163419701/1240715666978508980/Untitled_Artwork.png?ex=66479202&is=66464082&hm=76372a478f7b09065ed6c26ce36b23085cfde723f64da4260d16e819323fe063&=&format=webp&quality=lossless&width=1393&height=325',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1240715667502792785/Untitled_Artwork_1.png?ex=66bb9602&is=66ba4482&hm=976167e21b37a500238ec50f0c645034f3109d5915ca5847341631b14bca38e5&',
+    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=66bba363&is=66ba51e3&hm=bbf13d43244f72321653ed9c75a9384b40deb341a6cb01d58645a3dbb32bf6be&',
+    'https://media.discordapp.net/attachments/999962417163419701/1240715667255066686/Untitled_Artwork_2.png?ex=66bb9602&is=66ba4482&hm=a1600845e0db7942d0eaedac339a97c888ba4bb3824596809f8eb98469e08c96&=&format=webp&quality=lossless&width=1115&height=260',
+    'https://media.discordapp.net/attachments/999962417163419701/1240715666978508980/Untitled_Artwork.png?ex=66bb9602&is=66ba4482&hm=1188acbc835e97ab2354983fe14986feb77a9057123d8103f92246a1ddc2dc5f&=&format=webp&quality=lossless&width=1115&height=260',
   ];
 
   const adUrls = [
