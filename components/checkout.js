@@ -47,7 +47,7 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
     const maxAttempts = 10;
     for (let attempts = 0; attempts < maxAttempts; attempts++) {
       txInfo = await algodClient.pendingTransactionInformation(sendTx.txId).do();
-      if (txInfo['confirmed-round'] !== null && txInfo['confirmed-round'] !== undefined) {
+      if (txInfo && txInfo['confirmed-round'] !== null && txInfo['confirmed-round'] !== undefined) {
         break;
       }
       await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds before retrying
@@ -73,12 +73,16 @@ const Checkout = async (signTransactions, activeAddress, usdToAlgoRate, algoToWa
       throw new Error('No items in cart');
     }
 
-    const totalWar = cartItems.reduce((total, item) => 
-      total + getWarPrice(item.price, usdToAlgoRate, algoToWarRate) * item.quantity, 0);
+    const totalWar = cartItems.reduce((total, item) => {
+      if (!item.price || !item.quantity) {
+        throw new Error('Cart item missing price or quantity');
+      }
+      return total + getWarPrice(item.price, usdToAlgoRate, algoToWarRate) * item.quantity;
+    }, 0);
 
     // Check if the user has enough tokens
     const accountInfo = await algodClient.accountInformation(activeAddress).do();
-    const warAsset = accountInfo['assets'].find(asset => asset['asset-id'] === 1015673913);
+    const warAsset = accountInfo['assets'] ? accountInfo['assets'].find(asset => asset['asset-id'] === 1015673913) : null;
     const warBalance = warAsset ? warAsset.amount : 0;
 
     if (warBalance < totalWar) {
@@ -94,3 +98,4 @@ const Checkout = async (signTransactions, activeAddress, usdToAlgoRate, algoToWa
 };
 
 export default Checkout;
+
