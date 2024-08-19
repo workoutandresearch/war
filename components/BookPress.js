@@ -9,8 +9,8 @@ const CustomLogo = ({ icon, onClick, ariaLabel, variant, color }) => {
   const [isDarkModeLogo, setIsDarkModeLogo] = useState(false);
 
   // Define different URLs for your logo images for light and dark modes
-  const lightModeLogoUrl = 'https://cdn.discordapp.com/attachments/999962417163419701/1240719973064769678/Untitled_Artwork.png?ex=66bb9a05&is=66ba4885&hm=31fb73522a4e3c25a16e18b2bc9a3e8982e4919836b43fdc81b2a32d217b82f0&';
-  const darkModeLogoUrl = 'https://cdn.discordapp.com/attachments/999962417163419701/1240719973601644544/Untitled_Artwork.png?ex=66bb9a05&is=66ba4885&hm=250733df1cafe286f3e915b2184ad0d6391ebd02f362bbb5a3b151a481d840ab&';
+  const lightModeLogoUrl = 'https://i.postimg.cc/cJtY4mNj/lightmode.png';
+  const darkModeLogoUrl = 'https://i.postimg.cc/0yWdNjK6/darkmode.png';
 
   // Determine the appropriate URL based on the current color mode and the manual toggle
   const logoUrl = isDarkModeLogo ? darkModeLogoUrl : lightModeLogoUrl;
