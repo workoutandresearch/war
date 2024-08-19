@@ -2,16 +2,9 @@ import algosdk from 'algosdk';
 import { algodClient } from 'lib/algodClient';
 import toast from 'react-hot-toast';
 
-const ASSET_ID = 1015673913; // Define the asset ID for WAR tokens here
-
 const getCartItems = () => {
   if (typeof window !== "undefined") {
-    try {
-      return JSON.parse(localStorage.getItem('cart') || '[]');
-    } catch (error) {
-      console.error('Error parsing cart items:', error);
-      return [];
-    }
+    return JSON.parse(localStorage.getItem('cart') || '[]');
   }
   return [];
 };
@@ -28,11 +21,6 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
   try {
     const projectAddress = "6KD7NSIJGA3ONUX4TPIQ3TCRDM3Q4HMW53QZOFVD5NIDW4WNZ3L2MF23MY";
     const params = await algodClient.getTransactionParams().do();
-
-    if (!params) {
-      throw new Error('Failed to fetch transaction parameters');
-    }
-
     const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
       activeAddress,
       projectAddress,
@@ -40,33 +28,28 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
       undefined,
       amount,
       undefined,
-      ASSET_ID, // Use the correct asset ID for WAR tokens
+      1015673913, // Assuming this is the asset ID for WAR tokens
       params
     );
 
-    console.log("Transaction object:", txn); // Debugging transaction object
-
-    // Pass the txn object directly to the signTransactions function
-    const signedTxn = await signTransactions([txn]);
-
-    console.log("Signed transaction object:", signedTxn); // Debugging signed transaction
-
-    const sendTx = await algodClient.sendRawTransaction(signedTxn).do();
-
-    console.log("Transaction successful with ID:", sendTx.txId);
-
+    const signedTxn = await signTransactions([txn.toByte()]);
+    const sendTx = await algodClient.sendRawTransaction(signedTxn.blob).do();
+    console.log("Transaction successful with ID: ", sendTx.txId);
+    
     // Fetch transaction information
     let txInfo = null;
+    let attempts = 0;
     const maxAttempts = 10;
-    for (let attempts = 0; attempts < maxAttempts; attempts++) {
+    while (attempts < maxAttempts) {
       txInfo = await algodClient.pendingTransactionInformation(sendTx.txId).do();
-      if (txInfo && txInfo['confirmed-round'] !== null && txInfo['confirmed-round'] !== undefined) {
+      if (txInfo['confirmed-round'] !== null && txInfo['confirmed-round'] !== undefined) {
         break;
       }
+      attempts++;
       await new Promise(resolve => setTimeout(resolve, 3000)); // Wait for 3 seconds before retrying
     }
 
-    if (!txInfo || txInfo['confirmed-round'] === undefined || txInfo['confirmed-round'] === null) {
+    if (txInfo['confirmed-round'] === undefined || txInfo['confirmed-round'] === null) {
       throw new Error('Transaction not confirmed after multiple attempts');
     }
 
@@ -86,7 +69,7 @@ const Checkout = async (signTransactions, activeAddress, usdToAlgoRate, algoToWa
 
     // Check if the user has enough tokens
     const accountInfo = await algodClient.accountInformation(activeAddress).do();
-    const warBalance = accountInfo['assets'].find(asset => asset['asset-id'] === ASSET_ID)?.amount || 0;
+    const warBalance = accountInfo['assets'].find(asset => asset['asset-id'] === 1015673913)?.amount || 0;
 
     if (warBalance < totalWar) {
       throw new Error('Insufficient balance to complete the purchase');
