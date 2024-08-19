@@ -21,6 +21,7 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
   try {
     const projectAddress = "6KD7NSIJGA3ONUX4TPIQ3TCRDM3Q4HMW53QZOFVD5NIDW4WNZ3L2MF23MY";
     const params = await algodClient.getTransactionParams().do();
+
     const txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
       activeAddress,
       projectAddress,
@@ -32,9 +33,10 @@ const sendWarTransaction = async (amount, activeAddress, signTransactions) => {
       params
     );
 
-    const signedTxn = await signTransactions([txn.toByte()]);
-    const sendTx = await algodClient.sendRawTransaction(signedTxn.blob).do();
-    console.log("Transaction successful with ID: ", sendTx.txId);
+    // Pass the txn object directly to the signTransactions function
+    const signedTxn = await signTransactions([txn]);
+    const sendTx = await algodClient.sendRawTransaction(signedTxn).do(); // Remove `.blob` here as well
+    console.log("Transaction successful with ID:", sendTx.txId);
     
     // Fetch transaction information
     let txInfo = null;
