@@ -117,8 +117,8 @@ export default function Merch() {
   
   const products = [
     // Example product data
-    { id: 1, name: "Beanie", price: 1, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1092867880057573557/beanie-removebg-preview.png?width=486&height=450" },
-    { id: 2, name: "Baseball Cap", price: 55, imageUrl: "https://media.discordapp.net/attachments/999962417163419701/1097212741502107881/preview-removebg-preview.png?width=468&height=467" },
+    { id: 1, name: "Beanie", price: 1, imageUrl: "https://i.postimg.cc/sDYmb2vk/beanie.png" },
+    { id: 2, name: "Baseball Cap", price: 55, imageUrl: "https://i.postimg.cc/KcgJrfFv/baseball.png" },
     // ... more products
   ];
 
