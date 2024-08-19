@@ -62,10 +62,11 @@ export default function Returnpolicy() {
 
   const adImages = [
     // Array of ad image URLs
-    'https://cdn.discordapp.com/attachments/999962417163419701/1240715667502792785/Untitled_Artwork_1.png?ex=66bb9602&is=66ba4482&hm=976167e21b37a500238ec50f0c645034f3109d5915ca5847341631b14bca38e5&',
-    'https://cdn.discordapp.com/attachments/999962417163419701/1169339622761967779/Untitled_Artwork.png?ex=66bba363&is=66ba51e3&hm=bbf13d43244f72321653ed9c75a9384b40deb341a6cb01d58645a3dbb32bf6be&',
-    'https://media.discordapp.net/attachments/999962417163419701/1240715667255066686/Untitled_Artwork_2.png?ex=66bb9602&is=66ba4482&hm=a1600845e0db7942d0eaedac339a97c888ba4bb3824596809f8eb98469e08c96&=&format=webp&quality=lossless&width=1115&height=260',
-    'https://media.discordapp.net/attachments/999962417163419701/1240715666978508980/Untitled_Artwork.png?ex=66bb9602&is=66ba4482&hm=1188acbc835e97ab2354983fe14986feb77a9057123d8103f92246a1ddc2dc5f&=&format=webp&quality=lossless&width=1115&height=260',
+    'https://i.postimg.cc/cLFQC23F/algo.jpg',
+    'https://i.postimg.cc/0Nr7wndP/discord.png',
+    'https://i.postimg.cc/KYVBrTJL/vestige.jpg',
+    'https://i.postimg.cc/zBgWdfcQ/gpt-png.jpg',
+
   ];
   const adUrls = [
     'https://algorandtechnologies.com/',
