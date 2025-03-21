@@ -265,7 +265,7 @@ export default function Whitepaper() {
                 Easy Accessibility
                 </Text>
                 <Text fontSize="md" textAlign="center" color={textColor}>
-                WAR is built on the Algorand blockchain, which is known for thier high performance, security, and scalability. This means that it is easy to use and accessible to everyone, regardless of their technical expertise. The token can be easily stored in a wallet and used to purchase fitness merchandise with just a few clicks.
+                WAR is built on the Algorand blockchain, which is known for their high performance, security, and scalability. This means that it is easy to use and accessible to everyone, regardless of their technical expertise. The token can be easily stored in a wallet and used to purchase fitness merchandise with just a few clicks.
                 </Text>
             </VStack>
             {/* Feature 2 */}
